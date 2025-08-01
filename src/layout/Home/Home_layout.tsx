@@ -2,8 +2,6 @@ import react, { useState } from "react";
 import { Link, Outlet } from "@tanstack/react-router";
 import { motion } from "motion/react";
 export function Homelayout(): react.JSX.Element {
-  
-
   const [selectedTab, setSelectedTab] = useState(1);
   const handleTabClick = (tabIndex: number) => {
     setSelectedTab(tabIndex);
@@ -22,13 +20,13 @@ export function Homelayout(): react.JSX.Element {
           >
             {""}Home
             {selectedTab === 1 ? (
-             <motion.div
-                    className="absolute   h-0.5 w-9 bg-gray-900 rounded-full"
-                    layoutId="underline"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  />
+              <motion.div
+                className="absolute   h-0.5 w-9 bg-gray-900 rounded-full"
+                layoutId="underline"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
             ) : null}
           </Link>
           <Link
@@ -39,12 +37,12 @@ export function Homelayout(): react.JSX.Element {
             {""}Events
             {selectedTab === 2 ? (
               <motion.div
-                    className="absolute   h-0.5 w-13 bg-gray-900 rounded-full"
-                    layoutId="underline"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  />
+                className="absolute   h-0.5 w-13 bg-gray-900 rounded-full"
+                layoutId="underline"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
             ) : null}
           </Link>
           <Link
@@ -54,13 +52,13 @@ export function Homelayout(): react.JSX.Element {
           >
             {""}Study
             {selectedTab === 3 ? (
-             <motion.div
-                    className="absolute   h-0.5 w-9 bg-gray-900 rounded-full"
-                    layoutId="underline"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  />
+              <motion.div
+                className="absolute   h-0.5 w-9 bg-gray-900 rounded-full"
+                layoutId="underline"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
             ) : null}
           </Link>
           <Link
@@ -71,12 +69,12 @@ export function Homelayout(): react.JSX.Element {
             {""}About
             {selectedTab === 4 ? (
               <motion.div
-                    className="absolute   h-0.5 w-10 bg-gray-900 rounded-full"
-                    layoutId="underline"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  />
+                className="absolute   h-0.5 w-10 bg-gray-900 rounded-full"
+                layoutId="underline"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
             ) : null}
           </Link>
           <Link
@@ -87,12 +85,12 @@ export function Homelayout(): react.JSX.Element {
             {""}Contect us
             {selectedTab === 5 ? (
               <motion.div
-                    className="absolute   h-0.5 w-23 bg-gray-900 rounded-full"
-                    layoutId="underline"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={{ opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  />
+                className="absolute   h-0.5 w-23 bg-gray-900 rounded-full"
+                layoutId="underline"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
             ) : null}
           </Link>
         </div>
