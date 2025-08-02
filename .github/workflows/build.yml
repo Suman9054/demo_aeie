@@ -1,0 +1,22 @@
+name: bulidapplication
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: set up bun
+        uses: oven-sh/setup-bun@v2
+      - name: install dependencies
+        run: bun install
+      - name: run build
+        run: bun run build

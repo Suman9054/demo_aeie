@@ -34,10 +34,8 @@ export const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
               className="w-full h-full object-cover"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.2, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              
+              transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </AnimatePresence>
         </div>
