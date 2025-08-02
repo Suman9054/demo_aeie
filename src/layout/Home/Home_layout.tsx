@@ -62,7 +62,7 @@ export function Homelayout(): react.JSX.Element {
             ) : null}
           </Link>
           <Link
-            to="/About"
+            to="/AboutUs"
             className="font-mono [&.active]:text-teal-500"
             onClick={() => handleTabClick(4)}
           >
