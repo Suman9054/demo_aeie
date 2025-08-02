@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { Slideshow } from "../../components/Slide/Slide";
 
 export const Homepage: React.FC = () => {
+  // Define the images to be used in the slideshow
+  const images = [
+    { src: "https://via.placeholder.com/150", id: 1 },
+    { src: "https://via.placeholder.com/150/0000FF/808080?text=Image+2", id: 2 },
+    { src: "https://via.placeholder.com/150/FF0000/FFFFFF?text=Image+3", id: 3 },
+  ];
   interface particleArray {
     id: number;
     left: number;
@@ -63,11 +70,11 @@ export const Homepage: React.FC = () => {
             bottom: 0,
           }}
         />
-      ))}
-
-      <div className="flex items-center justify-between px-8 md:px-16 py-16 max-w-7xl mx-auto min-h-screen">
-        <div className="flex-1 max-w-lg z-10">
-          <div className="text-4xl md:text-6xl font-bold mb-8 leading-tight pt-6">
+       ))}
+       <div className="relative z-10 w-full h-full">
+       <div className="flex items-center justify-between px-8 md:px-16 py-16 max-w-7xl mx-auto min-h-screen gap-12">
+        <div className="flex-1 max-w-lg flex flex-col justify-center">
+          <div className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
             <motion.span
               className="text-pink-400 font-mono font-bold text-5xl md:text-7xl block mb-2"
               variants={containerVariants}
@@ -93,7 +100,13 @@ export const Homepage: React.FC = () => {
             Get ready for cutting-edge technology, seamless design, and features
             that haven't been seen before.
           </p>
-        </div>
+         </div>
+         <div className="flex-1 flex justify-center items-center">
+            <Slideshow images={images} />
+          </div>
+      </div>
+      
+      
       </div>
     </div>
   );
