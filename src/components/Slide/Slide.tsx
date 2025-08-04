@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 interface Image {
   src: string;
   alt?: string;
-  id:number;
+  id: number;
   about?: string;
 }
 
@@ -34,13 +34,12 @@ export const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
               className="w-full h-full object-cover"
-              
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </AnimatePresence>
         </div>
       </div>
-      
+
       {/* Navigation dots */}
       <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
@@ -48,7 +47,7 @@ export const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-pink-400 w-6' : 'bg-white/30'
+              index === currentIndex ? "bg-pink-400 w-6" : "bg-white/30"
             }`}
           />
         ))}
