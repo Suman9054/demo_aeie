@@ -20,3 +20,15 @@ jobs:
         run: bun install
       - name: run build
         run: bun run build
+  Lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: set up bun
+        uses: oven-sh/setup-bun@v2
+      - name: install dependencies
+        run: bun install
+      - name: run lint
+        run: bun run lint

@@ -9,7 +9,8 @@ import {
 } from "@tanstack/react-router";
 import { Homelayout } from "./layout/Home/Home_layout";
 import { Homepage } from "./pages/home/Home";
-import { AboutUs } from "./pages/home/AboutUs";
+import { AboutUs } from "./pages/About_club/AboutUs";
+import About_layout from "./layout/about/about_layout";
 
 const rootrouter = createRootRoute({
   component: Homelayout,
@@ -22,11 +23,19 @@ const Homeroute = createRoute({
 
 const AboutUsroute = createRoute({
   getParentRoute: () => rootrouter,
-  path: "/AboutUs",
+  path: "/about-us",
+  component: About_layout,
+});
+const Aboutclubroute = createRoute({
+  getParentRoute: () => AboutUsroute,
+  path: "/about-club",
   component: AboutUs,
 });
 
-const routeTree = rootrouter.addChildren([Homeroute,AboutUsroute]);
+const routeTree = rootrouter.addChildren([
+  Homeroute,
+  AboutUsroute.addChildren([Aboutclubroute]),
+]);
 const router = createRouter({ routeTree });
 
 createRoot(document.getElementById("root")!).render(
