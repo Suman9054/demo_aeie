@@ -26,14 +26,14 @@ export const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
 
   return (
     <div className="relative w-80 h-80 md:w-96 md:h-96">
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-400 to-purple-600 rounded-full p-2">
-        <div className="w-full h-full rounded-full overflow-hidden bg-black/20">
+      <div className="absolute inset-0 w-150 absolute -bottom-7 left-1/2 transform -translate-x-1/2 p-2">
+        <div className="w-full h-full rounded-lg border border-indigo-600 overflow-hidden bg-black/20">
           <AnimatePresence mode="wait">
             <motion.img
               key={currentIndex}
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-lg border-none"
               transition={{ duration: 0.5, ease: "easeOut" }}
             />
           </AnimatePresence>

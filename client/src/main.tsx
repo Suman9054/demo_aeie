@@ -11,6 +11,8 @@ import { Homelayout } from "./layout/Home/Home_layout";
 import { Homepage } from "./pages/home/Home";
 import { AboutUs } from "./pages/About_club/AboutUs";
 import About_layout from "./layout/about/about_layout";
+import Event_page from "./pages/Event/Event";
+
 
 const rootrouter = createRootRoute({
   component: Homelayout,
@@ -31,10 +33,16 @@ const Aboutclubroute = createRoute({
   path: "/about-club",
   component: AboutUs,
 });
+const Event_pagerout = createRoute({
+  getParentRoute: () => rootrouter,
+  path: "/Events",
+  component:Event_page,
+});
 
 const routeTree = rootrouter.addChildren([
   Homeroute,
   AboutUsroute.addChildren([Aboutclubroute]),
+  Event_pagerout,
 ]);
 const router = createRouter({ routeTree });
 
