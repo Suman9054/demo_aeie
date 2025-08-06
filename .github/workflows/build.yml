@@ -34,8 +34,6 @@ jobs:
         uses: actions/checkout@v4
       - name: set up bun
         uses: oven-sh/setup-bun@v2
-      - name: set up workingdirectory
-        run: cd ./client
       - name: install dependencies
         run: bun install
       - name: run lint
