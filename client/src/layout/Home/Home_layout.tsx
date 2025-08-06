@@ -1,11 +1,8 @@
-import react, { useState } from "react";
-import { Link, Outlet } from "@tanstack/react-router";
+import react from "react";
+import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Underline } from "../../components/underline/Underline";
 export function Homelayout(): react.JSX.Element {
-  const [selectedTab, setSelectedTab] = useState(1);
-  const handleTabClick = (tabIndex: number) => {
-    setSelectedTab(tabIndex);
-  };
+  const location = useLocation();
   return (
     <div className="min-h-screen min-w-screen">
       <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6  bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
@@ -13,42 +10,37 @@ export function Homelayout(): react.JSX.Element {
           <Link
             to="/"
             className="font-mono  [&.active]:text-teal-500  "
-            onClick={() => handleTabClick(1)}
           >
             {""}Home
-            {selectedTab === 1 ? <Underline /> : null}
+            {location.pathname === "/" ? <Underline /> : null}
           </Link>
           <Link
             to="/Events"
             className="font-mono [&.active]:text-teal-500"
-            onClick={() => handleTabClick(2)}
           >
-            {""}Events
-            {selectedTab === 2 ? <Underline /> : null}
+            {""}Event
+            {location.pathname ==="/Events" ? <Underline /> : null}
           </Link>
           <Link
             to="/Study"
             className="font-mono [&.active]:text-teal-500"
-            onClick={() => handleTabClick(3)}
           >
             {""}Study
-            {selectedTab === 3 ? <Underline /> : null}
+            {location.pathname==="/Study" ? <Underline /> : null}
           </Link>
           <Link
             to="/about-us"
             className="font-mono [&.active]:text-teal-500"
-            onClick={() => handleTabClick(4)}
           >
             {""}About
-            {selectedTab === 4 ? <Underline /> : null}
+            {location.pathname === "/about-us"? <Underline /> : null}
           </Link>
           <Link
             to="/contectUs"
             className="font-mono [&.active]:text-teal-500"
-            onClick={() => handleTabClick(5)}
           >
             {""}Contect us
-            {selectedTab === 5 ? <Underline /> : null}
+            {location.pathname === "/contectUs" ? <Underline /> : null}
           </Link>
         </div>
       </div>
