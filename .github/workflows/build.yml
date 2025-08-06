@@ -11,13 +11,14 @@ jobs:
   build:
     name: Build Application
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - name: checkout code
         uses: actions/checkout@v4
       - name: set up bun
         uses: oven-sh/setup-bun@v2
-      - name: set up workingdiretory
-        run : cd ./client
       - name: install dependencies
         run: bun install
       - name: run build
@@ -25,6 +26,9 @@ jobs:
   Lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - name: checkout code
         uses: actions/checkout@v4
