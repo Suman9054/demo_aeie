@@ -1,46 +1,47 @@
 import react from "react";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Underline } from "../../components/underline/Underline";
+
 export function Homelayout(): react.JSX.Element {
   const location = useLocation();
   return (
     <div className="min-h-screen min-w-screen">
-      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6  bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
-        <div className="flex  gap-4 text-gray-400">
+      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
+        <div className="flex gap-4 text-gray-400">
           <Link
             to="/"
-            className="font-mono  [&.active]:text-teal-500  "
+            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
-            {""}Home
+            Home
             {location.pathname === "/" ? <Underline /> : null}
           </Link>
           <Link
             to="/Events"
-            className="font-mono [&.active]:text-teal-500"
+            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
-            {""}Event
-            {location.pathname ==="/Events" ? <Underline /> : null}
+            Event
+            {location.pathname === "/Events" ? <Underline /> : null}
           </Link>
           <Link
             to="/Study"
-            className="font-mono [&.active]:text-teal-500"
+            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
-            {""}Study
-            {location.pathname==="/Study" ? <Underline /> : null}
+            Study
+            {location.pathname === "/Study" ? <Underline /> : null}
           </Link>
           <Link
             to="/about-us"
-            className="font-mono [&.active]:text-teal-500"
+            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
-            {""}About
-            {location.pathname === "/about-us"? <Underline /> : null}
+            About
+            {location.pathname === "/about-us" ? <Underline /> : null}
           </Link>
           <Link
-            to="/contectUs"
-            className="font-mono [&.active]:text-teal-500"
+            to="/contactUs"
+            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
-            {""}Contect us
-            {location.pathname === "/contectUs" ? <Underline /> : null}
+            Contact us
+            {location.pathname === "/contactUs" ? <Underline /> : null}
           </Link>
         </div>
       </div>
