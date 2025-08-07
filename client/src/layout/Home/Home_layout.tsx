@@ -7,7 +7,7 @@ export function Homelayout(): React.JSX.Element {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen min-w-screen bg-gradient-to-b from-gray-900 to-black text-white flex flex-col justify-between">
+   <div className="min-h-screen w-full bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white flex flex-col justify-between">
       {/* Navbar */}
       <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
         <div className="flex gap-4 text-gray-400">
