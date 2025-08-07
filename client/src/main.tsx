@@ -12,7 +12,7 @@ import { Homepage } from "./pages/home/Home";
 import { AboutUs } from "./pages/About_club/AboutUs";
 import About_layout from "./layout/about/about_layout";
 import Event_page from "./pages/Event/Event";
-
+import HodMsg from "./pages/Hod/HodMsg";
 
 const rootrouter = createRootRoute({
   component: Homelayout,
@@ -38,11 +38,16 @@ const Event_pagerout = createRoute({
   path: "/Events",
   component:Event_page,
 });
+const HodMsgRoute = createRoute({
+  getParentRoute: () => rootrouter,
+  path: "/hod-message",
+  component: HodMsg,
+});
 
 const routeTree = rootrouter.addChildren([
   Homeroute,
   AboutUsroute.addChildren([Aboutclubroute]),
-  Event_pagerout,
+  Event_pagerout,HodMsgRoute
 ]);
 const router = createRouter({ routeTree });
 
