@@ -3,10 +3,19 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "bun watch src/index.ts",
+    "build": "bun build src/index.ts --outdir=dist --target=bun",
+    "start": " bun dist/index.js"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "hono": "^4.8.12",
+    "zod": "^4.0.15"
   }
 }
