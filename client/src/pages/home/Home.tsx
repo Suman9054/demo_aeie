@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Slideshow } from "../../components/Slide/Slide";
+import { Link } from "@tanstack/react-router";
 
 export const Homepage: React.FC = () => {
   // Define the images to be used in the slideshow
@@ -98,7 +99,7 @@ export const Homepage: React.FC = () => {
                 ))}
               </motion.span>
               <span className="text-white text-4xl md:text-6xl">to AEIE</span>
-            </div>
+            </div> {/* ← This div was already present to close header text container */}
 
             <p className="text-gray-200 text-lg mb-8 leading-relaxed">
               Something extraordinary is brewing. We're crafting a revolutionary
@@ -106,12 +107,29 @@ export const Homepage: React.FC = () => {
               innovation. Get ready for cutting-edge technology, seamless
               design, and features that haven't been seen before.
             </p>
-          </div>
+          </div> {/* ← This closes the left column */}
           <div className="flex-1 flex justify-center items-center">
             <Slideshow images={images} />
           </div>
+        </div> {/* ← This closes the main content flex container */}
+      </div> {/* ← This closes the outer wrapper (probably page wrapper) */}
+       <div className="p-10 flex justify-center items-center min-h-screen bg-gray-100">
+      <Link to="/hod-message">
+        <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+          <img
+            src="/images/hod.jpg" // Place in public/images/hod.jpg
+            alt="HOD"
+            className="w-full h-48 object-cover rounded-t-xl"
+          />
+          <div className="p-4">
+            <h2 className="text-lg font-semibold text-gray-800">HOD Message</h2>
+            <p className="text-sm text-gray-600">
+              Click to read the message from the Head of Department.
+            </p>
+          </div>
         </div>
-      </div>
+      </Link>
+    </div>
     </div>
   );
 };
