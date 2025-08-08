@@ -58,7 +58,7 @@ const EventsPage: React.FC = () => {
 
       {/* Filters */}
       <div className="flex justify-center pr-80 space-x-4 mb-8">
-        <button className="px-4 py-2 bg-black text-white rounded-full text-sm">
+        <button className="px-4 py-2 bg-teal-500 text-gray-300 rounded-full text-sm">
           All Events
         </button>
         <button className="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-gray-200">
