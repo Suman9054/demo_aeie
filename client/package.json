@@ -17,10 +17,14 @@
     "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
     "react-icons": "^5.5.0",
 >>>>>>> Stashed changes
+=======
+    "react-icons": "^5.5.0",
+>>>>>>> origin/main
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
