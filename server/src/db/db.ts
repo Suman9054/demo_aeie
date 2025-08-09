@@ -51,7 +51,7 @@ export const db_connect = async () => {
     console.error("Database connection failed:", error);
   }
 };
-//user creat and auth function
+//user creat and auth functions
 export const create_user = async (userdata: z.infer<typeof userzodscema>) => {
   try {
     await usermodel
