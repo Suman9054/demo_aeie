@@ -1,28 +1,27 @@
-import { Schema,model } from "mongoose";
-
+import { Schema, model } from "mongoose";
 
 const userSchema: Schema = new Schema({
   username: {
     type: String,
     required: true,
   },
-    password: {
+  password: {
     type: String,
     required: true,
   },
-    email: {
+  email: {
     type: String,
     required: true,
   },
-    role: {
+  role: {
     type: String,
     enum: ["admin", "user"],
     default: "user",
   },
-    createdAt: {
+  createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 const eventSchema: Schema = new Schema({
@@ -30,49 +29,49 @@ const eventSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-    description: {
+  description: {
     type: String,
     required: true,
   },
-    date: {
+  date: {
     type: Date,
     required: true,
   },
-    lastdate: {
+  lastdate: {
     type: Date,
     required: true,
-    },
-    poster_url: {
+  },
+  poster_url: {
     type: String,
     required: true,
-    },
-   event_type: {
+  },
+  event_type: {
     type: String,
     enum: ["event", "competition", "workshop"],
     required: true,
-    }
+  },
 });
 
 const registrationSchema: Schema = new Schema({
-    user: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
-    },
-    event: {
+  },
+  event: {
     type: Schema.Types.ObjectId,
     ref: "Event",
     required: true,
-    },
-    registrationDate: {
+  },
+  registrationDate: {
     type: Date,
     default: Date.now,
-    },
-    status: {
+  },
+  status: {
     type: String,
     enum: ["registered", "cancelled"],
     default: "registered",
-    }
+  },
 });
 
 const sesionSchema: Schema = new Schema({
@@ -81,15 +80,13 @@ const sesionSchema: Schema = new Schema({
     ref: "User",
     required: true,
   },
-    token: {
+  token: {
     type: String,
     required: true,
-  }
+  },
 });
-   
+
 export const usermodel = model("User", userSchema);
 export const eventmodel = model("Event", eventSchema);
-export const registrationmodel = model("Registration", registrationSchema);
+export const registrationmodel = model("Registration_data", registrationSchema);
 export const sessionmodel = model("Session", sesionSchema);
-
-
