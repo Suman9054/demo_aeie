@@ -1,46 +1,20 @@
 import mongoose, { now } from "mongoose";
-import z, { date } from "zod";
+import z from "zod";
 import {
   eventmodel,
   registrationmodel,
   sessionmodel,
   usermodel,
 } from "../schema/schema";
+import type {
+  event_schema,
+  new_registration_schema,
+  upadate_event_shema,
+  user_loginschema,
+  UserReturnSchema,
+  userzodscema,
+} from "../types/type";
 
-//zode schema
-const userzodscema = z.object({
-  username: z.string(),
-  password: z.string(),
-  email: z.email(),
-});
-
-const user_loginschema = z.object({
-  username: z.string(),
-  hash: z.string(),
-});
-const event_schema = z.object({
-  itle: z.string(),
-  description: z.string(),
-  date: z.date(),
-  lastdate: z.date(),
-  poster_url: z.string(),
-  event_type: z.enum(["event", "competition", "workshop"]),
-});
-
-const upadate_event_shema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
-  date: z.date().optional(),
-  lastdate: z.date().optional(),
-  poster_url: z.string().optional(),
-  event_type: z.enum(["event", "competition", "workshop"]).optional(),
-  id: z.string(),
-});
-
-const new_registration_schema = z.object({
-  user: mongoose.Types.ObjectId,
-  event: mongoose.Types.ObjectId,
-});
 //mongodb connect
 export const db_connect = async () => {
   try {
@@ -52,32 +26,19 @@ export const db_connect = async () => {
   }
 };
 //user creat and auth functions
-export const create_user = async (userdata: z.infer<typeof userzodscema>) => {
+export const create_user = async (
+  userdata: z.infer<typeof userzodscema>,
+): Promise<UserReturnSchema> => {
   try {
-    await usermodel
-      .create({
-        name: userdata.username,
-        email: userdata.email,
-        password: userdata.password,
-      })
-      .then((user) => {
-        return user;
-      });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const find_user_by_sesion = async (token: string) => {
-  // it retur user id asine to the sesion
-  try {
-    const se = await sessionmodel.findOne({
-      token: token,
+    const user = await usermodel.create({
+      name: userdata.username,
+      email: userdata.email,
+      password: userdata.password,
     });
-    if (!se) return;
-    return se.user;
+    return user;
   } catch (e) {
     console.log(e);
+    throw new Error("Failed to create user");
   }
 };
 
@@ -97,7 +58,7 @@ export const asine_sesion_to_user = async (
 
 export const update_sesion = async (userid: string, sesiontoken: string) => {
   try {
-    await sessionmodel.findOne({ _id: userid }).updateOne({
+    await sessionmodel.findOne({ user: userid }).updateOne({
       token: sesiontoken,
       updatetedat: Date.now(),
     });
@@ -109,10 +70,24 @@ export const update_sesion = async (userid: string, sesiontoken: string) => {
 export const auth_user_by_sesion = async (sesiontoken: string) => {
   //sesion auth check function it return user
   try {
-    const user = await sessionmodel.findOne({ _id: sesiontoken });
-    return user ? user : null;
+    const sesion = await sessionmodel
+      .findOne({ token: sesiontoken })
+      .populate<{ user: UserReturnSchema }>("user")
+      .exec();
+    if (!sesion || !sesion.user) {
+      return null;
+    }
+    const user: UserReturnSchema = {
+      username: sesion.user.username,
+      email: sesion.user.email,
+      password: sesion.user.password,
+      role: sesion.user.role,
+      createdAt: sesion.user.createdAt,
+    };
+    return user;
   } catch (e) {
     console.log(e);
+    return null;
   }
 };
 
@@ -123,8 +98,15 @@ export const find_user = async (
   try {
     const user = await usermodel.findOne({
       username: auth_data.username,
-      password: auth_data.hash,
     });
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const find_user_by_id = async (userid: mongoose.Types.ObjectId) => {
+  try {
+    const user = await usermodel.findOne({ _id: userid });
     return user;
   } catch (e) {
     console.log(e);
@@ -136,18 +118,16 @@ export const Creat_new_event = async (
   event_data: z.infer<typeof event_schema>,
 ) => {
   try {
-    await eventmodel
-      .create({
-        itle: event_data.itle,
-        description: event_data.description,
-        date: event_data.date,
-        lastdate: event_data.lastdate,
-        poster_url: event_data.poster_url,
-        event_type: event_data.event_type,
-      })
-      .then((event) => {
-        return event;
-      });
+    const event = await eventmodel.create({
+      itle: event_data.title,
+      description: event_data.description,
+      date: event_data.date,
+      lastdate: event_data.lastdate,
+      poster_url: event_data.poster_url,
+      vedio_url: event_data.vedio_url,
+      event_type: event_data.event_type,
+    });
+    return event;
   } catch (e) {
     console.log(e);
   }
@@ -155,9 +135,8 @@ export const Creat_new_event = async (
 
 export const find_all_events = async () => {
   try {
-    await eventmodel.find().then((event) => {
-      return event;
-    });
+    const events = await eventmodel.find();
+    return events;
   } catch (e) {
     console.log(e);
   }
@@ -165,12 +144,8 @@ export const find_all_events = async () => {
 
 export const find_newest_event = async () => {
   try {
-    await eventmodel
-      .find()
-      .sort({ _id: -1 })
-      .then((event) => {
-        return event;
-      });
+    const event = await eventmodel.find().sort({ _id: -1 });
+    return event;
   } catch (e) {
     console.log(e);
   }
@@ -178,12 +153,10 @@ export const find_newest_event = async () => {
 
 export const find_nearst_events = async () => {
   try {
-    await eventmodel
+    const event = await eventmodel
       .find({ date: { $gte: now } })
-      .sort({ date: 1 })
-      .then((event) => {
-        return event;
-      });
+      .sort({ date: 1 });
+    return event;
   } catch (e) {
     console.log(e);
   }
@@ -201,14 +174,17 @@ export const update_one_event = async (
   update_event_data: z.infer<typeof upadate_event_shema>,
 ) => {
   try {
-    await eventmodel.findOne({ _id: update_event_data.id }).updateOne({
-      title: update_event_data.title,
-      description: update_event_data.description,
-      date: update_event_data.description,
-      lastdate: update_event_data.lastdate,
-      poster_url: update_event_data.poster_url,
-      event_type: update_event_data.event_type,
-    });
+    const event = await eventmodel
+      .findOne({ _id: update_event_data.id })
+      .updateOne({
+        title: update_event_data.title,
+        description: update_event_data.description,
+        date: update_event_data.description,
+        lastdate: update_event_data.lastdate,
+        poster_url: update_event_data.poster_url,
+        event_type: update_event_data.event_type,
+      });
+    return event;
   } catch (e) {
     console.log(e);
   }

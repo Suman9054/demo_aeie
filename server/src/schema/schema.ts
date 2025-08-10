@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import type { UserReturnSchema } from "../types/type";
 
-const userSchema: Schema = new Schema({
+const userSchema: Schema = new Schema<UserReturnSchema>({
   username: {
     type: String,
     required: true,
@@ -43,7 +44,9 @@ const eventSchema: Schema = new Schema({
   },
   poster_url: {
     type: String,
-    required: true,
+  },
+  vedio_url: {
+    type: String,
   },
   event_type: {
     type: String,
@@ -61,6 +64,10 @@ const registrationSchema: Schema = new Schema({
   event: {
     type: Schema.Types.ObjectId,
     ref: "Event",
+    required: true,
+  },
+  phonnumber: {
+    type: String,
     required: true,
   },
   registrationDate: {
@@ -97,7 +104,7 @@ const sesionSchema: Schema = new Schema({
   },
 });
 
-export const usermodel = model("User", userSchema);
+export const usermodel = model<UserReturnSchema>("User", userSchema);
 export const eventmodel = model("Event", eventSchema);
 export const registrationmodel = model("Registration_data", registrationSchema);
 export const sessionmodel = model("Session", sesionSchema);
