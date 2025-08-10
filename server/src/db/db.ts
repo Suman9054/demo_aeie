@@ -1,5 +1,5 @@
 import mongoose, { now } from "mongoose";
-import z from "zod";
+import z, { date } from "zod";
 import {
   eventmodel,
   registrationmodel,
@@ -69,11 +69,13 @@ export const create_user = async (userdata: z.infer<typeof userzodscema>) => {
 };
 
 export const find_user_by_sesion = async (token: string) => {
+  // it retur user id asine to the sesion
   try {
     const se = await sessionmodel.findOne({
       token: token,
     });
-    return se ? se.user : null;
+    if (!se) return;
+    return se.user;
   } catch (e) {
     console.log(e);
   }
@@ -97,14 +99,25 @@ export const update_sesion = async (userid: string, sesiontoken: string) => {
   try {
     await sessionmodel.findOne({ _id: userid }).updateOne({
       token: sesiontoken,
+      updatetedat: Date.now(),
     });
   } catch (e) {
     console.log(e);
   }
 };
 
+export const auth_user_by_sesion = async (sesiontoken: string) => {
+  //sesion auth check function it return user
+  try {
+    const user = await sessionmodel.findOne({ _id: sesiontoken });
+    return user ? user : null;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const find_user = async (
-  //auth function
+  //auth function it return user
   auth_data: z.infer<typeof user_loginschema>,
 ) => {
   try {

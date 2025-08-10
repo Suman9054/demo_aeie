@@ -84,6 +84,17 @@ const sesionSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  createdat: {
+    type: Date,
+    default: Date.now,
+  },
+  validate: {
+    type: Date,
+    default: () => new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 day from now
+  },
+  updatetedat: {
+    type: Date,
+  },
 });
 
 export const usermodel = model("User", userSchema);
