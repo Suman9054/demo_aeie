@@ -113,23 +113,23 @@ export const Homepage: React.FC = () => {
           </div>
         </div> {/* ← This closes the main content flex container */}
       </div> {/* ← This closes the outer wrapper (probably page wrapper) */}
-       <div className="p-10 flex justify-center items-center min-h-screen bg-gray-100">
-      <Link to="/hod-message">
-        <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-          <img
-            src="/images/hod.jpg" // Place in public/images/hod.jpg
-            alt="HOD"
-            className="w-full h-48 object-cover rounded-t-xl"
-          />
-          <div className="p-4">
-            <h2 className="text-lg font-semibold text-gray-800">HOD Message</h2>
-            <p className="text-sm text-gray-600">
-              Click to read the message from the Head of Department.
-            </p>
-          </div>
-        </div>
-      </Link>
+      <div className="p-10 flex justify-center items-center min-h-screen">
+  <Link to="/hod-message">
+    <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <img
+        src="HOD.png"
+        alt="HOD"
+        className="w-full h-48 object-cover object-top rounded-t-xl"
+      />
+      <div className="p-4">
+        <h2 className="text-lg font-semibold text-gray-800">HOD Message</h2>
+        <p className="text-sm text-gray-600">
+          Click to read the message from the Head of Department.
+        </p>
+      </div>
     </div>
+  </Link>
+</div>
     </div>
   );
 };
