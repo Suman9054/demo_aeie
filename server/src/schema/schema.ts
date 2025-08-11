@@ -70,6 +70,18 @@ const registrationSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  roolnumber: {
+    type: String,
+    required: true,
+  },
+  department: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: String,
+    required: true,
+  },
   registrationDate: {
     type: Date,
     default: Date.now,
@@ -91,16 +103,9 @@ const sesionSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  createdat: {
-    type: Date,
-    default: Date.now,
-  },
   validate: {
     type: Date,
-    default: () => new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 day from now
-  },
-  updatetedat: {
-    type: Date,
+    default: () => new Date(Date.now() + 60 * 60 * 24 * 7), // 7 day from now
   },
 });
 

@@ -1,6 +1,7 @@
 import z from "zod";
 import mongoose from "mongoose";
 
+
 export const userzodscema = z.object({
   username: z.string(),
   password: z.string(),
@@ -9,7 +10,6 @@ export const userzodscema = z.object({
 
 export const user_loginschema = z.object({
   username: z.string(),
-  hash: z.string(),
 });
 export const event_schema = z.object({
   title: z.string(),
@@ -37,12 +37,24 @@ export const new_registration_schema = z.object({
 });
 
 export const user_return_schema = z.object({
+  _id: z.string(),
   username: z.string(),
   password: z.string(),
   email: z.email(),
   role: z.string(),
   createdAt: z.date(),
 });
+const user_registration_schema = z.object({
+  username: z.string(),
+  password: z.string(),
+  email: z.email(),
+});
+const user_login_schema = z.object({
+  username: z.string(),
+  password: z.string(),
+});
 
 export type UserReturnSchema = z.infer<typeof user_return_schema>;
 export type neweventschema = z.infer<typeof event_schema>;
+export type user_login_schema = z.infer<typeof user_login_schema>;
+export type user_registration_schema = z.infer<typeof user_registration_schema>;
