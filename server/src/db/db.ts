@@ -31,7 +31,7 @@ export const create_user = async (
 ): Promise<UserReturnSchema> => {
   try {
     const user = await usermodel.create({
-      name: userdata.username,
+      username: userdata.username,
       email: userdata.email,
       password: userdata.password,
     });
@@ -78,6 +78,7 @@ export const auth_user_by_sesion = async (sesiontoken: string) => {
       return null;
     }
     const user: UserReturnSchema = {
+      _id: sesion.user._id,
       username: sesion.user.username,
       email: sesion.user.email,
       password: sesion.user.password,
