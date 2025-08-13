@@ -1,6 +1,4 @@
 import z from "zod";
-import mongoose from "mongoose";
-
 
 export const userzodscema = z.object({
   username: z.string(),
@@ -9,7 +7,7 @@ export const userzodscema = z.object({
 });
 
 export const user_loginschema = z.object({
-  username: z.string(),
+  email: z.email(),
 });
 export const event_schema = z.object({
   title: z.string(),
@@ -32,8 +30,12 @@ export const upadate_event_shema = z.object({
 });
 
 export const new_registration_schema = z.object({
-  user: mongoose.Types.ObjectId,
-  event: mongoose.Types.ObjectId,
+  user: z.string(),
+  event_id: z.string(),
+  phonnumber: z.string(),
+  roolnumber: z.string(),
+  department: z.string(),
+  year: z.string(),
 });
 
 export const user_return_schema = z.object({
@@ -50,11 +52,27 @@ const user_registration_schema = z.object({
   email: z.email(),
 });
 const user_login_schema = z.object({
-  username: z.string(),
+  email: z.email(),
   password: z.string(),
+});
+
+const event_return_schema = z.object({
+  _id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  date: z.date(),
+  lastdate: z.date(),
+  poster_url: z.string().optional(),
+  event_type: z.string(),
+  vedio_url: z.string().optional(),
 });
 
 export type UserReturnSchema = z.infer<typeof user_return_schema>;
 export type neweventschema = z.infer<typeof event_schema>;
 export type user_login_schema = z.infer<typeof user_login_schema>;
 export type user_registration_schema = z.infer<typeof user_registration_schema>;
+export type new_registration_schema_zod = z.infer<
+  typeof new_registration_schema
+>;
+export type event_return_schema = z.infer<typeof event_return_schema>;
+export type upadate_event_shema_zod = z.infer<typeof upadate_event_shema>;

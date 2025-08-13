@@ -7,6 +7,7 @@ import {
   usermodel,
 } from "../schema/schema";
 import type {
+  event_return_schema,
   event_schema,
   new_registration_schema,
   upadate_event_shema,
@@ -98,7 +99,7 @@ export const find_user = async (
 ) => {
   try {
     const user = await usermodel.findOne({
-      username: auth_data.username,
+      email: auth_data.email,
     });
     return user;
   } catch (e) {
@@ -175,16 +176,19 @@ export const update_one_event = async (
   update_event_data: z.infer<typeof upadate_event_shema>,
 ) => {
   try {
-    const event = await eventmodel
-      .findOne({ _id: update_event_data.id })
-      .updateOne({
-        title: update_event_data.title,
-        description: update_event_data.description,
-        date: update_event_data.description,
-        lastdate: update_event_data.lastdate,
-        poster_url: update_event_data.poster_url,
-        event_type: update_event_data.event_type,
-      });
+    const event = await eventmodel.findOneAndUpdate(
+      { _id: update_event_data.id },
+      {
+        $set: {
+          title: update_event_data.title,
+          description: update_event_data.description,
+          date: update_event_data.description,
+          lastdate: update_event_data.lastdate,
+          poster_url: update_event_data.poster_url,
+          event_type: update_event_data.event_type,
+        },
+      },
+    );
     return event;
   } catch (e) {
     console.log(e);
@@ -196,39 +200,75 @@ export const create_new_registration = async (
   registration_data: z.infer<typeof new_registration_schema>,
 ) => {
   try {
-    await registrationmodel.create({
+    const register = await registrationmodel.create({
       user: registration_data.user,
-      event: registration_data.event,
+      event: registration_data.event_id,
+      phonnumber: registration_data.phonnumber,
+      roolnumber: registration_data.roolnumber,
+      department: registration_data.department,
+      year: registration_data.year,
     });
+    return register;
   } catch (e) {
     console.log(e);
+    return null;
+  }
+};
+
+export const find_one_event = async (event_id: string) => {
+  try {
+    const event = await eventmodel.findOne({ _id: event_id });
+    return event;
+  } catch (e) {
+    console.log(e);
+    return null;
   }
 };
 
 export const cancelle_registration = async (registration_id: string) => {
   try {
-    await registrationmodel.findOne({ _id: registration_id }).updateOne({
-      status: "cancelled",
-    });
+    const r = await registrationmodel.findOneAndUpdate(
+      { _id: registration_id },
+      {
+        $set: { status: "cancelled" },
+      },
+    );
+    return r;
   } catch (e) {
     console.log(e);
+    return null;
   }
 };
 
 export const find_all_registration = async () => {
   try {
-    await registrationmodel.find({}).then((registration) => {
-      return registration;
-    });
+    const registration = await registrationmodel.find({});
+    return registration;
   } catch (e) {
     console.log(e);
+    return null;
   }
 };
 
-export const delete_one_registration = async (id: mongoose.Types.ObjectId) => {
+export const delete_one_registration = async (id: string) => {
   try {
-    await registrationmodel.findOneAndDelete({ _id: id });
+    const r = await registrationmodel.findOneAndDelete({ _id: id });
+    return r;
   } catch (e) {
     console.log(e);
+    return null;
+  }
+};
+
+export const find_registration_by_user = async (user_id: string) => {
+  try {
+    const registration = await registrationmodel
+      .find({ user: user_id })
+      .populate<{ event: event_return_schema }>("event")
+      .exec();
+    return registration;
+  } catch (e) {
+    console.log(e);
+    return null;
   }
 };
