@@ -19,7 +19,8 @@ const events: EventItem[] = [
       "To provide flexible, inspiring workspaces that foster creativity, collaboration, and professional growth.",
     organizer: "Podcast Seminggu",
     date: "Wed, 18 September 2024 at 7–9PM",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_FWF2judaujT30K9sMf-tZFhMWpgP6xCemw&s",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_FWF2judaujT30K9sMf-tZFhMWpgP6xCemw&s",
   },
   {
     id: 2,
@@ -29,7 +30,8 @@ const events: EventItem[] = [
       "To provide flexible, inspiring workspaces that foster creativity, collaboration, and professional growth.",
     organizer: "Podcast Seminggu",
     date: "Wed, 18 September 2024 at 7–9PM",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyG4zwWqbxI8Djn5Gii2jS_v8HR9qQz0jJjg&s",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyG4zwWqbxI8Djn5Gii2jS_v8HR9qQz0jJjg&s",
   },
   {
     id: 3,
@@ -39,19 +41,18 @@ const events: EventItem[] = [
       "To provide flexible, inspiring workspaces that foster creativity, collaboration, and professional growth.",
     organizer: "Podcast Seminggu",
     date: "Wed, 18 September 2024 at 7–9PM",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv5R_TCbEHyx_z3r72Dh5TGXMWp33gz5uE-A&s",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv5R_TCbEHyx_z3r72Dh5TGXMWp33gz5uE-A&s",
   },
 ];
 
 const EventsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-400/10 via-black-100/10 to-gray-200/10 text-gray-900">
-      
-
       {/* Hero Section */}
       <section className="text-center py-14">
         <h2 className="text-4xl font-bold leading-tight">
-          Grow Your Skills and 
+          Grow Your Skills and
           <br /> with Our Events
         </h2>
       </section>
@@ -87,7 +88,9 @@ const EventsPage: React.FC = () => {
                   {event.category}
                 </span>
                 <h3 className="font-semibold text-lg">{event.title}</h3>
-                <p className="text-sm text-gray-600 mt-1">{event.description}</p>
+                <p className="text-sm text-gray-600 mt-1">
+                  {event.description}
+                </p>
                 <div className="mt-3 text-sm text-gray-500">
                   <p>
                     <strong>Penyelenggara:</strong> {event.organizer}
@@ -96,7 +99,6 @@ const EventsPage: React.FC = () => {
                     <strong>Tanggal pelaksanaan:</strong> {event.date}
                   </p>
                 </div>
-                
               </div>
             </div>
           </div>

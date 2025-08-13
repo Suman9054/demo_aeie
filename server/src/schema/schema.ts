@@ -12,6 +12,7 @@ const userSchema: Schema = new Schema<UserReturnSchema>({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
   },
   role: {
