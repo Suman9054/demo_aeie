@@ -12,7 +12,7 @@ http:
     backend-api:
       loadBalancer:
         servers:
-          - url: "https://aeie-club-server-1.onrender.com"
-          - url: "https://aeie-club-server.onrender.com"
+          - url: "https://54.188.71.94:3000"
+          - url: "https://52.13.128.108:3000"
 
    
