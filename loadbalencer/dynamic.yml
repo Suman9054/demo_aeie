@@ -21,6 +21,6 @@ http:
           - url: "https://aeie-club-server.onrender.com"
           - url: "https://aeie-club-server-1.onrender.com"
         healthCheck:
-          path: "/api/v1/auth/jwt/verify"
+          path: "/helth"
           interval: "10s"
           timeout: "3s"
