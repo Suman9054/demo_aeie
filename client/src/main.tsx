@@ -27,9 +27,14 @@ const homeRoute = createRoute({
 });
 
 // About Us page
-const aboutUsRoute = createRoute({
+const About_layout = createRoute({
   getParentRoute: () => rootRoute,
   path: "/about-us",
+  component: AboutUs,
+});
+const aboutUsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/club",
   component: AboutUs,
 });
 
@@ -54,7 +59,7 @@ const hodMsgRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   homeRoute,
-  aboutUsRoute.addChildren([aboutUsRoute]),
+  About_layout.addChildren([aboutUsRoute]),
   Event_pagerout,
   hodMsgRoute,
 
