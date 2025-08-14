@@ -33,10 +33,12 @@ const aboutUsRoute = createRoute({
   component: AboutUs,
 });
 
+
 // Events page
-const eventPageRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/events",
+
+const Event_pagerout = createRoute({
+  getParentRoute: () => rootrouter,
+  path: "/Events",
   component: Event_page,
 });
 
@@ -47,12 +49,15 @@ const hodMsgRoute = createRoute({
   component: HodMsg,
 });
 
+
 // Build route tree
-const routeTree = rootRoute.addChildren([
-  homeRoute,
-  aboutUsRoute,
-  eventPageRoute,
-  hodMsgRoute,
+
+const routeTree = rootrouter.addChildren([
+  Homeroute,
+  AboutUsroute.addChildren([Aboutclubroute]),
+  Event_pagerout,
+  HodMsgRoute,
+
 ]);
 
 // Create router
