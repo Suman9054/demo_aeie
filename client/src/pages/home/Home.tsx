@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Slideshow } from "../../components/Slide/Slide";
-import { Link } from "@tanstack/react-router";
+import { HoverCard } from "../../components/Card/HoverCard";
 
 export const Homepage: React.FC = () => {
   // Define the images to be used in the slideshow
@@ -55,6 +55,7 @@ export const Homepage: React.FC = () => {
     }
     setParticles(particleArray);
   }, []);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white overflow-hidden relative">
@@ -114,21 +115,14 @@ export const Homepage: React.FC = () => {
         </div> {/* ← This closes the main content flex container */}
       </div> {/* ← This closes the outer wrapper (probably page wrapper) */}
       <div className="p-10 flex justify-center items-center min-h-screen">
-  <Link to="/hod-message">
-    <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <img
-        src="HOD.png"
-        alt="HOD"
-        className="w-full h-48 object-cover object-top rounded-t-xl"
+        <HoverCard
+        title="Beautiful Landscape"
+        shortText="A quick glimpse of nature."
+        fullText="Here is the full story about this beautiful landscape. It stretches across mountains, rivers, and forests, offering breathtaking views."
+        imageUrl="https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305"
+        // link="/landscape"
       />
-      <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800">HOD Message</h2>
-        <p className="text-sm text-gray-600">
-          Click to read the message from the Head of Department.
-        </p>
-      </div>
-    </div>
-  </Link>
+  
 </div>
     </div>
   );

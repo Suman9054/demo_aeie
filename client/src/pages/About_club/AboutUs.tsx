@@ -1,5 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { useMemo, ComponentType } from "react";
+import { useMemo, type ComponentType } from "react";
+// import { React } from "React";
 
 // Direct imports (no lazy)
 import MediaClub from "./aboutSections/MediaClub";
@@ -30,7 +31,7 @@ const sectionComponents: Record<SectionName, ComponentType> = {
   ISA,
 };
 
-export default function AboutUs(): JSX.Element {
+export default function AboutUs(): React.JSX.Element {
   const location = useLocation();
 
   // Get active section directly from the URL query param

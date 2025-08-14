@@ -43,7 +43,7 @@ const eventPageRoute = createRoute({
 // HOD message page
 const hodMsgRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/hod-message",
+  path: "/HodMsg",
   component: HodMsg,
 });
 
