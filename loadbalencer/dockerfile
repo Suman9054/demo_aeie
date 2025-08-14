@@ -1,7 +1,5 @@
 FROM traefik:latest AS base
 
-
 COPY traefik.yml /etc/traefik/traefik.yml
 COPY dynamic.yml /etc/traefik/dynamic.yml
 
-EXPOSE 80/tcp 800/tcp

@@ -1,11 +1,10 @@
-# traefik.yml
 api:
   dashboard: true
-  insecure: true
+  insecure: true  
 
 entryPoints:
   web:
-    address: ":80"
+    address: ":${PORT:-80}"
 
 providers:
   file:
@@ -14,3 +13,7 @@ providers:
 
 log:
   level: INFO
+
+
+serversTransport:
+  insecureSkipVerify: true  
