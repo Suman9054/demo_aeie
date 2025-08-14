@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export default function ISA(): JSX.Element {
   return (
     <div>

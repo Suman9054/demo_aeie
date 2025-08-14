@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export default function Faculty(): JSX.Element {
   return (
     <div>

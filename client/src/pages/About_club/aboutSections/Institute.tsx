@@ -1,4 +1,6 @@
-export default function Institute(): TSX.Element {
+import type { JSX } from "react";
+
+export default function Institute(): JSX.Element {
   return (
     <div>
       <p>

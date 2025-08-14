@@ -1,4 +1,6 @@
-export default function MediaClub(): TSX.Element {
+import type { JSX } from "react";
+
+export default function MediaClub(): JSX.Element {
   return (
     <div>
       <p>

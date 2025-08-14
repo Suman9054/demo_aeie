@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export default function TechnicalStaff(): JSX.Element {
   return (
     <div>

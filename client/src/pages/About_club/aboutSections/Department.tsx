@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export default function Department(): JSX.Element {
   return (
     <div>
@@ -7,12 +9,12 @@ export default function Department(): JSX.Element {
       </p>
 <br />
 <br />
-      <div class="grid grid-cols-2 gap-4 p-4 bg-gray-200">
-  <div class="bg-blue-500 text-white p-4 rounded text-center">
+      <div className="grid grid-cols-2 gap-4 p-4 bg-gray-200">
+  <div className="bg-blue-500 text-white p-4 rounded text-center">
     <h2 className="text-2xl font-bold">Vision</h2>
     <p>To become a dynamic contributor to the community by ensuring excellence in academic and research in the field of Applied Electronics and Instrumentation Engineering and to create an environment that will facilitate the growth of individuals in this field through innovative teaching, research and involvement of industry.</p>
   </div>
-  <div class="bg-blue-500 text-white p-4 rounded text-center">
+  <div className="bg-blue-500 text-white p-4 rounded text-center">
     <h2 className="text-2xl font-bold">Mission</h2>
     <p>M1: To produce quality engineering graduates with the capacity of serving the arena of science , engineering , teaching , research , entrepreneurship and management.
 <br />
@@ -20,11 +22,11 @@ M2: To add a skill-set such as communication parameter, ethical inputs and to nu
 <br />
 M3: To ensure the capability of work in a team effectively in different environments & to add tenacity to build workforce.</p>
   </div>
-  <div class="bg-blue-500 text-white p-4 rounded text-center">
+  <div className="bg-blue-500 text-white p-4 rounded text-center">
     <h2 className="text-2xl font-bold">Program Outcomes(POs)</h2>
     <p>To become a dynamic contributor to the community by ensuring excellence in academic and research in the field of Applied Electronics and Instrumentation Engineering and to create an environment that will facilitate the growth of individuals in this field through innovative teaching, research and involvement of industry.</p>
   </div>
-  <div class="bg-blue-500 text-white p-4 rounded text-center">
+  <div className="bg-blue-500 text-white p-4 rounded text-center">
     <h2 className="text-2xl font-bold">Program education objectives (PEOs)</h2>
     <p>
         PEO 1: To impart technical competency, knowledge, skill which ensure capability to solve problems in Industry, Research and Academics related to Instrumentation Engineering & other related disciplines.
@@ -38,7 +40,7 @@ PEO 4: To develop the ability to function effectively in diverse professional ro
 PEO 5: To fulfill the needs of society through their acquired attributes in ethical & responsible manner.
     </p>
   </div>
-  <div class="bg-blue-500 text-white p-4 rounded text-center">
+  <div className="bg-blue-500 text-white p-4 rounded text-center">
     <h2 className="text-2xl font-bold">Program specific Outcomes (PSOs)</h2>
     <p>PSO 1: Able to develop a strong foundation in the scientific, technology, engineering and mathematics (STEM) & to apply these in a unified manner for real life problems pertaining to Electronics and Instrumentation engg.
 <br />
