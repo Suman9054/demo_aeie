@@ -4,7 +4,7 @@ api:
 
 entryPoints:
   web:
-    address: ":${PORT:-80}"
+    address: ":80"
 
 providers:
   file:
