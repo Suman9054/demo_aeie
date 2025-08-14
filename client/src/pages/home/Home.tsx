@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Slideshow } from "../../components/Slide/Slide";
 import { HoverCard } from "../../components/Card/HoverCard";
+import { Link } from "@tanstack/react-router";
 
 export const Homepage: React.FC = () => {
   // Define the images to be used in the slideshow
@@ -130,10 +131,7 @@ export const Homepage: React.FC = () => {
   
 </div>
 
-        </div>{" "}
-        {/* ← This closes the main content flex container */}
-      </div>{" "}
-      {/* ← This closes the outer wrapper (probably page wrapper) */}
+      
       <div className="p-10 flex justify-center items-center min-h-screen bg-gray-100">
         <Link to="/hod-message">
           <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
