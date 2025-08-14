@@ -38,13 +38,13 @@ export default function Footer_layout(): React.JSX.Element {
         {/* Section 3: Social Icons */}
         <div className="flex gap-5 text-2xl">
           <a
-            href="mailto:your-email@example.com"
+            href="mailto:hodaeie.hit@gmail.com"
             className="hover:text-red-400 transition"
           >
             <MdEmail />
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/share/1ST1a2TfqD/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-500 transition"
@@ -52,7 +52,7 @@ export default function Footer_layout(): React.JSX.Element {
             <FaFacebook />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/aeie.hit/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-pink-400 transition"
@@ -60,7 +60,7 @@ export default function Footer_layout(): React.JSX.Element {
             <FaInstagram />
           </a>
           <a
-            href="https://twitter.com"
+            href="https://x.com/HODAEIE"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-sky-400 transition"
@@ -68,7 +68,7 @@ export default function Footer_layout(): React.JSX.Element {
             <FaTwitter />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/aeie-hit-00614a378/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-300 transition"
@@ -76,7 +76,7 @@ export default function Footer_layout(): React.JSX.Element {
             <FaLinkedin />
           </a>
           <a
-            href="https://youtube.com"
+            href="https://youtube.com/@aeiehit?si=CGniaiyWR6vjKnqE"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-red-500 transition"

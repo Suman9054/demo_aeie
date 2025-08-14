@@ -7,53 +7,65 @@ import {
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
+
 import { Homelayout } from "./layout/Home/Home_layout";
 import { Homepage } from "./pages/home/Home";
-import { AboutUs } from "./pages/About_club/AboutUs";
-import About_layout from "./layout/about/about_layout";
+import AboutUs from "./pages/About_club/AboutUs";
 import Event_page from "./pages/Event/Event";
 import HodMsg from "./pages/Hod/HodMsg";
 
-const rootrouter = createRootRoute({
+// Root layout route
+const rootRoute = createRootRoute({
   component: Homelayout,
 });
-const Homeroute = createRoute({
-  getParentRoute: () => rootrouter,
+
+// Home page
+const homeRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: "/",
   component: Homepage,
 });
 
-const AboutUsroute = createRoute({
-  getParentRoute: () => rootrouter,
+// About Us page
+const aboutUsRoute = createRoute({
+  getParentRoute: () => rootRoute,
   path: "/about-us",
-  component: About_layout,
-});
-const Aboutclubroute = createRoute({
-  getParentRoute: () => AboutUsroute,
-  path: "/about-club",
   component: AboutUs,
 });
+
+
+// Events page
+
 const Event_pagerout = createRoute({
-  getParentRoute: () => rootrouter,
+  getParentRoute: () => rootRoute,
   path: "/Events",
   component: Event_page,
 });
-const HodMsgRoute = createRoute({
-  getParentRoute: () => rootrouter,
-  path: "/hod-message",
+
+// HOD message page
+const hodMsgRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/HodMsg",
   component: HodMsg,
 });
 
-const routeTree = rootrouter.addChildren([
-  Homeroute,
-  AboutUsroute.addChildren([Aboutclubroute]),
+
+// Build route tree
+
+const routeTree = rootRoute.addChildren([
+  homeRoute,
+  aboutUsRoute.addChildren([aboutUsRoute]),
   Event_pagerout,
-  HodMsgRoute,
+  hodMsgRoute,
+
 ]);
+
+// Create router
 const router = createRouter({ routeTree });
 
+// Mount React app
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </StrictMode>
 );

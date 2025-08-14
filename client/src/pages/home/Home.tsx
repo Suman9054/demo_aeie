@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Slideshow } from "../../components/Slide/Slide";
+import { HoverCard } from "../../components/Card/HoverCard";
 import { Link } from "@tanstack/react-router";
 
 export const Homepage: React.FC = () => {
@@ -59,6 +60,7 @@ export const Homepage: React.FC = () => {
     setParticles(particleArray);
   }, []);
 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white overflow-hidden relative">
       {/* Animated particles */}
@@ -115,10 +117,21 @@ export const Homepage: React.FC = () => {
           <div className="flex-1 flex justify-center items-center">
             <Slideshow images={images} />
           </div>
-        </div>{" "}
-        {/* ← This closes the main content flex container */}
-      </div>{" "}
-      {/* ← This closes the outer wrapper (probably page wrapper) */}
+
+        </div> {/* ← This closes the main content flex container */}
+      </div> {/* ← This closes the outer wrapper (probably page wrapper) */}
+      <div className="p-10 flex justify-center items-center min-h-screen">
+        <HoverCard
+        title="Beautiful Landscape"
+        shortText="A quick glimpse of nature."
+        fullText="Here is the full story about this beautiful landscape. It stretches across mountains, rivers, and forests, offering breathtaking views."
+        imageUrl="https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305"
+        // link="/landscape"
+      />
+  
+</div>
+
+      
       <div className="p-10 flex justify-center items-center min-h-screen bg-gray-100">
         <Link to="/hod-message">
           <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -138,6 +151,7 @@ export const Homepage: React.FC = () => {
           </div>
         </Link>
       </div>
+
     </div>
   );
 };
