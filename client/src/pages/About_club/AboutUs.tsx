@@ -1,135 +1,80 @@
-import React from "react";
+import { Link, useLocation } from "@tanstack/react-router";
+import { useMemo, type ComponentType } from "react";
+// import { React } from "React";
 
-interface TeamMember {
-  name: string;
-  role: string;
-  image: string;
-  bio: string;
-}
+// Direct imports (no lazy)
+import MediaClub from "./aboutSections/MediaClub";
+import Institute from "./aboutSections/Institute";
+import Department from "./aboutSections/Department";
+import Faculty from "./aboutSections/Faculty";
+import TechnicalStaff from "./aboutSections/TechnicalStaff";
+import Committee from "./aboutSections/Committee";
+import ISA from "./aboutSections/ISA";
 
-export const AboutUs: React.FC = (): React.JSX.Element => {
-  const teamMembers: TeamMember[] = [
-    {
-      name: "Sarah Johnson",
-      role: "CEO & Founder",
-      image:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
-      bio: "With 15+ years in tech leadership, Sarah drives our vision of innovative solutions.",
-    },
-    {
-      name: "Michael Chen",
-      role: "CTO",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      bio: "Michael leads our technical strategy with expertise in scalable architecture.",
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Head of Design",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-      bio: "Emily crafts beautiful, user-centered experiences that delight our customers.",
-    },
-    {
-      name: "David Kim",
-      role: "VP of Engineering",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-      bio: "David ensures our products are built with quality, security, and performance.",
-    },
-  ];
+type SectionName =
+  | "Media Club"
+  | "Institute"
+  | "Department"
+  | "Faculty"
+  | "Technical Staff"
+  | "Committee"
+  | "ISA";
+
+// Mapping section names to components
+const sectionComponents: Record<SectionName, ComponentType> = {
+  "Media Club": MediaClub,
+  Institute,
+  Department,
+  Faculty,
+  "Technical Staff": TechnicalStaff,
+  Committee,
+  ISA,
+};
+
+export default function AboutUs(): React.JSX.Element {
+  const location = useLocation();
+
+  // Get active section directly from the URL query param
+  const activeSection = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    const section = params.get("section") as SectionName | null;
+    return section && section in sectionComponents
+      ? section
+      : "Media Club"; // default
+  }, [location.search]);
+
+  const ActiveComponent = sectionComponents[activeSection];
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-900">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gray-200/20 ">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex flex-col flex-1 leading-tight gap-3">
-          <span className="text-4xl md:text-4xl font-bold ">About Us</span>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl px-4 ">
-            We're on a mission to transform the digital landscape through
-            innovative technology and human-centered design.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen flex overflow-hidden bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white">
+      {/* Sidebar */}
+      <aside className="w-64 flex-shrink-0 bg-gradient-to-b from-indigo-800 via-indigo-900 to-blue-950 shadow-xl p-6 flex flex-col gap-4 border-r border-indigo-700">
+        <h2 className="text-xl font-bold mb-4 text-white">About Menu</h2>
+        <nav className="flex flex-col gap-2">
+          {(Object.keys(sectionComponents) as SectionName[]).map((item) => (
+            <Link
+              key={item}
+              to={`/about-us?section=${encodeURIComponent(item)}`} // ensures exact match
+              className={`text-left px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                activeSection === item
+                  ? "bg-indigo-700 text-white"
+                  : "text-indigo-100 hover:bg-indigo-700 hover:text-white hover:translate-x-1"
+              }`}
+            >
+              {item}
+            </Link>
+          ))}
+        </nav>
+      </aside>
 
-      {/* Story Section */}
-      <section className="py-20 bg-gray-200/20 text-gray-900 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-                Our Story
-              </h2>
-              <div className="prose prose-lg text-gray-600 space-y-6">
-                <p>
-                  Founded in 2019, we started with a simple belief: technology
-                  should empower people, not complicate their lives. What began
-                  as a small team of passionate developers has grown into a
-                  thriving company serving thousands of customers worldwide.
-                </p>
-                <p>
-                  Our journey has been marked by continuous innovation,
-                  strategic partnerships, and an unwavering commitment to
-                  excellence. We've weathered challenges, celebrated victories,
-                  and learned valuable lessons that have shaped who we are
-                  today.
-                </p>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-3xl transform rotate-3"></div>
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-                alt="Team collaboration"
-                className="relative rounded-3xl shadow-2xl w-full h-96 object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-20 bg-gray-200/20 text-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Behind every great product is an exceptional team. Get to know the
-              people who make it all possible.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-3">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {member.bio}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Main Content */}
+      <main className="flex-1 p-10 overflow-auto">
+        <h1 className="text-4xl font-bold mb-6 drop-shadow-lg">
+          About Our — {activeSection}
+        </h1>
+        {/* key forces remount so useEffect in each section runs */}
+        <ActiveComponent key={activeSection} />
+      </main>
     </div>
   );
-};
+}
