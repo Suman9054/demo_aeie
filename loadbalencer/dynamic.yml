@@ -1,0 +1,18 @@
+
+# dynamic.yml
+http:
+  routers:
+    api-router:
+      rule: "PathPrefix(`/api`)"
+      service: "backend-api"
+      entryPoints:
+        - web
+
+  services:
+    backend-api:
+      loadBalancer:
+        servers:
+          - url: "https://aeie-club-server-1.onrender.com"
+          - url: "https://aeie-club-server.onrender.com"
+
+   
