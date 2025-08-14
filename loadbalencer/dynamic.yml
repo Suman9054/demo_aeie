@@ -1,5 +1,3 @@
-
-# dynamic.yml
 http:
   routers:
     api-router:
@@ -7,12 +5,22 @@ http:
       service: "backend-api"
       entryPoints:
         - web
+    
+    # Add a catch-all router for non-API paths
+    default-router:
+      rule: "PathPrefix(`/`)"
+      service: "backend-api"
+      entryPoints:
+        - web
+      priority: 1  # Lower priority than api-router
 
   services:
     backend-api:
       loadBalancer:
         servers:
-          - url: "https://54.188.71.94:3000"
-          - url: "https://52.13.128.108:3000"
-
-   
+          - url: "https://aeie-club-server.onrender.com"
+          - url: "https://aeie-club-server-1.onrender.com"
+        healthCheck:
+          path: "/api/v1/auth/jwt/verify"
+          interval: "10s"
+          timeout: "3s"
