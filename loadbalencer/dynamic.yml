@@ -1,0 +1,26 @@
+http:
+  routers:
+    api-router:
+      rule: "PathPrefix(`/api`)"
+      service: "backend-api"
+      entryPoints:
+        - web
+    
+    # Add a catch-all router for non-API paths
+    default-router:
+      rule: "PathPrefix(`/`)"
+      service: "backend-api"
+      entryPoints:
+        - web
+      priority: 1  # Lower priority than api-router
+
+  services:
+    backend-api:
+      loadBalancer:
+        servers:
+          - url: "https://aeie-club-server.onrender.com"
+          - url: "https://aeie-club-server-1.onrender.com"
+        healthCheck:
+          path: "/"
+          interval: "10s"
+          timeout: "3s"
