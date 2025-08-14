@@ -27,7 +27,7 @@ app.use(
 );
 
 app.get("/", (c) => {
-  return c.text("Welcome to the AEIE");
+  return c.text("Welcome to the AEIE",200);
 });
 // all the routes
 app.route("/api/v1/event", event_route);
