@@ -26,8 +26,8 @@ app.use(
   }),
 );
 
-app.get("/helth", (c) => {
-  return c.text("Welcome to the AEIE API");
+app.get("/", (c) => {
+  return c.text("Welcome to the AEIE");
 });
 // all the routes
 app.route("/api/v1/event", event_route);
