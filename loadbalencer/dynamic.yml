@@ -1,17 +1,19 @@
 http:
   routers:
     api-router:
-      rule: "PathPrefix(`/api`)"
+      rule: "PathPrefix(`/api/`)"  # Added trailing slash
       service: "backend-api"
       entryPoints:
         - web
+      priority: 10
     
-    # Add a catch-all router for non-API paths
+    # Catch-all router for other paths
     default-router:
       rule: "PathPrefix(`/`)"
       service: "backend-api"
       entryPoints:
         - web
+      priority: 1
 
   services:
     backend-api:
@@ -19,4 +21,3 @@ http:
         servers:
           - url: "https://aeie-club-server.onrender.com"
           - url: "https://aeie-club-server-1.onrender.com"
-        
