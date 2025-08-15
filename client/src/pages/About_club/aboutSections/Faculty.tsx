@@ -25,7 +25,7 @@ const professorsData: Professor[] = [
       "Biomedical Signal Processing",
     ],
     image:
-      "https://images.unsplash.com/photo-1494790108755-2616c6d5b2be?w=300&h=300&fit=crop&crop=face",
+      "https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -40,7 +40,7 @@ const professorsData: Professor[] = [
       "Digital Signal Processing",
     ],
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      "https://ik.imagekit.io/AEIE/aeie_media/dg_20sir.jpg?updatedAt=1755281954881",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -49,7 +49,7 @@ const professorsData: Professor[] = [
     qualification: "PhD (Engg.), M.Tech, B.E",
     designation: "Associate Professor",
     fieldsOfResearch: ["Astrophysical Signal Processing", "Embedded System", "Microprocessor & Microcontroller"],
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/soumya_20roy.jpg?updatedAt=1755282391825",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -58,7 +58,7 @@ const professorsData: Professor[] = [
     qualification: "PhD (Tech), M.Tech, B.Tech",
     designation: "Associate Professor",
     fieldsOfResearch: ["Analog Electronics", "Field Theory", "Linear Control Theory", "Nonlinear Control System"],
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/asim_20sir.jpg?updatedAt=1755282354543",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -67,7 +67,7 @@ const professorsData: Professor[] = [
     qualification: "PhD (Engg.), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Solar Photovoltaics", "Control Theory", "Electrical & Electronics Measurement"],
-    image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/madhumita_20mam.jpg?updatedAt=1755282390675",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -76,7 +76,7 @@ const professorsData: Professor[] = [
     qualification: "PhD (Tech), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: [" Circuit Theory", "Measurement", "Digital Signal Processing", "Medical Image Processing"],
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/maumita_20mam.gif?updatedAt=1755282308537",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -85,7 +85,7 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B. Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Biomedical signal Processing", "Sensors and Transducers", "Power Electronics"],
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/rohan_20sir.jpg?updatedAt=1755282287946",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -94,7 +94,7 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Biomedical Instrumentation", "Networking", "Image Processing"],
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanko_20sir.jpg?updatedAt=1755282263659",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -103,7 +103,7 @@ const professorsData: Professor[] = [
     qualification: "PhD (Tech), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Process Control", "Power Plant Instrumentation", "Advanced Process Control"],
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/somak_20sir.jpg?updatedAt=1755282240620",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -112,7 +112,7 @@ const professorsData: Professor[] = [
     qualification: "PhD (Engg.), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Image Processing", "Digital Electronics", "Microprocessor & Microcontroller"],
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/saurabh_20sir.png?updatedAt=1755282220710",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -121,7 +121,7 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Basic Electronics", "Renewable Energy"],
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/sweta_20mam.png?updatedAt=1755282200052",
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -130,7 +130,7 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Basic Electronics", "Industrial Instrumentation"],
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanka_20mam.jpg?updatedAt=1755282178094",
     department: "Applied Electronics and Instrumentation Engineering"
   }
 ];
