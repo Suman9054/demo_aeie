@@ -19,7 +19,4 @@ http:
         servers:
           - url: "https://aeie-club-server.onrender.com"
           - url: "https://aeie-club-server-1.onrender.com"
-        healthCheck:
-          path: "/"
-          interval: "10s"
-          timeout: "3s"
+        
