@@ -3,4 +3,4 @@ FROM traefik:latest AS base
 COPY traefik.yml /etc/traefik/traefik.yml
 COPY dynamic.yml /etc/traefik/dynamic.yml
 
-EXPOSE 3000
+EXPOSE "${PORT}"
