@@ -1,6 +1,9 @@
-FROM traefik:latest AS base
+FROM haproxy:latest
 
-COPY traefik.yml /etc/traefik/traefik.yml
-COPY dynamic.yml /etc/traefik/dynamic.yml
+# Copy HAProxy configuration
+COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 
-EXPOSE 80
+# Expose ports 80 (main traffic) and 8404 (stats)
+EXPOSE 3000
+
+# HAProxy runs automatically with the default entrypoint
