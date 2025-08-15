@@ -43,7 +43,96 @@ const professorsData: Professor[] = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     department: "Applied Electronics and Instrumentation Engineering",
   },
-  // ... You can paste the rest here unchanged (except trimming field names)
+  {
+    id: 3,
+    name: "Dr. Soumya Roy",
+    qualification: "PhD (Engg.), M.Tech, B.E",
+    designation: "Associate Professor",
+    fieldsOfResearch: ["Astrophysical Signal Processing", "Embedded System", "Microprocessor & Microcontroller"],
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 4,
+    name: "Dr. Asim Halder",
+    qualification: "PhD (Tech), M.Tech, B.Tech",
+    designation: "Associate Professor",
+    fieldsOfResearch: ["Analog Electronics", "Field Theory", "Linear Control Theory", "Nonlinear Control System"],
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 5,
+    name: "Dr. Madhumita Das",
+    qualification: "PhD (Engg.), M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Solar Photovoltaics", "Control Theory", "Electrical & Electronics Measurement"],
+    image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 6,
+    name: "Dr. Moumita Sahoo",
+    qualification: "PhD (Tech), M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: [" Circuit Theory", "Measurement", "Digital Signal Processing", "Medical Image Processing"],
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 7,
+    name: "Mr. Rohan Mandal",
+    qualification: "M.Tech, B. Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Biomedical signal Processing", "Sensors and Transducers", "Power Electronics"],
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 8,
+    name: "Mr. Priyonko Das",
+    qualification: "M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Biomedical Instrumentation", "Networking", "Image Processing"],
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 9,
+    name: "Dr. Somak Karan",
+    qualification: "PhD (Tech), M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Process Control", "Power Plant Instrumentation", "Advanced Process Control"],
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 10,
+    name: "Dr. Saorabh Kumar Mondal",
+    qualification: "PhD (Engg.), M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Image Processing", "Digital Electronics", "Microprocessor & Microcontroller"],
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 11,
+    name: "Mrs. Sweta Bijali Maity",
+    qualification: "M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Basic Electronics", "Renewable Energy"],
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  },
+  {
+    id: 12,
+    name: "Mrs. Priyanka Rakshit Sarkar",
+    qualification: "M.Tech, B.Tech",
+    designation: "Assistant Professor",
+    fieldsOfResearch: ["Basic Electronics", "Industrial Instrumentation"],
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+    department: "Applied Electronics and Instrumentation Engineering"
+  }
 ];
 
 // Props interface for card
