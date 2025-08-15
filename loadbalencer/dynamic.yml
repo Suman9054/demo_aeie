@@ -7,6 +7,7 @@ http:
         - web
       priority: 10
     
+
     # Catch-all router for other paths
     default-router:
       rule: "PathPrefix(`/`)"
@@ -14,6 +15,8 @@ http:
       entryPoints:
         - web
       priority: 1
+
+   
 
   services:
     backend-api:
