@@ -12,7 +12,6 @@ http:
       service: "backend-api"
       entryPoints:
         - web
-      priority: 1  # Lower priority than api-router
 
   services:
     backend-api:

@@ -1,10 +1,10 @@
 api:
-  dashboard: true
-  insecure: true  
+  dashboard: false
+
 
 entryPoints:
   web:
-    address: ":80"
+    address: ":3000"
 
 providers:
   file:
