@@ -35,6 +35,6 @@ app.route("/api/v1/auth", authRouter);
 app.route("/api/v1/registration", registrationRouter);
 
 export default {
-  port: 3000,
+  port: process.env.PORT || 3000,
   fetch: app.fetch,
 };
