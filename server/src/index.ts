@@ -14,12 +14,6 @@ app.use(
   }),
 );
 app.use(
-  "/api/v1/event/*",
-  jwt({
-    secret: process.env.JWT_SECRET as string,
-  }),
-);
-app.use(
   "/api/v1/registration/*",
   jwt({
     secret: process.env.JWT_SECRET as string,
