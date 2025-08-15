@@ -1,0 +1,17 @@
+http:
+  routers:
+    api-router:
+      rule: "PathPrefix(`/api`)"
+      entryPoints:
+        - websecure
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    backend-service:
+      loadBalancer:
+        servers:
+          - url: "http://aeie-club-server-1.onrender.com"
+          - url: "http://aeie-club-server.onrender.com"
+        passHostHeader: true
