@@ -14,6 +14,7 @@ import AboutUs from "./pages/About_club/AboutUs";
 import Event_page from "./pages/Event/Event";
 import HodMsg from "./pages/Hod/HodMsg";
 import Committee from "./pages/About_club/aboutSections/Committee";
+import  ContactUs from "./pages/Contact/Contact";
 
 // Root layout route
 const rootRoute = createRootRoute({
@@ -55,11 +56,17 @@ const hodMsgRoute = createRoute({
   component: HodMsg,
 });
 // Committee page
-export const CommitteeRoute = createRoute({
+const CommitteeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/Committee',
   component: Committee,
 });
+// Contact Page
+const ContactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "ContactUs",
+  component: ContactUs,
+})
 
 // Build route tree
 
@@ -67,7 +74,7 @@ const routeTree = rootRoute.addChildren([
   homeRoute,
   About_layout.addChildren([aboutUsRoute, CommitteeRoute]),
   Event_pagerout,
-  hodMsgRoute,
+  hodMsgRoute,ContactRoute,
 
 ]);
 
