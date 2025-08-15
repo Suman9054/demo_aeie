@@ -1,9 +1,7 @@
-FROM haproxy:latest
+FROM nginx:1.24.0-alpine
 
-# Copy HAProxy configuration
-COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose ports 80 (main traffic) and 8404 (stats)
-EXPOSE 3000
+EXPOSE 4000
 
-# HAProxy runs automatically with the default entrypoint
+CMD ["nginx", "-g", "daemon off;"]
