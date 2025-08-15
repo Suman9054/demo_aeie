@@ -4,7 +4,7 @@ api:
 
 entryPoints:
   web:
-    address: ":${PORT}" 
+    address: ":80" 
 
 providers:
   file:
@@ -15,5 +15,3 @@ log:
   level: INFO
 
 
-serversTransport:
-  insecureSkipVerify: true  
