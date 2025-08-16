@@ -18,5 +18,5 @@ COPY --from=prerelease /user/src/app/ .
 COPY --from=prerelease /user/src/app/package.json .
 
 USER bun
-
+EXPOSE 3000
 CMD [ "bun", "run", "src/index.ts" ]
