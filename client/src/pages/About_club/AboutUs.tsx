@@ -1,6 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useMemo, type ComponentType } from "react";
-// import { React } from "React";
 
 // Direct imports (no lazy)
 import MediaClub from "./aboutSections/MediaClub";
@@ -46,15 +45,15 @@ export default function AboutUs(): React.JSX.Element {
   const ActiveComponent = sectionComponents[activeSection];
 
   return (
-    <div className="min-h-screen flex overflow-hidden bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white">
-      {/* Sidebar */}
-      <aside className="w-64 flex-shrink-0 bg-gradient-to-b from-indigo-800 via-indigo-900 to-blue-950 shadow-xl p-6 flex flex-col gap-4 border-r border-indigo-700">
+    <div className="min-h-screen flex bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white overflow-hidden">
+      {/* Fixed Sidebar */}
+      <aside className="fixed top-0 left-0 h-screen w-64 bg-gradient-to-b from-indigo-800 via-indigo-900 to-blue-950 shadow-xl p-6 flex flex-col gap-4 border-r border-indigo-700 overflow-y-auto">
         <h2 className="text-xl font-bold mb-4 text-white">About Menu</h2>
         <nav className="flex flex-col gap-2">
           {(Object.keys(sectionComponents) as SectionName[]).map((item) => (
             <Link
               key={item}
-              to={`/about-us?section=${encodeURIComponent(item)}`} // ensures exact match
+              to={`/about-us?section=${encodeURIComponent(item)}`}
               className={`text-left px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                 activeSection === item
                   ? "bg-indigo-700 text-white"
@@ -67,8 +66,8 @@ export default function AboutUs(): React.JSX.Element {
         </nav>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 p-10 overflow-auto">
+      {/* Scrollable Main Content */}
+      <main className="ml-64 flex-1 p-10 overflow-y-auto h-screen">
         <h1 className="text-4xl font-bold mb-6 drop-shadow-lg">
           About Our — {activeSection}
         </h1>

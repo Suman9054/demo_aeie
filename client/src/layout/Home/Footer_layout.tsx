@@ -10,7 +10,7 @@ import { MdEmail } from "react-icons/md";
 
 export default function Footer_layout(): React.JSX.Element {
   return (
-    <footer className="w-full bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white py-10 px-6">
+    <footer className="w-full bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white py-10 px-6 z-3">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         {/* Section 1: Logos */}
         <div className="flex items-center gap-6">
