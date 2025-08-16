@@ -17,6 +17,6 @@ jobs:
             username: ${{ secrets.DOCKER_USER_NAME }}
             password: ${{ secrets.DOCKER_LOGIN_PASSWORD }}
         - name: build surver docker image
-          run: docker build -t ${{ secrets.DOCKER_USER_NAME }}/aeie_club_loadbalencer_trafic:latest .
+          run: docker build -t ${{ secrets.DOCKER_USER_NAME }}/aeie_club_loadbalencer:latest .
         - name: push server docker image
-          run: docker push ${{ secrets.DOCKER_USER_NAME }}/aeie_club_loadbalencer_trafic:latest     
+          run: docker push ${{ secrets.DOCKER_USER_NAME }}/aeie_club_loadbalencer:latest     

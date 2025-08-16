@@ -1,6 +1,10 @@
-import React from "react";
 
 // TypeScript interface for Professor
+
+import React from 'react';
+
+// TypeScript interface for Professor data structure
+
 interface Professor {
   id: number;
   name: string;
@@ -11,13 +15,14 @@ interface Professor {
   department: string;
 }
 
-// Data
+
 const professorsData: Professor[] = [
   {
     id: 1,
     name: "Prof.Dr. Uday Maji",
     qualification: "PhD (Tech), M.Tech, B. Tech",
     designation: "Professor & Head of Department",
+
     fieldsOfResearch: [
       "Digital Electronics",
       "Microprocessor and Microcontroller",
@@ -27,12 +32,14 @@ const professorsData: Professor[] = [
     image:
       "https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305",
     department: "Applied Electronics and Instrumentation Engineering",
+    
   },
   {
     id: 2,
     name: "Mr. Debadatta Ghosh",
     qualification: "M.Tech, B.Tech, B.Sc (Hons.)",
     designation: "Associate Professor",
+
     fieldsOfResearch: [
       "Analog Electronics",
       "Electrical & Electronics Measurement",
@@ -42,6 +49,8 @@ const professorsData: Professor[] = [
     image:
       "https://ik.imagekit.io/AEIE/aeie_media/dg_20sir.jpg?updatedAt=1755281954881",
     department: "Applied Electronics and Instrumentation Engineering",
+
+    
   },
   {
     id: 3,
@@ -49,7 +58,10 @@ const professorsData: Professor[] = [
     qualification: "PhD (Engg.), M.Tech, B.E",
     designation: "Associate Professor",
     fieldsOfResearch: ["Astrophysical Signal Processing", "Embedded System", "Microprocessor & Microcontroller"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/soumya_20roy.jpg?updatedAt=1755282391825",
+
+    
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -58,7 +70,9 @@ const professorsData: Professor[] = [
     qualification: "PhD (Tech), M.Tech, B.Tech",
     designation: "Associate Professor",
     fieldsOfResearch: ["Analog Electronics", "Field Theory", "Linear Control Theory", "Nonlinear Control System"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/asim_20sir.jpg?updatedAt=1755282354543",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -67,7 +81,9 @@ const professorsData: Professor[] = [
     qualification: "PhD (Engg.), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Solar Photovoltaics", "Control Theory", "Electrical & Electronics Measurement"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/madhumita_20mam.jpg?updatedAt=1755282390675",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -76,7 +92,9 @@ const professorsData: Professor[] = [
     qualification: "PhD (Tech), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: [" Circuit Theory", "Measurement", "Digital Signal Processing", "Medical Image Processing"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/maumita_20mam.gif?updatedAt=1755282308537",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -85,7 +103,9 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B. Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Biomedical signal Processing", "Sensors and Transducers", "Power Electronics"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/rohan_20sir.jpg?updatedAt=1755282287946",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -94,7 +114,9 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Biomedical Instrumentation", "Networking", "Image Processing"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/priyanko_20sir.jpg?updatedAt=1755282263659",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -103,7 +125,9 @@ const professorsData: Professor[] = [
     qualification: "PhD (Tech), M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Process Control", "Power Plant Instrumentation", "Advanced Process Control"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/somak_20sir.jpg?updatedAt=1755282240620",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -113,6 +137,7 @@ const professorsData: Professor[] = [
     designation: "Assistant Professor",
     fieldsOfResearch: ["Image Processing", "Digital Electronics", "Microprocessor & Microcontroller"],
     image: "https://ik.imagekit.io/AEIE/aeie_media/saurabh_20sir.png?updatedAt=1755282220710",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -121,7 +146,9 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Basic Electronics", "Renewable Energy"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/sweta_20mam.png?updatedAt=1755282200052",
+
     department: "Applied Electronics and Instrumentation Engineering"
   },
   {
@@ -130,10 +157,13 @@ const professorsData: Professor[] = [
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
     fieldsOfResearch: ["Basic Electronics", "Industrial Instrumentation"],
+
     image: "https://ik.imagekit.io/AEIE/aeie_media/priyanka_20mam.jpg?updatedAt=1755282178094",
+
     department: "Applied Electronics and Instrumentation Engineering"
   }
 ];
+
 
 // Props interface for card
 interface ProfessorCardProps {
@@ -221,35 +251,41 @@ const ProfessorCard: React.FC<ProfessorCardProps> = ({ professor }) => {
 };
 
 // Main component
+
+
+// Main Component using .map() to render all professor cards
 const ProfessorCards: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="text-center mb-16">
-        <h1 className="text-5xl font-bold text-gray-800 mb-6 leading-tight">
-          Meet Our{" "}
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-pulse">
-            Distinguished Faculty
-          </span>
-        </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Our professors are world-renowned experts and researchers, bringing
-          cutting-edge knowledge and decades of industry experience to shape the
-          next generation of innovators.
-        </p>
-        <div className="mt-8 flex justify-center">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-1 w-24 rounded-full" />
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-gray-800 mb-6 leading-tight">
+            Meet Our 
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-pulse">
+              Distinguished Faculty
+            </span>
+          </h1>
+          <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed">
+            Our professors are world-renowned experts and researchers, bringing cutting-edge knowledge 
+            and decades of industry experience to shape the next generation of innovators.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-1 w-24 rounded-full" />
+          </div>
+        </div>
+
+        {/* Cards Grid - Using .map() to render each professor card */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 place-items-center">
+          {professorsData.map((professor: Professor) => (
+            <ProfessorCard 
+              key={professor.id} 
+              professor={professor} 
+            />
+          ))}
         </div>
       </div>
-
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 place-items-center">
-        {professorsData.map((professor) => (
-          <ProfessorCard key={professor.id} professor={professor} />
-        ))}
-      </div>
-    </div>
   );
 };
+
 
 export default ProfessorCards;

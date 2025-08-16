@@ -1,6 +1,5 @@
-FROM traefik:latest AS base
+FROM haproxy:alpine
 
-COPY traefik.yml /etc/traefik/traefik.yml
-COPY dynamic.yml /etc/traefik/dynamic.yml
+COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 
-EXPOSE 80
+EXPOSE 10000
