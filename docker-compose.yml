@@ -1,5 +1,5 @@
 name: aeie-club
-version: '0.0000'
+
 
 services:
 
@@ -8,6 +8,7 @@ services:
     container_name: "traefik"
     command:
       #- "--log.level=DEBUG"
+      -  "--log.level=DEBUG" 
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -25,20 +26,21 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
       - "traefik.http.routers.whoami.entrypoints=web"
-  backend:
-   image: "sumanhazra914/aeie_club_server:latest"
-   environment:
-    - DB_URL=mongodb+srv://sumanhazra368:tDnqBItGtxlrb0TL@aeiecluster0.lt2akvi.mongodb.net/?retryWrites=true&w=majority&appName=AEIEcluster0
-    - IMAGEKIT_PUBLIC_KEY=public_IdL2aCe8j0dEwXVT5LNygLDQ3XE=
-    - IMAGEKIT_PRIVATE_KEY=private_pZmWx4fmNC99DJIn7OFyv854ud0=
-    - IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/AEIE
-    - JWT_SECRET=your_jwt_secret_key
-
-   deploy:
+  AEIE-Club-Server:
+    image: "sumanhazra914/aeie_club_server:latest"
+    environment:
+    - DB_URL=${DB_URL}
+    - IMAGEKIT_PUBLIC_KEY=${IMAGEKIT_PUBLIC_KEY}
+    - IMAGEKIT_PRIVATE_KEY=${IMAGEKIT_PRIVATE_KEY}
+    - IMAGEKIT_URL_ENDPOINT=${IMAGEKIT_URL_ENDPOINT}
+    - JWT_SECRET=${JWT_SECRET}
+    - PORT=3000
+    deploy:
       mode: replicated
-      replicas: 2
-   labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
-    - "traefik.http.routers.backend.entrypoints=web"
+      replicas: 5
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.AEIE-b.rule=Host(`backend.localhost`)&& PathPrefix(`/api`)"
+      - "traefik.http.routers.AEIE-b.entrypoints=web"
+      - "traefik.http.services.AEIE-b.loadbalancer.server.port=3000"
     

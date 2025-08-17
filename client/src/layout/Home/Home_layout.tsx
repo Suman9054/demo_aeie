@@ -7,7 +7,7 @@ export function Homelayout(): React.JSX.Element {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white flex flex-col justify-between">
+    <div className="min-h-screen w-full bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-yellow-700 via-cyan-950 to-slate-400 relative">
       {/* Navbar */}
       <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
         <div className="flex gap-4 text-gray-400">
@@ -50,11 +50,9 @@ export function Homelayout(): React.JSX.Element {
       </div>
 
       {/* Page Content */}
-      <div className="min-h-screen bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white overflow-hidden relative">
+      
         <Outlet />
-      </div>
-
-      {/* Footer */}
+      
       <Footer />
     </div>
   );

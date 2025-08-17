@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Slideshow } from "../../components/Slide/Slide";
 import { HoverCard } from "../../components/Card/HoverCard";
-import { Link } from "@tanstack/react-router";
-
 export const Homepage: React.FC = () => {
   // Define the images to be used in the slideshow
   const images = [
@@ -62,14 +60,14 @@ export const Homepage: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white overflow-hidden relative">
+    <div className="min-h-screen  text-white relative overflow-hidden">
       {/* Animated particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
           className="absolute w-0.5 h-0.5 bg-pink-400 rounded-full opacity-60"
-          initial={{ y: 0, opacity: 0.6 }}
-          animate={{ y: -window.innerHeight, opacity: 0 }}
+          initial={{ y: 0, opacity: 0.8 }}
+          animate={{ y: -window.innerHeight, opacity: 0.1 }}
           transition={{
             duration: particle.duration,
             delay: particle.delay,
@@ -130,27 +128,6 @@ export const Homepage: React.FC = () => {
       />
   
 </div>
-
-      
-      <div className="p-10 flex justify-center items-center min-h-screen bg-gray-100">
-        <Link to="/hod-message">
-          <div className="w-80 cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-            <img
-              src="/images/hod.jpg" // Place in public/images/hod.jpg
-              alt="HOD"
-              className="w-full h-48 object-cover rounded-t-xl"
-            />
-            <div className="p-4">
-              <h2 className="text-lg font-semibold text-gray-800">
-                HOD Message
-              </h2>
-              <p className="text-sm text-gray-600">
-                Click to read the message from the Head of Department.
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
 
     </div>
   );

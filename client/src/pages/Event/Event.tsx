@@ -48,10 +48,10 @@ const events: EventItem[] = [
 
 const EventsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-400/10 via-black-100/10 to-gray-200/10 text-gray-900">
+    <div className="min-h-screen  text-gray-900 ">
       {/* Hero Section */}
       <section className="text-center py-14">
-        <h2 className="text-4xl font-bold leading-tight">
+        <h2 className="text-2xl  leading-tight text-font-display text-black-700 pt-4">
           Grow Your Skills and
           <br /> with Our Events
         </h2>
