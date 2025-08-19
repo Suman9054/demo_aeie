@@ -58,7 +58,6 @@ export const Homepage: React.FC = () => {
     setParticles(particleArray);
   }, []);
 
-
   return (
     <div className="min-h-screen  text-white relative overflow-hidden">
       {/* Animated particles */}
@@ -115,20 +114,19 @@ export const Homepage: React.FC = () => {
           <div className="flex-1 flex justify-center items-center">
             <Slideshow images={images} />
           </div>
-
-        </div> {/* ← This closes the main content flex container */}
-      </div> {/* ← This closes the outer wrapper (probably page wrapper) */}
+        </div>{" "}
+        {/* ← This closes the main content flex container */}
+      </div>{" "}
+      {/* ← This closes the outer wrapper (probably page wrapper) */}
       <div className="p-10 flex justify-center items-center min-h-screen">
         <HoverCard
-        title="Beautiful Landscape"
-        shortText="A quick glimpse of nature."
-        fullText="Here is the full story about this beautiful landscape. It stretches across mountains, rivers, and forests, offering breathtaking views."
-        imageUrl="https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305"
-        // link="/landscape"
-      />
-  
-</div>
-
+          title="Beautiful Landscape"
+          shortText="A quick glimpse of nature."
+          fullText="Here is the full story about this beautiful landscape. It stretches across mountains, rivers, and forests, offering breathtaking views."
+          imageUrl="https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305"
+          // link="/landscape"
+        />
+      </div>
     </div>
   );
 };

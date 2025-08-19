@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
 import {
   RouterProvider,
   createRootRoute,
@@ -10,36 +9,24 @@ import {
 
 import { Homelayout } from "./layout/Home/Home_layout";
 import { Homepage } from "./pages/home/Home";
-import AboutUs from "./pages/About_club/AboutUs";
 import Event_page from "./pages/Event/Event";
-import HodMsg from "./pages/Hod/HodMsg";
-
-// Root layout route
+import About_layout from "./layout/about/about_layout";
+import "./index.css";
 const rootRoute = createRootRoute({
   component: Homelayout,
 });
 
-// Home page
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: Homepage,
 });
 
-// About Us page
-const About_layout = createRoute({
+const aboutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/about-us",
-  component: AboutUs,
+  component: About_layout,
 });
-const aboutUsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/club",
-  component: AboutUs,
-});
-
-
-// Events page
 
 const Event_pagerout = createRoute({
   getParentRoute: () => rootRoute,
@@ -47,30 +34,16 @@ const Event_pagerout = createRoute({
   component: Event_page,
 });
 
-// HOD message page
-const hodMsgRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/HodMsg",
-  component: HodMsg,
-});
-
-
-// Build route tree
-
 const routeTree = rootRoute.addChildren([
   homeRoute,
-  About_layout.addChildren([aboutUsRoute]),
   Event_pagerout,
-  hodMsgRoute,
-
+  aboutRoute,
 ]);
 
-// Create router
 const router = createRouter({ routeTree });
 
-// Mount React app
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );
