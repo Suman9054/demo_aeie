@@ -12,7 +12,7 @@ export function HoverCard({ title, shortText, fullText, imageUrl }: CardProps) {
     <motion.div
       initial={{ width: "20rem", height: "24rem" }} // Initial size
       whileHover={{
-        width: "80vw",  // 80% of screen width
+        width: "80vw", // 80% of screen width
         height: "80vh", // 80% of screen height
       }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}

@@ -14,27 +14,21 @@ app.use(
   }),
 );
 app.use(
-  "/api/v1/event/*",
-  jwt({
-    secret: process.env.JWT_SECRET as string,
-  }),
-);
-app.use(
   "/api/v1/registration/*",
   jwt({
     secret: process.env.JWT_SECRET as string,
   }),
 );
 
-app.get("/", (c) => {
+app.get("/api/helth", (c) => {
   return c.text("Welcome to the AEIE",200);
 });
-// all the routes
+
 app.route("/api/v1/event", event_route);
 app.route("/api/v1/auth", authRouter);
 app.route("/api/v1/registration", registrationRouter);
 
 export default {
-  port: 3000,
+  port: process.env.PORT || 3000,
   fetch: app.fetch,
 };

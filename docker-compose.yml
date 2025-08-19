@@ -1,0 +1,46 @@
+name: aeie-club
+
+
+services:
+
+  traefik:
+    image: "traefik:v3.5"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      -  "--log.level=DEBUG" 
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+  AEIE-Club-Server:
+    image: "sumanhazra914/aeie_club_server:latest"
+    environment:
+    - DB_URL=${DB_URL}
+    - IMAGEKIT_PUBLIC_KEY=${IMAGEKIT_PUBLIC_KEY}
+    - IMAGEKIT_PRIVATE_KEY=${IMAGEKIT_PRIVATE_KEY}
+    - IMAGEKIT_URL_ENDPOINT=${IMAGEKIT_URL_ENDPOINT}
+    - JWT_SECRET=${JWT_SECRET}
+    - PORT=3000
+    deploy:
+      mode: replicated
+      replicas: 5
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.AEIE-b.rule=Host(`backend.localhost`)&& PathPrefix(`/api`)"
+      - "traefik.http.routers.AEIE-b.entrypoints=web"
+      - "traefik.http.services.AEIE-b.loadbalancer.server.port=3000"
+    
