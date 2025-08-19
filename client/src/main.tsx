@@ -13,6 +13,8 @@ import { Homepage } from "./pages/home/Home";
 import AboutUs from "./pages/About_club/AboutUs";
 import Event_page from "./pages/Event/Event";
 import HodMsg from "./pages/Hod/HodMsg";
+import Committee from "./pages/About_club/aboutSections/Committee";
+
 
 // Root layout route
 const rootRoute = createRootRoute({
@@ -53,13 +55,20 @@ const hodMsgRoute = createRoute({
   path: "/HodMsg",
   component: HodMsg,
 });
+// Committee page
+const CommitteeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/Committee',
+  component: Committee,
+});
+// Contact Page
 
 
 // Build route tree
 
 const routeTree = rootRoute.addChildren([
   homeRoute,
-  About_layout.addChildren([aboutUsRoute]),
+  About_layout.addChildren([aboutUsRoute, CommitteeRoute]),
   Event_pagerout,
   hodMsgRoute,
 

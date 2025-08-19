@@ -1,56 +1,74 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
-import { Underline } from "../../components/underline/Underline";
 import Footer from "./Footer_layout";
 
 export function Homelayout(): React.JSX.Element {
   const location = useLocation();
 
   return (
+
     <div className="min-h-screen w-full bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-yellow-700 via-cyan-950 to-slate-400 relative">
+
       {/* Navbar */}
-      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
-        <div className="flex gap-4 text-gray-400">
+      <div className="sticky top-0 bg-blue-700 z-50">
+        <nav className="flex justify-center items-center gap-8 py-3 px-10">
           <Link
             to="/"
-            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
+            className="relative font-medium text-gray-300 transition-transform duration-300 hover:text-white hover:scale-110"
+            aria-current={location.pathname === "/" ? "page" : undefined}
           >
             Home
-            {location.pathname === "/" ? <Underline /> : null}
+            {location.pathname === "/" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[3px] rounded-full bg-teal-400 transition-all duration-300 ease-in-out scale-x-100 origin-left" />
+            )}
           </Link>
           <Link
             to="/Events"
-            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
+            className="relative font-medium text-gray-300 transition-transform duration-300 hover:text-white hover:scale-110"
+            aria-current={location.pathname === "/Events" ? "page" : undefined}
           >
             Event
-            {location.pathname === "/Events" ? <Underline /> : null}
+            {location.pathname === "/Events" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[3px] rounded-full bg-teal-400 transition-all duration-300 ease-in-out scale-x-100 origin-left" />
+            )}
           </Link>
           <Link
             to="/Study"
-            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
+            className="relative font-medium text-gray-300 transition-transform duration-300 hover:text-white hover:scale-110"
+            aria-current={location.pathname === "/Study" ? "page" : undefined}
           >
             Study
-            {location.pathname === "/Study" ? <Underline /> : null}
+            {location.pathname === "/Study" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[3px] rounded-full bg-teal-400 transition-all duration-300 ease-in-out scale-x-100 origin-left" />
+            )}
           </Link>
           <Link
             to="/about-us"
-            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
+            className="relative font-medium text-gray-300 transition-transform duration-300 hover:text-white hover:scale-110"
+            aria-current={location.pathname === "/about-us" ? "page" : undefined}
           >
             About
-            {location.pathname === "/about-us" ? <Underline /> : null}
+            {location.pathname === "/about-us" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[3px] rounded-full bg-teal-400 transition-all duration-300 ease-in-out scale-x-100 origin-left" />
+            )}
           </Link>
           <Link
             to="/contactUs"
-            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
+            className="relative font-medium text-gray-300 transition-transform duration-300 hover:text-white hover:scale-110"
+            aria-current={location.pathname === "/contactUs" ? "page" : undefined}
           >
             Contact us
-            {location.pathname === "/contactUs" ? <Underline /> : null}
+            {location.pathname === "/contactUs" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[3px] rounded-full bg-teal-400 transition-all duration-300 ease-in-out scale-x-100 origin-left" />
+            )}
           </Link>
-        </div>
+        </nav>
       </div>
 
       {/* Page Content */}
+
       
+
         <Outlet />
       
       <Footer />
