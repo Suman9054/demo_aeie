@@ -10,7 +10,7 @@ export function Homelayout(): React.JSX.Element {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative">
       {/* Navbar */}
-      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4">
+      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/40 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg">
         <div className="flex gap-4 text-gray-400">
           <Link
             to="/"
