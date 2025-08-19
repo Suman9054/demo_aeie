@@ -61,14 +61,14 @@ export const Homepage: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-indigo-900 to-blue-950 text-white overflow-hidden relative">
+    <div className="min-h-screen  text-white relative overflow-hidden">
       {/* Animated particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
           className="absolute w-0.5 h-0.5 bg-pink-400 rounded-full opacity-60"
-          initial={{ y: 0, opacity: 0.6 }}
-          animate={{ y: -window.innerHeight, opacity: 0 }}
+          initial={{ y: 0, opacity: 0.8 }}
+          animate={{ y: -window.innerHeight, opacity: 0.1 }}
           transition={{
             duration: particle.duration,
             delay: particle.delay,
@@ -130,8 +130,6 @@ export const Homepage: React.FC = () => {
   
 </div>
 
-      
-      
 
     </div>
   );
