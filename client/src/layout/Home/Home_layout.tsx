@@ -1,16 +1,15 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Underline } from "../../components/underline/Underline";
-import Footer from "../../components/Footer/Footer_layout";
 
 
 export function Homelayout(): React.JSX.Element {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative">
+    <div className="min-h-screen w-full  ">
       {/* Navbar */}
-      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/40 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg">
+      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/40 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg ">
         <div className="flex gap-4 text-gray-400">
           <Link
             to="/"
@@ -58,9 +57,9 @@ export function Homelayout(): React.JSX.Element {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-circle-user-round-icon lucide-circle-user-round"
             >
               <path d="M18 20a6 6 0 0 0-12 0" />
@@ -75,7 +74,7 @@ export function Homelayout(): React.JSX.Element {
 
       <Outlet />
 
-      <Footer />
+      
     </div>
   );
 }
