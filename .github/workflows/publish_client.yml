@@ -1,13 +1,13 @@
-name: publish_loadbalencer
+name: publish_client
 on:
     [workflow_dispatch]
 jobs:
   publish:
-    name: publish server
+    name: publish client
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./loadbalencer
+        working-directory: ./client
     steps:
         - name: checkout code
           uses: actions/checkout@v4
@@ -17,6 +17,6 @@ jobs:
             username: ${{ secrets.DOCKER_USER_NAME }}
             password: ${{ secrets.DOCKER_LOGIN_PASSWORD }}
         - name: build surver docker image
-          run: docker build -t ${{ secrets.DOCKER_USER_NAME }}/aeie_club_loadbalencer:latest .
+          run: docker build -t ${{ secrets.DOCKER_USER_NAME }}/aeie_club_client:latest .
         - name: push server docker image
-          run: docker push ${{ secrets.DOCKER_USER_NAME }}/aeie_club_loadbalencer:latest     
+          run: docker push ${{ secrets.DOCKER_USER_NAME }}/aeie_club_client:latest     
