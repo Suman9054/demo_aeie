@@ -2,14 +2,13 @@ import React from "react";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Underline } from "../../components/underline/Underline";
 
-
 export function Homelayout(): React.JSX.Element {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen w-full  ">
+    <div className="min-h-screen w-full ">
       {/* Navbar */}
-      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/40 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg ">
+      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/10 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg ">
         <div className="flex gap-4 text-gray-400">
           <Link
             to="/"
@@ -73,8 +72,6 @@ export function Homelayout(): React.JSX.Element {
       {/* Page Content */}
 
       <Outlet />
-
-      
     </div>
   );
 }
