@@ -29,7 +29,7 @@ export const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
 
   return (
     <div className="relative w-80 h-80 md:w-96 md:h-96">
-      <div className="absolute inset-0 w-150 absolute -bottom-7 left-1/2 transform -translate-x-1/2 p-2">
+      <div className="absolute inset-0 w-150  -bottom-7 left-1/2 transform -translate-x-1/2 p-2">
         <motion.div
           className="relative w-full h-full rounded-lg overflow-hidden bg-gray-900"
           onHoverStart={() => setIsHovered(true)}

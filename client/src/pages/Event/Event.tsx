@@ -49,7 +49,6 @@ const events: EventItem[] = [
 const EventsPage: React.FC = () => {
   return (
     <div className="min-h-screen  text-gray-900 ">
-      {/* Hero Section */}
       <section className="text-center py-14">
         <h2 className="text-2xl  leading-tight text-font-display text-black-700 pt-4">
           Grow Your Skills and
@@ -57,7 +56,6 @@ const EventsPage: React.FC = () => {
         </h2>
       </section>
 
-      {/* Filters */}
       <div className="flex justify-center pr-80 space-x-4 mb-8">
         <button className="px-4 py-2 bg-teal-500 text-gray-300 rounded-full text-sm">
           All Events
