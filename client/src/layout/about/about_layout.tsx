@@ -12,7 +12,7 @@ export default function About_layout(): React.JSX.Element {
             { to: "/about-us/faculty", label: "Faculty" },
             { to: "/about-us/Technicalstaf", label: "Technical Staff" },
             { to: "/about-us/placement", label: "Placement" },
-            { to: "/about-us/media-club", label: "Media Club" },
+            { to: "/about-us//Mediaclub", label: "Media Club" },
           ]}
         />
       </div>
