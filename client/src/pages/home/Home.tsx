@@ -1,132 +1,165 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
-import { Slideshow } from "../../components/Slide/Slide";
-import { HoverCard } from "../../components/Card/HoverCard";
-export const Homepage: React.FC = () => {
-  // Define the images to be used in the slideshow
-  const images = [
-    {
-      src:"https://ik.imagekit.io/AEIE/aeie_media/poster18.jpg?updatedAt=1754924565502",
-      id: 1,
-    },
-    {
-      src: "https://ik.imagekit.io/AEIE/aeie_media/poster14.jpg?updatedAt=1754924556712",
-      id: 2,
-    },
-    {
-      src: "https://ik.imagekit.io/AEIE/aeie_media/WhatsApp%20Image%202025-05-08%20at%2016.36.18.jpeg?updatedAt=1754924525950",
-      id: 3,
-    },
-  ];
-  interface particleArray {
-    id: number;
-    left: number;
-    delay: number;
-    duration: number;
-  }
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Mcard } from "../../components/motioncard/motioncard";
+import HodMsg from "../../components/Hod/HodMsg";
 
-  const [particles, setParticles] = useState<particleArray[]>([]);
-  const text = "Welcome!";
-  const containerVariants = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1, // Time between each character
-      },
-    },
-  };
-  const letterVariants = {
-    hidden: { opacity: 0, y: `0.25em` },
-    visible: {
-      opacity: 1,
-      y: `0em`,
-    },
-  };
+
+type XY = "x" | "y";
+
+interface Stat {
+  label: string;
+  value: string;
+}
+
+interface Card {
+  title: string;
+  icon: string;
+  description: string;
+  stats: Stat[];
+  bgColor: string;
+  textColor: string;
+  xy: XY; // strictly "x" | "y"
+}
+
+
+export const Homepage: React.FC = () => {
+  const text = "Welcome to AEIE";
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // Generate particles
-    const particleArray = [];
-    for (let i = 0; i < 20; i++) {
-      particleArray.push({
-        id: i,
-        left: Math.random() * 100,
-        delay: Math.random() * 8,
-        duration: 8 + Math.random() * 4,
-      });
+    const typingSpeed = 100;
+
+    if (!isDeleting && index === text.length) {
+      const timeout = setTimeout(() => setIsDeleting(true), 1000);
+      return () => clearTimeout(timeout);
     }
-    setParticles(particleArray);
-  }, []);
+
+    if (isDeleting && index === 0) {
+      const timeout = setTimeout(() => setIsDeleting(false), 500);
+      return () => clearTimeout(timeout);
+    }
+
+    const interval = setInterval(() => {
+      if (!isDeleting) {
+        setDisplayedText((prev) => prev + text[index]);
+        setIndex((prev) => prev + 1);
+      } else {
+        setDisplayedText((prev) => prev.slice(0, -1));
+        setIndex((prev) => prev - 1);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(interval);
+  }, [index, isDeleting, text]);
+
+  const cardsData:Card[] = [
+    {
+      title: "placement",
+      icon: "🎯",
+      description:
+        "Excellent placement opportunities with top companies in electronics, automation, and instrumentation sectors. Our dedicated placement cell ensures comprehensive career guidance and industry connections.",
+      stats: [
+        { label: "Placement Rate", value: "92%" },
+        { label: "Average Package", value: "6.5 LPA" },
+        { label: "Top Companies", value: "50+" },
+      ],
+      bgColor: "bg-amber-500/20",
+      textColor: "text-amber-400",
+      xy: "x",
+    },
+    {
+      title: "features",
+      icon: "⚡",
+      description:
+        "State-of-the-art laboratories, experienced faculty, industry-relevant curriculum, and hands-on learning approach that prepares students for real-world challenges in modern technology.",
+      stats: [
+        { label: "Faculty Ratio", value: "1:12" },
+        { label: "Lab Facilities", value: "15+" },
+        { label: "Industry Projects", value: "100+" },
+      ],
+      bgColor: "bg-blue-500/20",
+      textColor: "text-blue-400",
+      xy: "y",
+    },
+    {
+      title: "projects",
+      icon: "🚀",
+      description:
+        "Innovative student projects in IoT, robotics, industrial automation, and embedded systems. Regular participation in national competitions and research publications.",
+      stats: [
+        { label: "Active Projects", value: "80+" },
+        { label: "Research Papers", value: "25+" },
+        { label: "Awards Won", value: "15+" },
+      ],
+      bgColor: "bg-green-500/20",
+      textColor: "text-green-400",
+      xy: "x",
+    },
+  ];
+
+  
 
   return (
-    <div className="min-h-screen  text-white relative overflow-hidden">
-      {/* Animated particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute w-0.5 h-0.5 bg-pink-400 rounded-full opacity-60"
-          initial={{ y: 0, opacity: 0.8 }}
-          animate={{ y: -window.innerHeight, opacity: 0.1 }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "loop",
-          }}
-          style={{
-            left: `${particle.left}%`,
-            bottom: 0,
-          }}
-        />
-      ))}
-      <div className="relative z-10 w-full h-full">
-        <div className="flex items-center justify-between px-8 md:px-16 py-16 max-w-7xl mx-auto min-h-screen gap-12">
-          <div className="flex-1 max-w-lg flex flex-col justify-center">
-            <div className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              <motion.span
-                className="text-pink-400 font-mono font-bold text-5xl md:text-7xl block mb-2"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                {text.split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    variants={letterVariants}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.span>
-              <span className="text-white text-4xl md:text-6xl">to AEIE</span>
-            </div>{" "}
-            {/* ← This div was already present to close header text container */}
-            <p className="text-gray-200 text-lg mb-8 leading-relaxed">
-              Something extraordinary is brewing. We're crafting a revolutionary
-              platform that will transform how you experience digital
-              innovation. Get ready for cutting-edge technology, seamless
-              design, and features that haven't been seen before.
+    <main className="scroll-smooth">
+      <div className="min-h-screen w-full relative flex flex-col justify-between py-10 overflow-x-scroll ">
+        <div className="flex flex-col items-center justify-center max-w-[50%] text-center z-10 gap-2 mx-auto px-4 pt-30 flex-grow">
+          <motion.h3
+            className="text-3xl md:text-5xl font-sans text-gray-300 mb-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {displayedText}
+            <motion.span
+              className="inline-block w-[2px] h-6 md:h-8 bg-gray-300 ml-1"
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ repeat: Infinity, duration: 0.8 }}
+            />
+          </motion.h3>
+
+          <motion.div
+            className="text-gray-400 md:text-lg mb-4 text-center font-sans"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.7 }}
+          >
+            <p className="mb-4 font-thin">
+              AEIE at Haldia Institute of Technology combines electronics,
+              instrumentation, and modern technology to prepare students for
+              careers in automation, control systems, and embedded systems. With
+              experienced faculty, well-equipped labs, and active student
+              engagement, the program fosters innovation and technical
+              excellence for both industry success and higher studies.
             </p>
-          </div>{" "}
-          {/* ← This closes the left column */}
-          <div className="flex-1 flex justify-center items-center">
-            <Slideshow images={images} />
-          </div>
-        </div>{" "}
-        {/* ← This closes the main content flex container */}
-      </div>{" "}
-      {/* ← This closes the outer wrapper (probably page wrapper) */}
-      <div className="p-10 flex justify-center items-center min-h-screen">
-        <HoverCard
-          title="Beautiful Landscape"
-          shortText="A quick glimpse of nature."
-          fullText="Here is the full story about this beautiful landscape. It stretches across mountains, rivers, and forests, offering breathtaking views."
-          imageUrl="https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305"
-          // link="/landscape"
-        />
+            <motion.button
+              className="bg-orange-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-orange-600 transition text-sm"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Learn More
+            </motion.button>
+          </motion.div>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-4 px-4  z-20">
+          {cardsData.map((card) => (
+            <Mcard
+              key={card.title}
+              title={card.title}
+              icon={card.icon}
+              description={card.description}
+              stats={card.stats}
+              bgColor={card.bgColor}
+              textColor={card.textColor}
+              xy={card.xy}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <HodMsg />
+     
+    </main>
   );
 };

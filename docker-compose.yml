@@ -1,11 +1,10 @@
-name: aeie-club
+
 
 
 services:
 
   traefik:
     image: "traefik:v3.5"
-    container_name: "traefik"
     command:
       #- "--log.level=DEBUG"
       -  "--log.level=DEBUG" 
@@ -18,22 +17,19 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-  whoami:
-    image: "traefik/whoami"
-    container_name: "simple-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+    deploy:
+     placement:
+       constraints:
+         - node.role == manager
+  
   AEIE-Club-Server:
     image: "sumanhazra914/aeie_club_server:latest"
     environment:
-    - DB_URL=${DB_URL}
-    - IMAGEKIT_PUBLIC_KEY=${IMAGEKIT_PUBLIC_KEY}
-    - IMAGEKIT_PRIVATE_KEY=${IMAGEKIT_PRIVATE_KEY}
-    - IMAGEKIT_URL_ENDPOINT=${IMAGEKIT_URL_ENDPOINT}
-    - JWT_SECRET=${JWT_SECRET}
+    - DB_URL=mongodb+srv://sumanhazra368:tDnqBItGtxlrb0TL@aeiecluster0.lt2akvi.mongodb.net/?retryWrites=true&w=majority&appName=AEIEcluster0
+    - IMAGEKIT_PUBLIC_KEY=public_IdL2aCe8j0dEwXVT5LNygLDQ3XE=
+    - IMAGEKIT_PRIVATE_KEY=private_pZmWx4fmNC99DJIn7OFyv854ud0=
+    - IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/AEIE
+    - JWT_SECRET=441274548542
     - PORT=3000
     deploy:
       mode: replicated

@@ -1,51 +1,49 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Underline } from "../../components/underline/Underline";
-import Footer from "../../components/Footer/Footer_layout";
-
 
 export function Homelayout(): React.JSX.Element {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-slate-950 to-black ">
       {/* Navbar */}
-      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/40 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg">
+      <div className="flex items-center justify-center fixed w-4/5 z-50 py-3 px-6 bg-black/50 border border-white/10 rounded-2xl left-1/2 transform -translate-x-1/2 top-4 backdrop-blur-lg ">
         <div className="flex gap-4 text-gray-400">
           <Link
             to="/"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Home
-            {location.pathname === "/" ? <Underline /> : null}
+            {location.pathname === "/" ? <Underline w="w-9" /> : null}
           </Link>
           <Link
             to="/Events"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Event
-            {location.pathname === "/Events" ? <Underline /> : null}
+            {location.pathname === "/Events" ? <Underline w="w-11" /> : null}
           </Link>
           <Link
             to="/Study"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Study
-            {location.pathname === "/Study" ? <Underline /> : null}
+            {location.pathname === "/Study" ? <Underline w="w-10" /> : null}
           </Link>
           <Link
             to="/about-us"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             About
-            {location.pathname === "/about-us" ? <Underline /> : null}
+            {location.pathname === "/about-us" ? <Underline w="w-11" /> : null}
           </Link>
           <Link
             to="/contactUs"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Contact us
-            {location.pathname === "/contactUs" ? <Underline /> : null}
+            {location.pathname === "/contactUs" ? <Underline w="w-22" /> : null}
           </Link>
           <Link
             to="/login"
@@ -58,9 +56,9 @@ export function Homelayout(): React.JSX.Element {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-circle-user-round-icon lucide-circle-user-round"
             >
               <path d="M18 20a6 6 0 0 0-12 0" />
@@ -71,11 +69,7 @@ export function Homelayout(): React.JSX.Element {
         </div>
       </div>
 
-      {/* Page Content */}
-
       <Outlet />
-
-      <Footer />
     </div>
   );
 }
