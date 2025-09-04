@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import type{ TargetAndTransition } from "framer-motion";
 
 interface Stats {
   label: string;
   value: string;
 }
-
+type XY = "x" | "y";
 interface CardProps {
   title: string;
   icon: string;
@@ -13,8 +14,10 @@ interface CardProps {
   bgColor: string;
   textColor: string;
   description: string;
-  xy: string;
+  xy: XY;
 }
+
+
 
 export const Mcard = ({
   title,
@@ -26,20 +29,22 @@ export const Mcard = ({
   textColor,
 }: CardProps): React.JSX.Element => {
   const [isHovered, setIsHovered] = useState(false);
-  const internalaimaton: any = {
+  const internalaimaton:TargetAndTransition = {
     opacity: 0,
+    [xy]:40
   };
-  internalaimaton[xy] = 40;
-  const animation: any = {
+  
+  const animation:TargetAndTransition = {
     opacity: 1,
+    [xy]:0
   };
-  animation[xy] = 0;
+  
 
   return (
     <motion.div
       className={`relative overflow-hidden rounded-xl backdrop-blur-md border border-white/20 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 cursor-pointer ${bgColor} min-h-[280px] w-80 p-6`}
       initial={internalaimaton}
-      animate={animation}
+      whileInView={animation}
       transition={{ delay: 0.5, duration: 0.7 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

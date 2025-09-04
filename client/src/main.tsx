@@ -12,6 +12,11 @@ import { Homepage } from "./pages/home/Home";
 import Event_page from "./pages/Event/Event";
 import About_layout from "./layout/about/about_layout";
 import "./index.css";
+import Department from "./pages/About_club/Department/Department";
+import ProfessorsPage from "./pages/About_club/Faculty/Faculty";
+import TechnicalStaff from "./pages/About_club/Technicalstuf/TechnicalStaff";
+import { Placement } from "./pages/About_club/Placement/Placement";
+import MediaClub from "./pages/About_club/mediaclub/MediaClub";
 const rootRoute = createRootRoute({
   component: Homelayout,
 });
@@ -28,6 +33,38 @@ const aboutRoute = createRoute({
   component: About_layout,
 });
 
+const AEIEROute = createRoute({
+  getParentRoute:()=> aboutRoute,
+  path:"/",
+  component:Department,
+});
+
+const FacultyRoute = createRoute({
+  getParentRoute:()=> aboutRoute,
+  path:"/Faculty",
+  component:ProfessorsPage
+});
+
+const TechnicalStafRoute = createRoute({
+  getParentRoute:()=>aboutRoute,
+  path:"/Technicalstaf",
+  component:TechnicalStaff
+});
+
+const PlacementRoute = createRoute({
+ getParentRoute:()=>aboutRoute,
+ path:"/Placement",
+ component:Placement
+});
+
+const MediaclubRoute = createRoute({
+  getParentRoute:()=> aboutRoute,
+  path:"/Mediaclub",
+  component:MediaClub
+});
+
+
+
 const Event_pagerout = createRoute({
   getParentRoute: () => rootRoute,
   path: "/Events",
@@ -37,7 +74,7 @@ const Event_pagerout = createRoute({
 const routeTree = rootRoute.addChildren([
   homeRoute,
   Event_pagerout,
-  aboutRoute,
+  aboutRoute.addChildren([AEIEROute,FacultyRoute,TechnicalStafRoute,PlacementRoute,MediaclubRoute]),
 ]);
 
 const router = createRouter({ routeTree });

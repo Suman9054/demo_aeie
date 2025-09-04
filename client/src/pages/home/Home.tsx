@@ -1,7 +1,26 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mcard } from "../../components/motioncard/motioncard";
-import HodMsg from "../Hod/HodMsg";
+import HodMsg from "../../components/Hod/HodMsg";
+
+
+type XY = "x" | "y";
+
+interface Stat {
+  label: string;
+  value: string;
+}
+
+interface Card {
+  title: string;
+  icon: string;
+  description: string;
+  stats: Stat[];
+  bgColor: string;
+  textColor: string;
+  xy: XY; // strictly "x" | "y"
+}
+
 
 export const Homepage: React.FC = () => {
   const text = "Welcome to AEIE";
@@ -10,7 +29,7 @@ export const Homepage: React.FC = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    let typingSpeed = 100;
+    const typingSpeed = 100;
 
     if (!isDeleting && index === text.length) {
       const timeout = setTimeout(() => setIsDeleting(true), 1000);
@@ -35,7 +54,7 @@ export const Homepage: React.FC = () => {
     return () => clearInterval(interval);
   }, [index, isDeleting, text]);
 
-  const cardsData = [
+  const cardsData:Card[] = [
     {
       title: "placement",
       icon: "🎯",
@@ -76,9 +95,11 @@ export const Homepage: React.FC = () => {
       ],
       bgColor: "bg-green-500/20",
       textColor: "text-green-400",
-      xy: "-x",
+      xy: "x",
     },
   ];
+
+  
 
   return (
     <main className="scroll-smooth">
@@ -138,6 +159,7 @@ export const Homepage: React.FC = () => {
         </div>
       </div>
       <HodMsg />
+     
     </main>
   );
 };
