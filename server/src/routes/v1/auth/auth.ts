@@ -19,8 +19,10 @@ import { sign } from "hono/jwt";
 
 const authRouter = new Hono();
 
-authRouter.get("/login", async (c) => {
+authRouter.post("/login", async (c) => {
   const { email, password } = c.req.query() as unknown as user_login_schema;
+  
+
   if (!email || !password) {
     return c.text("Email and password are required", 400);
   }
@@ -54,7 +56,7 @@ authRouter.get("/login", async (c) => {
   return c.json({ message: "Login successful" }, 200);
 });
 
-authRouter.get("/register", async (c) => {
+authRouter.post("/register", async (c) => {
   const { username, password, email } =
     c.req.query() as unknown as user_registration_schema;
   if (!username || !password || !email) {
@@ -76,7 +78,7 @@ authRouter.get("/register", async (c) => {
   const jwt_token = await sign({}, process.env.JWT_SECRET as string);
   setCookie(c, "jwt_token", jwt_token, {
     httpOnly: true,
-    secure: true,
+    secure: false,
     sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
@@ -85,7 +87,7 @@ authRouter.get("/register", async (c) => {
 
   setCookie(c, "session_token", token, {
     httpOnly: true,
-    secure: true,
+    secure: false,
     sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });

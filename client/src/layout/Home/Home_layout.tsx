@@ -18,14 +18,14 @@ export function Homelayout(): React.JSX.Element {
             {location.pathname === "/" ? <Underline w="w-9" /> : null}
           </Link>
           <Link
-            to="/Events"
+            to="/events"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Event
             {location.pathname === "/Events" ? <Underline w="w-11" /> : null}
           </Link>
           <Link
-            to="/Study"
+            to="/"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Study
@@ -46,7 +46,7 @@ export function Homelayout(): React.JSX.Element {
             {location.pathname === "/contactUs" ? <Underline w="w-22" /> : null}
           </Link>
           <Link
-            to="/login"
+            to="/user"
             className=" transition-transform duration-200 hover:scale-110 object-fit-contain"
           >
             <svg
