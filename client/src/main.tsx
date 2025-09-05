@@ -40,33 +40,33 @@ const aboutRoute = createRoute({
 });
 
 const AEIEROute = createRoute({
-  getParentRoute:()=> aboutRoute,
-  path:"/",
-  component:Department,
+  getParentRoute: () => aboutRoute,
+  path: "/",
+  component: Department,
 });
 
 const FacultyRoute = createRoute({
-  getParentRoute:()=> aboutRoute,
-  path:"/faculty",
-  component:ProfessorsPage
+  getParentRoute: () => aboutRoute,
+  path: "/faculty",
+  component: ProfessorsPage,
 });
 
 const TechnicalStafRoute = createRoute({
-  getParentRoute:()=>aboutRoute,
-  path:"/technicalstaf",
-  component:TechnicalStaff
+  getParentRoute: () => aboutRoute,
+  path: "/technicalstaf",
+  component: TechnicalStaff,
 });
 
 const PlacementRoute = createRoute({
- getParentRoute:()=>aboutRoute,
- path:"/placement",
- component:Placement
+  getParentRoute: () => aboutRoute,
+  path: "/placement",
+  component: Placement,
 });
 
 const MediaclubRoute = createRoute({
-  getParentRoute:()=> aboutRoute,
-  path:"/mediaclub",
-  component:MediaClub
+  getParentRoute: () => aboutRoute,
+  path: "/mediaclub",
+  component: MediaClub,
 });
 
 const Event_pagerout = createRoute({
@@ -76,52 +76,58 @@ const Event_pagerout = createRoute({
 });
 
 const AuthRootrout = createRoute({
-  getParentRoute:()=>rootRoute,
-  path:"/auth",
-  component:AuthLayout
-})
+  getParentRoute: () => rootRoute,
+  path: "/auth",
+  component: AuthLayout,
+});
 
 const LoginRoute = createRoute({
-  getParentRoute:()=>AuthRootrout,
-  path:"/login",
-  component:LoginForm
-})
+  getParentRoute: () => AuthRootrout,
+  path: "/login",
+  component: LoginForm,
+});
 
 const RegistrationRoute = createRoute({
-  getParentRoute:()=>AuthRootrout,
-  path:"/registr",
-  component:RegistrationForm
-})
+  getParentRoute: () => AuthRootrout,
+  path: "/registr",
+  component: RegistrationForm,
+});
 
 const userroute = createRoute({
-  getParentRoute:()=>rootRoute,
-  path:"/user",
-  component:UserPage,
-  beforeLoad:authverify
-})
+  getParentRoute: () => rootRoute,
+  path: "/user",
+  component: UserPage,
+  beforeLoad: authverify,
+});
 
 const adminRoute = createRoute({
-  getParentRoute:()=>rootRoute,
-  path:"/admin",
-  component:AdminDashboard
-})
+  getParentRoute: () => rootRoute,
+  path: "/admin",
+  component: AdminDashboard,
+});
 const routeTree = rootRoute.addChildren([
   homeRoute,
   Event_pagerout,
-  aboutRoute.addChildren([AEIEROute,FacultyRoute,TechnicalStafRoute,PlacementRoute,MediaclubRoute]),
-  AuthRootrout.addChildren([LoginRoute,RegistrationRoute]),
+  aboutRoute.addChildren([
+    AEIEROute,
+    FacultyRoute,
+    TechnicalStafRoute,
+    PlacementRoute,
+    MediaclubRoute,
+  ]),
+  AuthRootrout.addChildren([LoginRoute, RegistrationRoute]),
   userroute,
-  adminRoute
+  adminRoute,
 ]);
 
 const router = createRouter({ routeTree });
 
-declare module '@tanstack/react-router' {
+{ /*declare module "@tanstack/react-router" {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }
-
+ */}
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
-import { api_client } from '../../../utils/axiosclient/axios';
-import { Link } from '@tanstack/react-router';
+import React, { useState } from "react";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { api_client } from "../../../utils/axiosclient/axios";
+import { Link } from "@tanstack/react-router";
 
 interface FormData {
   email: string;
@@ -16,8 +16,8 @@ interface FormErrors {
 
 export default function LoginForm(): React.JSX.Element {
   const [formData, setFormData] = useState<FormData>({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -26,72 +26,74 @@ export default function LoginForm(): React.JSX.Element {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     const fieldName = name as keyof FormData;
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      [fieldName]: value
+      [fieldName]: value,
     }));
-    
-    
+
     if (errors[fieldName]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [fieldName]: undefined
+        [fieldName]: undefined,
       }));
     }
   };
 
   const validateForm = (): FormErrors => {
     const newErrors: FormErrors = {};
-    
+
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = "Password must be at least 6 characters";
     }
-    
+
     return newErrors;
   };
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ): Promise<void> => {
     e.preventDefault();
-    
+
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsLoading(true);
     setErrors({});
-    
-    
+
     try {
-       const respons = await api_client.post("/api/v1/auth/login",
+      const respons = await api_client.post(
+        "/api/v1/auth/login",
         {},
         {
-        params:{
-         email:formData.email,
-         password:formData.password
-        }
-       });
-       if(!respons){
-       setErrors({ general: 'Login failed. Please try again.' });
-       setFormData({
-        email:"",
-        password:""
-       });
-       } 
-     console.log(respons.status,respons.data)
+          params: {
+            email: formData.email,
+            password: formData.password,
+          },
+        },
+      );
+      if (!respons) {
+        setErrors({ general: "Login failed. Please try again." });
+        setFormData({
+          email: "",
+          password: "",
+        });
+      }
+      console.log(respons.status, respons.data);
     } catch (error: unknown) {
-      setErrors({ general: 'Login failed. Please try again.' });
-      console.log(error)
+      setErrors({ general: "Login failed. Please try again." });
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -111,15 +113,18 @@ export default function LoginForm(): React.JSX.Element {
             <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock className="w-8 h-8 text-indigo-600" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              Welcome back
+            </h1>
             <p className="text-gray-600">Please sign in to your account</p>
           </div>
 
-        
           <div className="space-y-6">
-           
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Email address
               </label>
               <div className="relative">
@@ -133,7 +138,7 @@ export default function LoginForm(): React.JSX.Element {
                   value={formData.email}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors ${
-                    errors.email ? 'border-red-300' : 'border-gray-300'
+                    errors.email ? "border-red-300" : "border-gray-300"
                   }`}
                   placeholder="Enter your email"
                 />
@@ -143,9 +148,11 @@ export default function LoginForm(): React.JSX.Element {
               )}
             </div>
 
-           
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Password
               </label>
               <div className="relative">
@@ -155,11 +162,11 @@ export default function LoginForm(): React.JSX.Element {
                 <input
                   id="password"
                   name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors ${
-                    errors.password ? 'border-red-300' : 'border-gray-300'
+                    errors.password ? "border-red-300" : "border-gray-300"
                   }`}
                   placeholder="Enter your password"
                 />
@@ -180,24 +187,20 @@ export default function LoginForm(): React.JSX.Element {
               )}
             </div>
 
-            
-
-            
             {errors.general && (
               <div className="text-center">
                 <p className="text-sm text-red-600">{errors.general}</p>
               </div>
             )}
 
-           
             <button
               type="submit"
               disabled={isLoading}
               onClick={handleSubmit}
               className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-colors ${
                 isLoading
-                  ? 'bg-indigo-400 cursor-not-allowed'
-                  : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                  ? "bg-indigo-400 cursor-not-allowed"
+                  : "bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               }`}
             >
               {isLoading ? (
@@ -206,24 +209,23 @@ export default function LoginForm(): React.JSX.Element {
                   Signing in...
                 </div>
               ) : (
-                'Sign in'
+                "Sign in"
               )}
             </button>
           </div>
 
-         
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link to="/auth/registr" className="text-indigo-600 hover:text-indigo-800 font-medium">
+              Don't have an account?{" "}
+              <Link
+                to="/auth/registr"
+                className="text-indigo-600 hover:text-indigo-800 font-medium"
+              >
                 Sign up here
               </Link>
             </p>
           </div>
         </div>
-
-       
-       
       </div>
     </div>
   );

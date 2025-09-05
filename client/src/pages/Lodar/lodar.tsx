@@ -1,4 +1,3 @@
-
 const Loader = () => {
   return (
     <div className="flex-col gap-4 w-full flex items-center justify-center">
@@ -7,6 +6,6 @@ const Loader = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Loader;

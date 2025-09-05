@@ -3,7 +3,6 @@ import type { Variants } from "motion/react";
 import * as motion from "motion/react-client";
 import { useEffect, useRef, useState } from "react";
 
-
 interface NavItem {
   to: string;
   label: string;
@@ -12,7 +11,6 @@ interface NavItem {
 interface SlidenaebarProps {
   navItems: NavItem[];
 }
-
 
 export default function Slidenaebar({ navItems }: SlidenaebarProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +39,6 @@ export default function Slidenaebar({ navItems }: SlidenaebarProps) {
     </div>
   );
 }
-
 
 const navVariants: Variants = {
   open: {
@@ -104,7 +101,6 @@ const MenuItem = ({
   );
 };
 
-
 const sidebarVariants: Variants = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -124,7 +120,6 @@ const sidebarVariants: Variants = {
     },
   },
 };
-
 
 interface PathProps {
   d?: string;
@@ -168,7 +163,6 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
     </svg>
   </button>
 );
-
 
 const container: React.CSSProperties = {
   position: "relative",
@@ -243,7 +237,6 @@ const textPlaceholder: React.CSSProperties = {
   borderRadius: 5,
   flex: 1,
 };
-
 
 const useDimensions = (ref: React.RefObject<HTMLDivElement | null>) => {
   const dimensions = useRef({ width: 0, height: 0 });

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 export default function Department(): JSX.Element {
   return (
     <div className="max-h-screen max-w-screen text justify-center items-center mx-auto">
-     
       <motion.h2
         className="text-2xl font-bold mb-4 text-center"
         initial={{ opacity: 0, y: -50 }}
@@ -14,7 +13,6 @@ export default function Department(): JSX.Element {
         Department of Applied Electronics and Instrumentation Engineering
       </motion.h2>
 
-     
       <motion.p
         className="leading-relaxed text-gray-700"
         initial={{ opacity: 0 }}
@@ -32,7 +30,6 @@ export default function Department(): JSX.Element {
       <br />
       <br />
 
-     
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-200 rounded-lg"
         initial="hidden"

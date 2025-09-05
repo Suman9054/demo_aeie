@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  PlusCircle,
-  Calendar,
-  Users,
-  Trash2,
-  Edit,
-  Eye,
-} from "lucide-react";
+import { PlusCircle, Calendar, Users, Trash2, Edit, Eye } from "lucide-react";
 
 interface Registration {
   id: string;
@@ -31,17 +24,19 @@ const AdminDashboard: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [showRegistrations, setShowRegistrations] = useState<Event | null>(
-    null
+    null,
   );
 
-  const [formData, setFormData] = useState<Omit<Event, "id" | "registrations">>({
-    title: "",
-    date: "",
-    time: "",
-    location: "",
-    description: "",
-    maxParticipants: 1,
-  });
+  const [formData, setFormData] = useState<Omit<Event, "id" | "registrations">>(
+    {
+      title: "",
+      date: "",
+      time: "",
+      location: "",
+      description: "",
+      maxParticipants: 1,
+    },
+  );
 
   // Load from localStorage
   useEffect(() => {
@@ -75,8 +70,8 @@ const AdminDashboard: React.FC = () => {
       // Update existing event
       setEvents((prev) =>
         prev.map((ev) =>
-          ev.id === editingEvent.id ? { ...editingEvent, ...formData } : ev
-        )
+          ev.id === editingEvent.id ? { ...editingEvent, ...formData } : ev,
+        ),
       );
     } else {
       // Create new event
@@ -147,10 +142,7 @@ const AdminDashboard: React.FC = () => {
         <StatCard
           icon={<Users className="h-8 w-8 text-green-600" />}
           label="Total Registrations"
-          value={events.reduce(
-            (sum, e) => sum + e.registrations.length,
-            0
-          )}
+          value={events.reduce((sum, e) => sum + e.registrations.length, 0)}
         />
         <StatCard
           icon={<Calendar className="h-8 w-8 text-purple-600" />}
@@ -186,11 +178,10 @@ const AdminDashboard: React.FC = () => {
                     <p className="text-sm text-gray-600">
                       {event.date} at {event.time} • {event.location}
                     </p>
-                    <p className="text-sm text-gray-500">
-                      {event.description}
-                    </p>
+                    <p className="text-sm text-gray-500">{event.description}</p>
                     <p className="text-xs text-gray-400 mt-1">
-                      {event.registrations.length} / {event.maxParticipants} registered
+                      {event.registrations.length} / {event.maxParticipants}{" "}
+                      registered
                     </p>
                   </div>
                   <div className="flex gap-2 items-start">
@@ -329,9 +320,7 @@ const AdminDashboard: React.FC = () => {
                     <p className="font-medium">{reg.name}</p>
                     <p className="text-sm text-gray-600">{reg.email}</p>
                   </div>
-                  <p className="text-sm text-gray-500">
-                    {reg.registeredAt}
-                  </p>
+                  <p className="text-sm text-gray-500">{reg.registeredAt}</p>
                 </div>
               ))}
             </div>
@@ -344,11 +333,11 @@ const AdminDashboard: React.FC = () => {
 
 /* ----------------- Reusable Components ----------------- */
 
-const StatCard: React.FC<{ icon: React.ReactNode; label: string; value: number }> = ({
-  icon,
-  label,
-  value,
-}) => (
+const StatCard: React.FC<{
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+}> = ({ icon, label, value }) => (
   <div className="bg-white rounded-lg shadow p-6 flex items-center">
     {icon}
     <div className="ml-4">

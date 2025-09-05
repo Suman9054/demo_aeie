@@ -4,7 +4,6 @@ import Slidenaebar from "../../components/slidenavebar/Slidenaebar";
 export default function About_layout(): React.JSX.Element {
   return (
     <div className="min-h-screen flex">
-      
       <div className=" fixed left-0 top-0 h-full">
         <Slidenaebar
           navItems={[
@@ -17,7 +16,6 @@ export default function About_layout(): React.JSX.Element {
         />
       </div>
 
-     
       <div className="flex-1 ml-64 p-20">
         <Outlet />
       </div>

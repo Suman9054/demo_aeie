@@ -66,33 +66,37 @@ export default function RegistrationForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-   const handleReset = () => {
+  const handleReset = () => {
     setFormData({
       username: "",
       email: "",
       password: "",
     });
     setErrors({});
-    setIsSubmitted(false);};
+    setIsSubmitted(false);
+  };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     if (validateForm()) {
-      const respons = await api_client.post("/api/v1/auth/register",{},{
-       params:{
-         username:formData.username,
-         password:formData.password,
-         email:formData.email
-       }
-      });
-     if(!respons){
-       handleReset(); 
-     }
+      const respons = await api_client.post(
+        "/api/v1/auth/register",
+        {},
+        {
+          params: {
+            username: formData.username,
+            password: formData.password,
+            email: formData.email,
+          },
+        },
+      );
+      if (!respons) {
+        handleReset();
+      }
       setIsSubmitted(true);
       console.log("Form submitted:", formData);
     }
   };
 
-  
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -118,7 +122,6 @@ export default function RegistrationForm() {
           <p className="text-gray-600 mb-6">
             Welcome {formData.username}! Your account has been created.
           </p>
-          
         </div>
       </div>
     );

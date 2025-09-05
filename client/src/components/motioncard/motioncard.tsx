@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import type{ TargetAndTransition } from "framer-motion";
+import type { TargetAndTransition } from "framer-motion";
 
 interface Stats {
   label: string;
@@ -17,8 +17,6 @@ interface CardProps {
   xy: XY;
 }
 
-
-
 export const Mcard = ({
   title,
   xy,
@@ -29,16 +27,15 @@ export const Mcard = ({
   textColor,
 }: CardProps): React.JSX.Element => {
   const [isHovered, setIsHovered] = useState(false);
-  const internalaimaton:TargetAndTransition = {
+  const internalaimaton: TargetAndTransition = {
     opacity: 0,
-    [xy]:40
+    [xy]: 40,
   };
-  
-  const animation:TargetAndTransition = {
+
+  const animation: TargetAndTransition = {
     opacity: 1,
-    [xy]:0
+    [xy]: 0,
   };
-  
 
   return (
     <motion.div

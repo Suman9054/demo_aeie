@@ -1,8 +1,6 @@
-
-
 import React from "react";
-import { motion,  } from "framer-motion";
-import type{ Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 interface Professor {
   id: number;
@@ -89,8 +87,12 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
           {professor.name}
         </h3>
 
-        <p className="text-sm text-gray-600 text-center mb-2">{professor.designation}</p>
-        <p className="text-xs text-gray-500 text-center mb-3">{professor.qualification}</p>
+        <p className="text-sm text-gray-600 text-center mb-2">
+          {professor.designation}
+        </p>
+        <p className="text-xs text-gray-500 text-center mb-3">
+          {professor.qualification}
+        </p>
 
         <div className="flex flex-wrap justify-center gap-2">
           {professor.fieldsOfResearch.map((field, idx) => (

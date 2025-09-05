@@ -71,11 +71,13 @@ export default function UserPage(): React.JSX.Element {
   ]);
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [showConfirmDialog, setShowConfirmDialog] = useState<number | null>(null);
+  const [showConfirmDialog, setShowConfirmDialog] = useState<number | null>(
+    null,
+  );
 
   const addNotification = (
     message: string,
-    type: "success" | "error" | "info"
+    type: "success" | "error" | "info",
   ) => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
@@ -143,8 +145,8 @@ export default function UserPage(): React.JSX.Element {
               notification.type === "success"
                 ? "bg-green-500 text-white"
                 : notification.type === "error"
-                ? "bg-red-500 text-white"
-                : "bg-blue-500 text-white"
+                  ? "bg-red-500 text-white"
+                  : "bg-blue-500 text-white"
             }`}
           >
             {notification.type === "success" && <CheckCircle size={16} />}
@@ -224,14 +226,14 @@ export default function UserPage(): React.JSX.Element {
                         </h3>
                         <span
                           className={`px-3 py-1 text-xs font-medium rounded-full border ${getCategoryColor(
-                            event.category
+                            event.category,
                           )}`}
                         >
                           {event.category}
                         </span>
                         <span
                           className={`text-sm font-medium ${getStatusColor(
-                            event.status
+                            event.status,
                           )}`}
                         >
                           {event.status}
