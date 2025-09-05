@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Mcard } from "../../components/motioncard/motioncard";
 import HodMsg from "../../components/Hod/HodMsg";
 
-
 type XY = "x" | "y";
 
 interface Stat {
@@ -20,7 +19,6 @@ interface Card {
   textColor: string;
   xy: XY; // strictly "x" | "y"
 }
-
 
 export const Homepage: React.FC = () => {
   const text = "Welcome to AEIE";
@@ -54,7 +52,7 @@ export const Homepage: React.FC = () => {
     return () => clearInterval(interval);
   }, [index, isDeleting, text]);
 
-  const cardsData:Card[] = [
+  const cardsData: Card[] = [
     {
       title: "placement",
       icon: "🎯",
@@ -98,8 +96,6 @@ export const Homepage: React.FC = () => {
       xy: "x",
     },
   ];
-
-  
 
   return (
     <main className="scroll-smooth">
@@ -159,7 +155,6 @@ export const Homepage: React.FC = () => {
         </div>
       </div>
       <HodMsg />
-     
     </main>
   );
 };

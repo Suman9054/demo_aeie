@@ -12,12 +12,12 @@ export default function TechnicalStaff() {
       className="p-4"
     >
       <p>
-        Our skilled technical staff ensures the smooth functioning of laboratories and
-        supports students during practical sessions.
+        Our skilled technical staff ensures the smooth functioning of
+        laboratories and supports students during practical sessions.
       </p>
       <p className="mt-4">
-        They play a vital role in maintaining equipment, troubleshooting issues, and
-        assisting with project work.
+        They play a vital role in maintaining equipment, troubleshooting issues,
+        and assisting with project work.
       </p>
     </motion.div>
   );

@@ -24,7 +24,8 @@ const userSchema: Schema = new Schema<UserReturnSchema>({
     type: Date,
     default: Date.now,
   },
-});
+},{ suppressReservedKeysWarning: true }
+);
 
 const eventSchema: Schema = new Schema({
   title: {
@@ -54,7 +55,8 @@ const eventSchema: Schema = new Schema({
     enum: ["event", "competition", "workshop"],
     required: true,
   },
-});
+},{ suppressReservedKeysWarning: true }
+);
 
 const registrationSchema: Schema = new Schema({
   user: {
