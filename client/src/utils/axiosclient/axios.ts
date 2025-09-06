@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api_client = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://aeie.localhost",
   withCredentials: true,
 });

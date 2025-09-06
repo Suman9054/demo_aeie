@@ -22,6 +22,17 @@ services:
        constraints:
          - node.role == manager
   
+  AEIE-Club-client:
+    imange: "sumanhazra914/aeie_club_client:latest"
+    deploy:
+      mode: replicated
+      replicas: 2
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.AEIE-b.rule=Host(`aeie.localhost`)&& PathPrefix(`/`)"
+      - "traefik.http.routers.AEIE-b.entrypoints=web"
+      - "traefik.http.services.AEIE-b.loadbalancer.server.port=4173"
+
   AEIE-Club-Server:
     image: "sumanhazra914/aeie_club_server:latest"
     environment:
@@ -36,7 +47,7 @@ services:
       replicas: 5
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.AEIE-b.rule=Host(`backend.localhost`)&& PathPrefix(`/api`)"
+      - "traefik.http.routers.AEIE-b.rule=Host(`aeie.localhost`)&& PathPrefix(`/api`)"
       - "traefik.http.routers.AEIE-b.entrypoints=web"
       - "traefik.http.services.AEIE-b.loadbalancer.server.port=3000"
     
