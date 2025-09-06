@@ -1,61 +1,65 @@
 import { Schema, model } from "mongoose";
 import type { UserReturnSchema } from "../types/type";
 
-const userSchema: Schema = new Schema<UserReturnSchema>({
-  username: {
-    type: String,
-    required: true,
+const userSchema: Schema = new Schema<UserReturnSchema>(
+  {
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  role: {
-    type: String,
-    enum: ["admin", "user"],
-    default: "user",
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-},{ suppressReservedKeysWarning: true }
+  { suppressReservedKeysWarning: true },
 );
 
-const eventSchema: Schema = new Schema({
-  title: {
-    type: String,
-    required: true,
+const eventSchema: Schema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+    },
+    lastdate: {
+      type: Date,
+      required: true,
+    },
+    poster_url: {
+      type: String,
+    },
+    vedio_url: {
+      type: String,
+    },
+    event_type: {
+      type: String,
+      enum: ["event", "competition", "workshop"],
+      required: true,
+    },
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  lastdate: {
-    type: Date,
-    required: true,
-  },
-  poster_url: {
-    type: String,
-  },
-  vedio_url: {
-    type: String,
-  },
-  event_type: {
-    type: String,
-    enum: ["event", "competition", "workshop"],
-    required: true,
-  },
-},{ suppressReservedKeysWarning: true }
+  { suppressReservedKeysWarning: true },
 );
 
 const registrationSchema: Schema = new Schema({

@@ -3,6 +3,7 @@ import {
   Creat_new_event,
   delete_one_evnt,
   find_all_events,
+  find_nearst_events,
   find_newest_event,
 } from "../../../db/db";
 import { admin_verify_middleware } from "../../../middleware/middleware";
@@ -11,6 +12,7 @@ import type {
   upadate_event_shema_zod,
 } from "../../../types/type";
 import { image_upload } from "../../../helper/helper";
+import { getCookie } from "hono/cookie";
 
 const event_route = new Hono();
 
@@ -31,7 +33,7 @@ event_route.get("/newestevents", async (c) => {
 });
 
 event_route.get("/nearestevents", async (c) => {
-  const nearestevents = await find_newest_event();
+  const nearestevents = await find_nearst_events();
   if (!nearestevents) {
     return c.json({ message: "No nearest events found" }, 404);
   }
@@ -128,4 +130,5 @@ event_route.post("/update/event", admin_verify_middleware, async (c) => {
     return c.status(500);
   }
 });
+
 export default event_route;

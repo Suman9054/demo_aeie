@@ -225,17 +225,19 @@ export const find_one_event = async (event_id: string) => {
   }
 };
 
-export const cancelle_registration = async (registration_id: string) => {
+export const cancel_registration = async (
+  user_id: string,
+  event_id: string,
+) => {
   try {
     const r = await registrationmodel.findOneAndUpdate(
-      { _id: registration_id },
-      {
-        $set: { status: "cancelled" },
-      },
+      { user: user_id, event: event_id },
+      { $set: { status: "cancelled" } },
+      { new: true }, // return updated document
     );
     return r;
   } catch (e) {
-    console.log(e);
+    console.error("Error cancelling registration:", e);
     return null;
   }
 };

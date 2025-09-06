@@ -21,7 +21,6 @@ const authRouter = new Hono();
 
 authRouter.post("/login", async (c) => {
   const { email, password } = c.req.query() as unknown as user_login_schema;
-  
 
   if (!email || !password) {
     return c.text("Email and password are required", 400);
@@ -91,7 +90,7 @@ authRouter.post("/register", async (c) => {
     sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
-  return c.json({ message: "User Registration successful"}, 201);
+  return c.json({ message: "User Registration successful" }, 201);
 });
 
 export default authRouter;
