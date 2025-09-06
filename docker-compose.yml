@@ -21,18 +21,20 @@ services:
      placement:
        constraints:
          - node.role == manager
-  
+    networks:
+      - traefik
   AEIE-Club-client:
-    imange: "sumanhazra914/aeie_club_client:latest"
+    image: "sumanhazra914/aeie_club_client:latest"
     deploy:
       mode: replicated
       replicas: 2
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.AEIE-b.rule=Host(`aeie.localhost`)&& PathPrefix(`/`)"
-      - "traefik.http.routers.AEIE-b.entrypoints=web"
-      - "traefik.http.services.AEIE-b.loadbalancer.server.port=4173"
-
+    - "traefik.enable=true"
+    - "traefik.http.routers.AEIE-client.rule=Host(`aeie.localhost`)"
+    - "traefik.http.routers.AEIE-client.entrypoints=web"
+    - "traefik.http.services.AEIE-client.loadbalancer.server.port=4173"
+    networks:
+      - traefik
   AEIE-Club-Server:
     image: "sumanhazra914/aeie_club_server:latest"
     environment:
@@ -44,10 +46,16 @@ services:
     - PORT=3000
     deploy:
       mode: replicated
-      replicas: 5
+      replicas: 3
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.AEIE-b.rule=Host(`aeie.localhost`)&& PathPrefix(`/api`)"
-      - "traefik.http.routers.AEIE-b.entrypoints=web"
-      - "traefik.http.services.AEIE-b.loadbalancer.server.port=3000"
-    
+    - "traefik.enable=true"
+    - "traefik.http.routers.AEIE-server.rule=Host(`aeie.localhost`) && PathPrefix(`/api`)"
+    - "traefik.http.routers.AEIE-server.entrypoints=web"
+    - "traefik.http.services.AEIE-server.loadbalancer.server.port=3000"
+    networks:
+      - traefik
+
+      
+networks:
+  traefik:
+    driver: bridge  
