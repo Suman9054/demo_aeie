@@ -22,14 +22,14 @@ export function Homelayout(): React.JSX.Element {
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Event
-            {location.pathname === "/Events" ? <Underline w="w-11" /> : null}
+            {location.pathname === "/events" ? <Underline w="w-11" /> : null}
           </Link>
           <Link
             to="/"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Study
-            {location.pathname === "/Study" ? <Underline w="w-10" /> : null}
+            {location.pathname === "/study" ? <Underline w="w-10" /> : null}
           </Link>
           <Link
             to="/about-us"

@@ -1,23 +1,17 @@
 import React, { useState } from "react";
-import {
-  Calendar,
-  MapPin,
-  Users,
-  LogOut,
-  AlertCircle,
-  CheckCircle,
-  X,
-} from "lucide-react";
+import { Calendar, LogOut, AlertCircle, CheckCircle, X } from "lucide-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { api_client } from "../../utils/axiosclient/axios";
 
-interface Event {
-  id: number;
-  name: string;
-  date: string;
-  time: string;
-  location: string;
-  attendees: number;
-  category: "conference" | "workshop" | "hackathon" | "meetup";
-  status: "upcoming" | "ongoing" | "past";
+export interface Event {
+  _id: string;
+  title: string;
+  description: string;
+  date: Date;
+  lastdate: Date;
+  poster_url?: string;
+  event_type: string;
+  vedio_url?: string;
 }
 
 interface Notification {
@@ -27,53 +21,12 @@ interface Notification {
 }
 
 export default function UserPage(): React.JSX.Element {
-  const [events, setEvents] = useState<Event[]>([
-    {
-      id: 1,
-      name: "Tech Conference 2025",
-      date: "2025-09-10",
-      time: "09:00 AM",
-      location: "Convention Center, NYC",
-      attendees: 1250,
-      category: "conference",
-      status: "upcoming",
-    },
-    {
-      id: 2,
-      name: "AI Workshop: Machine Learning Fundamentals",
-      date: "2025-09-15",
-      time: "02:00 PM",
-      location: "Tech Hub, San Francisco",
-      attendees: 85,
-      category: "workshop",
-      status: "upcoming",
-    },
-    {
-      id: 3,
-      name: "Global Hackathon",
-      date: "2025-09-20",
-      time: "10:00 AM",
-      location: "Innovation Campus, Austin",
-      attendees: 300,
-      category: "hackathon",
-      status: "upcoming",
-    },
-    {
-      id: 4,
-      name: "React Developers Meetup",
-      date: "2025-08-25",
-      time: "06:00 PM",
-      location: "Co-working Space, Seattle",
-      attendees: 45,
-      category: "meetup",
-      status: "past",
-    },
-  ]);
-
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [showConfirmDialog, setShowConfirmDialog] = useState<number | null>(
+  const [showConfirmDialog, setShowConfirmDialog] = useState<string | null>(
     null,
   );
+  const [cancelevent_id, setcancelevent_id] = useState<string | null>(null);
+  const quaryclient = useQueryClient();
 
   const addNotification = (
     message: string,
@@ -86,27 +39,48 @@ export default function UserPage(): React.JSX.Element {
     }, 4000);
   };
 
-  const cancelEvent = (id: number) => {
-    const event = events.find((e) => e.id === id);
-    setEvents(events.filter((event) => event.id !== id));
-    addNotification(`Successfully cancelled "${event?.name}"`, "success");
-    setShowConfirmDialog(null);
+  const clearAllCookies = () => {
+    window.document.cookie.split(";").forEach((cookie) => {
+      const name = cookie.split("=")[0].trim();
+      console.log("coocky", name);
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+    });
   };
-
   const handleLogout = () => {
+    clearAllCookies();
     addNotification("Logged out successfully!", "info");
     setTimeout(() => {
       alert("Redirecting to login page...");
     }, 1000);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+  const getuserevents = async (): Promise<Event[]> => {
+    const res = await api_client.get<Event[]>(
+      "/api/v1/registration/find/registration",
+    );
+
+    return res.data;
+  };
+
+  const quary = useQuery<Event[]>({
+    queryKey: ["userevents"],
+    queryFn: getuserevents,
+  });
+
+  const handelcancle = async (event_id: string) => {
+    await api_client.delete("/cancel/registration", {
+      params: {
+        event_id,
+      },
     });
   };
+
+  const mutation = useMutation({
+    mutationFn: handelcancle,
+    onSuccess: () => {
+      quaryclient.invalidateQueries({ queryKey: ["userevents"] });
+    },
+  });
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -124,15 +98,14 @@ export default function UserPage(): React.JSX.Element {
       "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
     );
   };
-
-  const getStatusColor = (status: string) => {
-    const colors = {
-      upcoming: "text-green-500",
-      ongoing: "text-blue-400",
-      past: "text-gray-400",
-    };
-    return colors[status as keyof typeof colors] || "text-gray-400";
-  };
+  function formatDate(dateString: string | Date): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 dark:text-gray-100 pt-20">
@@ -177,7 +150,13 @@ export default function UserPage(): React.JSX.Element {
                 Keep Event
               </button>
               <button
-                onClick={() => cancelEvent(showConfirmDialog)}
+                onClick={() => {
+                  if (cancelevent_id) {
+                    mutation.mutate(cancelevent_id);
+                  } else {
+                    setShowConfirmDialog(null);
+                  }
+                }}
                 className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
               >
                 Cancel Event
@@ -208,59 +187,48 @@ export default function UserPage(): React.JSX.Element {
         </div>
 
         {/* Events List */}
+
         <div className="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
-          {events.length > 0 ? (
+          {quary.data && quary.data.length > 0 ? (
             <div className="space-y-4">
-              {events.map((event) => (
+              {quary.data.map((event) => (
                 <div
-                  key={event.id}
+                  key={event._id}
                   className={`p-6 border rounded-xl hover:shadow-md transition-all duration-200 ${
-                    event.status === "past" ? "opacity-75" : ""
+                    new Date(event.date).getTime() < Date.now()
+                      ? "opacity-75"
+                      : ""
                   } dark:border-gray-700`}
                 >
                   <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-                          {event.name}
+                          {event.title}
                         </h3>
                         <span
                           className={`px-3 py-1 text-xs font-medium rounded-full border ${getCategoryColor(
-                            event.category,
+                            event.event_type,
                           )}`}
                         >
-                          {event.category}
-                        </span>
-                        <span
-                          className={`text-sm font-medium ${getStatusColor(
-                            event.status,
-                          )}`}
-                        >
-                          {event.status}
+                          {event.event_type}
                         </span>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-300">
                         <div className="flex items-center space-x-2">
                           <Calendar size={16} />
-                          <span>
-                            {formatDate(event.date)} at {event.time}
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin size={16} />
-                          <span>{event.location}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Users size={16} />
-                          <span>{event.attendees} attendees</span>
+                          <span>{formatDate(event.date)}</span>
                         </div>
                       </div>
                     </div>
 
-                    {event.status === "upcoming" && (
+                    {new Date(event.date).getTime() > Date.now() && (
                       <button
-                        onClick={() => setShowConfirmDialog(event.id)}
+                        onClick={() => {
+                          setShowConfirmDialog(event._id);
+                          setcancelevent_id(event._id);
+                        }}
                         className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors duration-200"
                       >
                         <X size={16} />

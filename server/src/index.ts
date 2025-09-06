@@ -5,36 +5,30 @@ import authRouter from "./routes/v1/auth/auth";
 import { jwt } from "hono/jwt";
 import { cors } from "hono/cors";
 import registrationRouter from "./routes/v1/registration/registration";
+import { getCookie } from "hono/cookie";
 
 const app = new Hono();
 
 db_connect();
 
-
-app.use("/*", cors({
-  origin: "http://localhost:5000", 
-    credentials: true,               
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],}));
-
+app.use(
+  "/*",
+  cors({
+    origin: "http://localhost:5000",
+    credentials: true,
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  }),
+);
 
 app.use(
   "/api/jwt/verify",
-  jwt({ secret: process.env.JWT_SECRET as string,
-    cookie:"jwt_token",
-   }),
+  jwt({ secret: process.env.JWT_SECRET as string, cookie: "jwt_token" }),
 );
-
-app.use(
-  "/api/v1/registration/*",
-  jwt({ secret: process.env.JWT_SECRET as string }),
-);
-
 
 app.get("/api/health", (c) => {
   return c.text("Welcome to the AEIE", 200);
 });
 app.get("/api/jwt/verify", (c) => {
-  
   return c.json({ valid: true, message: "Token is valid" });
 });
 // Routes

@@ -3,7 +3,7 @@ import type { new_registration_schema_zod } from "../../../types/type";
 import { getCookie } from "hono/cookie";
 import {
   auth_user_by_sesion,
-  cancelle_registration,
+  cancel_registration,
   create_new_registration,
   delete_one_registration,
   find_all_registration,
@@ -78,27 +78,31 @@ registrationRouter.delete(
 );
 
 registrationRouter.get("/find/registration", async (c) => {
-  const user_sesiontoken = getCookie(c, "session_token");
-  if (!user_sesiontoken) {
+  const { session_token } = getCookie(c);
+
+  if (!session_token) {
     return c.json({ message: "Unauthorized" }, 401);
   }
-  const user = await auth_user_by_sesion(user_sesiontoken);
+  const user = await auth_user_by_sesion(session_token);
   if (!user) {
     return c.json({ message: "Unauthorized" }, 401);
   }
-  const registration = find_registration_by_user(user._id);
+  const registration = await find_registration_by_user(user._id);
   if (!registration) {
     return c.json({ message: "No registrations found for this user" }, 404);
   }
-  return c.json(registration, 200);
+  const events = registration.map((r) => r.event);
+  return c.json(events, 200);
 });
 
 registrationRouter.delete("/cancel/registration", async (c) => {
-  const { registration_id } = c.req.query() as { registration_id: string };
-  if (!registration_id) {
-    return c.json({ message: "Registration ID is required" }, 400);
+  const { event_id } = c.req.query() as { event_id: string };
+  const { session_token } = getCookie(c);
+  if (!event_id || !session_token) {
+    return c.json({ message: "Registration ID is required unauthorise" }, 400);
   }
-  const r = await cancelle_registration(registration_id);
+  const user = await auth_user_by_sesion(session_token);
+  const r = await cancel_registration(event_id, user?._id as string);
   if (!r) {
     return c.json({ message: "Registration not found" }, 404);
   }
