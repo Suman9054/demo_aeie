@@ -1,6 +1,4 @@
 
-
-
 services:
 
   traefik:
@@ -29,10 +27,11 @@ services:
       mode: replicated
       replicas: 2
     labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.AEIE-client.rule=Host(`aeie.localhost`)"
-    - "traefik.http.routers.AEIE-client.entrypoints=web"
-    - "traefik.http.services.AEIE-client.loadbalancer.server.port=5000"
+     - "traefik.enable=true"
+      # frontend → default catch-all (everything except /api)
+     - "traefik.http.routers.aeie-client.rule=Host(`aeie.localhost`)"
+     - "traefik.http.routers.aeie-client.entrypoints=web"
+     - "traefik.http.services.aeie-client.loadbalancer.server.port=80"
     networks:
       - traefik
   AEIE-Club-Server:
