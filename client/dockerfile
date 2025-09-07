@@ -34,5 +34,6 @@ COPY --from=prerelease /usr/src/app/vite.config.ts .
 # run the app
 USER bun
 EXPOSE 5000/tcp
-ENTRYPOINT [ "bun", "run", "preview" ]
+ENTRYPOINT [ "bunx", "vite", "preview", "--port", "5000", "--host", "0.0.0.0" ]
+
 
