@@ -32,7 +32,7 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.AEIE-client.rule=Host(`aeie.localhost`)"
     - "traefik.http.routers.AEIE-client.entrypoints=web"
-    - "traefik.http.services.AEIE-client.loadbalancer.server.port=4173"
+    - "traefik.http.services.AEIE-client.loadbalancer.server.port=5000"
     networks:
       - traefik
   AEIE-Club-Server:
