@@ -33,6 +33,6 @@ COPY --from=prerelease /usr/src/app/package.json .
 
 # run the app
 USER bun
-EXPOSE 4173/tcp
-ENTRYPOINT [ "bun", "run", "vite preview --host 0.0.0.0 --port 4173" ]
+EXPOSE 5000/tcp
+ENTRYPOINT [ "bun", "run", "preview" ]
 
