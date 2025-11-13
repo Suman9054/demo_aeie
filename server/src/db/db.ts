@@ -84,6 +84,7 @@ export const auth_user_by_sesion = async (sesiontoken: string) => {
       email: sesion.user.email,
       password: sesion.user.password,
       role: sesion.user.role,
+      varified: sesion.user.varified,
       createdAt: sesion.user.createdAt,
     };
     return user;
@@ -236,10 +237,10 @@ export const cancel_registration = async (
   }
 };
 
-export const find_all_registration = async (event_id: string) => {
+export const find_all_registration = async () => {
   try {
     const registration = await registrationmodel
-      .find({ event: event_id })
+      .find()
       .populate<UserReturnSchema>("user")
       .populate<event_return_schema>("event");
     return registration;

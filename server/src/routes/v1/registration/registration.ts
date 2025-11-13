@@ -49,14 +49,11 @@ registrationRouter.post("/new/event", async (c) => {
 });
 
 registrationRouter.get(
-  "/all/registration:id",
+  "/all/registration",
   admin_verify_middleware,
   async (c) => {
-    const { id } = c.req.param() as unknown as { id: string };
-    if (!id) {
-      return c.json("id requard", 404);
-    }
-    const registrations = await find_all_registration(id);
+    
+    const registrations = await find_all_registration();
     if (!registrations) {
       return c.json({ message: "No registrations found" }, 404);
     }
