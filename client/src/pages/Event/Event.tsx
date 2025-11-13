@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { api_client } from "../../utils/axiosclient/axios";
 import { Calendar } from "lucide-react";
 import type { Event } from "../userpage/user";
+import { useNavigate } from "@tanstack/react-router";
+import Loader from "../Lodar/lodar";
 
 const slideevents = [
   {
@@ -31,93 +33,91 @@ const EventsPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<
     "allevents" | "nearest" | "latest"
   >("allevents");
-
-  const getallevents = async (): Promise<Event[]> => {
+ 
+  const getAllEvents = async (): Promise<Event[]> => {
     const res = await api_client.get<Event[]>("/api/v1/event/allevents");
-
     return res.data;
   };
 
-  const getnearestevents = async (): Promise<Event[]> => {
-    const res = await api_client.get<Event[]>(
-      "/api/v1/event/find_nearst_events",
-    );
-
+  const getNearestEvents = async (): Promise<Event[]> => {
+    const res = await api_client.get<Event[]>("/api/v1/event/nearestevents");
     return res.data;
   };
 
-  const getnewstevents = async (): Promise<Event[]> => {
-    const res = await api_client.get<Event[]>(
-      "/api/v1/event/find_nearst_events",
-    );
-
+  const getNewestEvents = async (): Promise<Event[]> => {
+    const res = await api_client.get<Event[]>("/api/v1/event/newestevents");
     return res.data;
   };
 
-  const alleventquary = useQuery<Event[]>({
+  const allEventsQuery = useQuery({
     queryKey: ["allevents"],
-    queryFn: getallevents,
+    queryFn: getAllEvents,
   });
 
-  const nearesteventquary = useQuery<Event[]>({
-    queryKey: ["nearestevent"],
-    queryFn: getnearestevents,
+  const nearestEventsQuery = useQuery({
+    queryKey: ["nearestevents"],
+    queryFn: getNearestEvents,
   });
 
-  const newsteventquary = useQuery<Event[]>({
-    queryKey: ["newstevent"],
-    queryFn: getnewstevents,
+  const newestEventsQuery = useQuery({
+    queryKey: ["newstevents"],
+    queryFn: getNewestEvents,
   });
 
-  const [data, setdata] = useState(alleventquary.data);
+  // Select which data to show
+  let data: Event[] | undefined;
+  let isLoading = false;
+
+  if (activeFilter === "allevents") {
+    data = allEventsQuery.data;
+    isLoading = allEventsQuery.isLoading;
+  } else if (activeFilter === "nearest") {
+    data = nearestEventsQuery.data;
+   isLoading = nearestEventsQuery.isLoading;
+  } else if (activeFilter === "latest") {
+    data = newestEventsQuery.data;
+    isLoading = newestEventsQuery.isLoading;
+  }
+
+  const navigate = useNavigate({ from: "/events" });
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+     
       <div className="pt-8">
         <Slideshow images={slideevents} />
       </div>
 
       <div className="w-full flex flex-col py-12 items-center">
+       
         <div className="flex justify-center space-x-4 mb-12">
-          {/* All Events */}
           <button
-            onClick={() => {
-              setActiveFilter("allevents");
-              setdata(alleventquary.data);
-            }}
+            onClick={() => setActiveFilter("allevents")}
             className={`px-6 py-3 rounded-full text-sm font-medium shadow-lg transition-all duration-300 hover:scale-105 ${
               activeFilter === "allevents"
-                ? "bg-gradient-to-r from-teal-500 to-cyan-500 text-white"
+                ? "bg-gradient-to-r from-teal-400 to-cyan-500 text-white"
                 : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20"
             }`}
           >
             All Events
           </button>
 
-          {/* Nearest Events */}
           <button
-            onClick={() => {
-              setActiveFilter("nearest");
-              setdata(nearesteventquary.data);
-            }}
-            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 ${
+            onClick={() => setActiveFilter("nearest")}
+            className={`px-6 py-3 rounded-full text-sm font-medium shadow-lg transition-all duration-300 hover:scale-105 ${
               activeFilter === "nearest"
-                ? "bg-gradient-to-r from-teal-500 to-cyan-500 text-white"
+                ? "bg-gradient-to-r from-teal-400 to-cyan-500 text-white"
                 : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20"
             }`}
           >
             Nearest Events
           </button>
 
-          {/* Latest Events */}
           <button
-            onClick={() => {
-              setActiveFilter("latest");
-              setdata(newsteventquary.data);
-            }}
-            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 ${
+            onClick={() => setActiveFilter("latest")}
+            className={`px-6 py-3 rounded-full text-sm font-medium shadow-lg transition-all duration-400 hover:scale-105 ${
               activeFilter === "latest"
-                ? "bg-gradient-to-r from-teal-500 to-cyan-500 text-white"
+                ? "bg-gradient-to-r from-teal-400 to-cyan-500 text-white"
                 : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20"
             }`}
           >
@@ -125,8 +125,11 @@ const EventsPage: React.FC = () => {
           </button>
         </div>
 
+       
         <div className="max-w-6xl mx-auto space-y-8 px-4 w-full">
-          {data && data.length > 0 ? (
+          {isLoading ? (
+            <Loader />
+          ) : data && data.length > 0 ? (
             <div className="space-y-4">
               {data.map((event) => (
                 <div
@@ -136,6 +139,7 @@ const EventsPage: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative flex">
+                    
                     <div className="relative overflow-hidden">
                       <img
                         src={event.poster_url}
@@ -145,6 +149,7 @@ const EventsPage: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20"></div>
                     </div>
 
+                   
                     <div className="flex-1 p-8 flex flex-col justify-between relative z-10">
                       <div>
                         <span className="inline-block px-4 py-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 backdrop-blur-sm border border-teal-400/30 text-teal-300 rounded-full text-xs font-medium mb-4">
@@ -162,13 +167,22 @@ const EventsPage: React.FC = () => {
                           <strong className="text-white mr-2">
                             Tanggal pelaksanaan:
                           </strong>
-                          {event.date.toLocaleDateString()}
+                          {new Date(event.date).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
 
+                   
                     <div className="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                      <button className="px-6 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                      <button
+                        onClick={() => {
+                          navigate({
+                            to: "/events/$id",
+                            params: { id: event._id },
+                          });
+                        }}
+                        className="px-6 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300"
+                      >
                         Learn More
                       </button>
                     </div>
@@ -180,7 +194,7 @@ const EventsPage: React.FC = () => {
             <div className="text-center py-12">
               <Calendar className="mx-auto text-gray-300 mb-4" size={64} />
               <p className="text-gray-600 dark:text-gray-400 text-lg mb-2">
-                no events
+                No events
               </p>
             </div>
           )}

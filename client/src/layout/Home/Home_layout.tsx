@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Underline } from "../../components/underline/Underline";
+import Footer_layout from "../../components/Footer/Footer_layout";
 
 export function Homelayout(): React.JSX.Element {
   const location = useLocation();
@@ -25,7 +26,7 @@ export function Homelayout(): React.JSX.Element {
             {location.pathname === "/events" ? <Underline w="w-11" /> : null}
           </Link>
           <Link
-            to="/"
+            to="/study"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Study
@@ -39,7 +40,7 @@ export function Homelayout(): React.JSX.Element {
             {location.pathname === "/about-us" ? <Underline w="w-11" /> : null}
           </Link>
           <Link
-            to="/contactUs"
+            to="/"
             className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
           >
             Contact us
@@ -70,6 +71,7 @@ export function Homelayout(): React.JSX.Element {
       </div>
 
       <Outlet />
+      <Footer_layout />
     </div>
   );
 }

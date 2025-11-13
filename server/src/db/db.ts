@@ -121,12 +121,11 @@ export const Creat_new_event = async (
 ) => {
   try {
     const event = await eventmodel.create({
-      itle: event_data.title,
+      title: event_data.title,
       description: event_data.description,
       date: event_data.date,
       lastdate: event_data.lastdate,
       poster_url: event_data.poster_url,
-      vedio_url: event_data.vedio_url,
       event_type: event_data.event_type,
     });
     return event;
@@ -155,6 +154,7 @@ export const find_newest_event = async () => {
 
 export const find_nearst_events = async () => {
   try {
+    const now = new Date();
     const event = await eventmodel
       .find({ date: { $gte: now } })
       .sort({ date: 1 });
@@ -173,21 +173,15 @@ export const delete_one_evnt = async (id: string) => {
 };
 
 export const update_one_event = async (
-  update_event_data: z.infer<typeof upadate_event_shema>,
+  data: any,
 ) => {
+  const { id, ...fields } = data;
   try {
     const event = await eventmodel.findOneAndUpdate(
-      { _id: update_event_data.id },
+      { _id: id },
       {
-        $set: {
-          title: update_event_data.title,
-          description: update_event_data.description,
-          date: update_event_data.description,
-          lastdate: update_event_data.lastdate,
-          poster_url: update_event_data.poster_url,
-          event_type: update_event_data.event_type,
-        },
-      },
+        $set: fields,
+      },{new: true,}
     );
     return event;
   } catch (e) {
@@ -242,9 +236,12 @@ export const cancel_registration = async (
   }
 };
 
-export const find_all_registration = async () => {
+export const find_all_registration = async (event_id: string) => {
   try {
-    const registration = await registrationmodel.find({});
+    const registration = await registrationmodel
+      .find({ event: event_id })
+      .populate<UserReturnSchema>("user")
+      .populate<event_return_schema>("event");
     return registration;
   } catch (e) {
     console.log(e);

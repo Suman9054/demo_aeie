@@ -16,17 +16,16 @@ export const event_schema = z.object({
   lastdate: z.date(),
   poster_url: z.string().optional(),
   event_type: z.enum(["event", "competition", "workshop"]),
-  vedio_url: z.string().optional(),
 });
 
 export const upadate_event_shema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
-  date: z.date().optional(),
-  lastdate: z.date().optional(),
-  poster_url: z.string().optional(),
+  date: z.coerce.date().optional(),
+  lastdate: z.coerce.date().optional(),
+  poster_: z.any().optional(),
   event_type: z.enum(["event", "competition", "workshop"]).optional(),
-  id: z.string(),
+  id: z.string().optional(),
 });
 
 export const new_registration_schema = z.object({
@@ -44,6 +43,7 @@ export const user_return_schema = z.object({
   password: z.string(),
   email: z.email(),
   role: z.string(),
+  varified: z.boolean(),
   createdAt: z.date(),
 });
 const user_registration_schema = z.object({
@@ -64,7 +64,17 @@ const event_return_schema = z.object({
   lastdate: z.date(),
   poster_url: z.string().optional(),
   event_type: z.string(),
-  vedio_url: z.string().optional(),
+});
+
+export const neweventschema = z.object({
+  title: z.string().min(4, "Title must be at least 4 characters long"),
+  description: z
+    .string()
+    .min(10, "Description must be at least 10 characters long"),
+  date: z.coerce.date(),
+  lastdate: z.coerce.date(),
+  event_type: z.enum(["event", "competition", "workshop"]),
+  poster_: z.any().optional() || null,
 });
 
 export type UserReturnSchema = z.infer<typeof user_return_schema>;
@@ -75,4 +85,4 @@ export type new_registration_schema_zod = z.infer<
   typeof new_registration_schema
 >;
 export type event_return_schema = z.infer<typeof event_return_schema>;
-export type upadate_event_shema_zod = z.infer<typeof upadate_event_shema>;
+

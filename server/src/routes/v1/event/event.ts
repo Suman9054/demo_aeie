@@ -5,14 +5,11 @@ import {
   find_all_events,
   find_nearst_events,
   find_newest_event,
+  update_one_event,
 } from "../../../db/db";
 import { admin_verify_middleware } from "../../../middleware/middleware";
-import type {
-  neweventschema,
-  upadate_event_shema_zod,
-} from "../../../types/type";
 import { image_upload } from "../../../helper/helper";
-import { getCookie } from "hono/cookie";
+import { neweventschema, upadate_event_shema } from "../../../types/type";
 
 const event_route = new Hono();
 
@@ -40,8 +37,8 @@ event_route.get("/nearestevents", async (c) => {
   return c.json(nearestevents);
 });
 
-event_route.delete("/deleteevent/:id", admin_verify_middleware, async (c) => {
-  const { id } = c.req.param() as { id: string };
+event_route.delete("/deleteevent", admin_verify_middleware, async (c) => {
+  const { id } = c.req.query() as { id: string };
   try {
     delete_one_evnt(id);
     return c.json({ message: "Event deleted successfully" }, 200);
@@ -51,76 +48,161 @@ event_route.delete("/deleteevent/:id", admin_verify_middleware, async (c) => {
   }
 });
 
-event_route.post("/creat/new/event", admin_verify_middleware, async (c) => {
-  const { title, description, date, lastdate, event_type } =
-    c.req.query() as unknown as neweventschema;
-  const img = c.req.query("img") as unknown as File;
-  const vedio = c.req.query("video") as unknown as File;
-  if ((title && description && date && vedio) || img) {
-    if (vedio && img) {
-      const vedio_url = await image_upload(vedio);
-      const img_url = await image_upload(img);
-      const new_event = Creat_new_event({
-        title: title,
-        description: description,
-        date: date,
-        poster_url: img_url,
-        vedio_url: vedio_url,
-        event_type: event_type,
-        lastdate: lastdate,
-      });
-      if (!new_event) {
-        return c.json({ message: "Failed to create event" }, 500);
-      }
-      return c.json("Event created successfully", 200);
-    } else if (img) {
-      const img_url = await image_upload(img);
-      const new_event = Creat_new_event({
-        title: title,
-        description: description,
-        date: date,
-        poster_url: img_url,
-        event_type: event_type,
-        lastdate: lastdate,
-      });
-      if (!new_event) {
-        return c.json({ message: "Failed to create event" }, 500);
-      }
-      return c.json("Event created successfully", 200);
-    } else {
-      const vedio_url = await image_upload(vedio);
-      const new_event = Creat_new_event({
-        title: title,
-        description: description,
-        date: date,
-        vedio_url: vedio_url,
-        event_type: event_type,
-        lastdate: lastdate,
-      });
-      if (!new_event) {
-        return c.status(500);
-      }
-      return c.json("Event created successfully", 200);
+event_route.post("/create/new/event", admin_verify_middleware, async (c) => {
+  try {
+    
+    const form = await c.req.formData();
+
+    
+    const title = form.get("title") as string;
+    const description = form.get("description") as string;
+    const date = form.get("date")
+      ? new Date(form.get("date") as string).toISOString()
+      : undefined;
+    const lastdate = form.get("lastdate")
+      ? new Date(form.get("lastdate") as string).toISOString()
+      : undefined;
+    const event_type = form.get("event_type") as string;
+
+    // Extract files
+    const poster_ = form.get("poster_");
+    const vedio_ = form.get("vedio_");
+
+    
+    const parsed = neweventschema.safeParse({
+      title,
+      description,
+      date,
+      lastdate,
+      event_type,
+      poster_,
+      vedio_,
+    });
+
+    if (!parsed.success) {
+      return c.json(
+        { message: "Invalid input on phrased", errors: parsed.error.format() },
+        400,
+      );
     }
+
+    const {
+      title: pTitle,
+      description: pDescription,
+      date: pDate,
+      lastdate: pLastdate,
+      event_type: pEventType,
+      poster_: pPoster,
+      vedio_: pVedio,
+    } = parsed.data;
+
+   
+    let img_url: string | undefined;
+    let video_url: string | undefined;
+
+    if (pPoster && pPoster instanceof File) {
+      img_url = await image_upload(pPoster);
+    }
+    if (pVedio && pVedio instanceof File) {
+      video_url = await image_upload(pVedio);
+    }
+
+   
+    const new_event = await Creat_new_event({
+      title: pTitle,
+      description: pDescription,
+      date: pDate,
+      lastdate: pLastdate,
+      event_type: pEventType,
+      poster_url: img_url,
+      vedio_url: video_url,
+    });
+
+    if (!new_event) {
+      return c.json({ message: "Failed to create event" }, 500);
+    }
+
+    return c.json(
+      { message: "Event created successfully", event: new_event },
+      200,
+    );
+  } catch (err) {
+    console.error("Error creating event:", err);
+    return c.json({ message: "Server error" }, 500);
   }
 });
 
-event_route.post("/update/event", admin_verify_middleware, async (c) => {
-  const { title, description, date, lastdate, poster_url, event_type, id } =
-    c.req.query() as unknown as upadate_event_shema_zod;
+event_route.put("/update/event", admin_verify_middleware, async (c) => {
+  const { id } = c.req.query() as { id: string };
   if (!id) {
     return c.json({ message: "Event ID is required" }, 400);
   }
-  const update_data: any = {};
-  if (title) update_data.title = title;
-  if (description) update_data.description = description;
-  if (date) update_data.date = date;
-  if (lastdate) update_data.lastdate = lastdate;
-  if (poster_url) update_data.poster_url = poster_url;
-  if (event_type) update_data.event_type = event_type;
+  
+  const update_form = await c.req.formData();
+  
+  const title = update_form.get("title") as string | undefined;
+  const description = update_form.get("description") as string | undefined;
+  const date = update_form.get("date")
+    ? new Date(update_form.get("date") as string).toISOString()
+    : undefined;
+  const lastdate = update_form.get("lastdate")
+    ? new Date(update_form.get("lastdate") as string).toISOString()
+    : undefined;
+  const event_type = update_form.get("event_type") as string | undefined;
 
+  const poster_ = update_form.get("poster_");
+  const vedio_ = update_form.get("vedio_");
+
+  
+
+  const prased = upadate_event_shema.safeParse({
+    title,
+    description,
+    date,
+    lastdate,
+    event_type,
+    poster_,
+    vedio_,
+  });
+
+  if (!prased.success) {
+    return c.json(
+      { message: "Invalid input on phrased", errors: prased.error.format() },
+      400,
+    );
+  }
+
+  const {
+      title: pTitle,
+      description: pDescription,
+      date: pDate,
+      lastdate: pLastdate,
+      event_type: pEventType,
+      poster_: pPoster,
+      vedio_: pVedio,
+    } = prased.data;
+  let poster_url: string | undefined;
+  let vedio_url: string | undefined;
+
+  if (vedio_ && vedio_ instanceof File) {
+    vedio_url = await image_upload(pVedio);
+  }
+  if (poster_ && poster_ instanceof File) {
+    poster_url = await image_upload(pPoster);
+  }
+
+  const update_data: any = {};
+  if (title) update_data.title = pTitle;
+  if (description) update_data.description = pDescription;
+  if (date) update_data.date = pDate;
+  if (lastdate) update_data.lastdate = pLastdate;
+  if (poster_url) update_data.poster_url = poster_url;
+  if (event_type) update_data.event_type = pEventType;
+  if (vedio_url) update_data.vedio_url = vedio_url;
   try {
-    const updated_event = await Creat_new_event(update_data);
+   
+    const updated_event = await update_one_event({ id, ...update_data });
+    
     if (!updated_event) {
       return c.json({ message: "Failed to update event" }, 500);
     }

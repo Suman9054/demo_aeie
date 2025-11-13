@@ -1,6 +1,4 @@
-
 services:
-
   traefik:
     image: "traefik:v3.5"
     command:
@@ -10,11 +8,18 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=sumanhazra368@gmail.com"  
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+
     ports:
       - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "letsencrypt:/letsencrypt"
     deploy:
      placement:
        constraints:
@@ -30,7 +35,8 @@ services:
      - "traefik.enable=true"
       # frontend → default catch-all (everything except /api)
      - "traefik.http.routers.aeie-client.rule=Host(`aeie.localhost`)"
-     - "traefik.http.routers.aeie-client.entrypoints=web"
+     - "traefik.http.routers.aeie-client.entrypoints=websecure"
+     - "traefik.http.routers.aeie-client.tls.certresolver=myresolver"
      - "traefik.http.services.aeie-client.loadbalancer.server.port=80"
     networks:
       - traefik
@@ -58,3 +64,5 @@ services:
 networks:
   traefik:
     driver: bridge  
+volumes:
+    letsencrypt:   

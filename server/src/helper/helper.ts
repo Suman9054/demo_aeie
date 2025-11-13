@@ -1,13 +1,14 @@
+import type z from "zod";
 import { auth_user_by_sesion } from "../db/db";
-
+import { Resend } from "resend";
 import ImageKit from "imagekit";
 
 const imagekit = new ImageKit({
-  publicKey: process.env.IMAGEKIT_PUBLIC_KEY as string,
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY as string,
-  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT as string,
+  publicKey: "public_qW9ugAdhoqs9mwvVOHR5xo6oGJk=",
+  privateKey: "private_mrywzxmfA6Uz4CXAZxyZWu3EG5o=",
+  urlEndpoint: "https://ik.imagekit.io/AEIE",
 });
-
+const resend = new Resend(process.env.resend_api_key as string);
 export const hash_password = async (password: string) => {
   const hash = await Bun.password.hash(password);
   return hash;
@@ -32,17 +33,63 @@ export const verify_admin = async (token: string) => {
 };
 
 export const image_upload = async (file: File) => {
-  const buffer = await file.arrayBuffer();
-  return imagekit
-    .upload({
-      file: Buffer.from(buffer), // required
-      fileName: file.name, // required
-    })
-    .then((response) => {
-      return response.url;
-    })
-    .catch((error) => {
-      console.error("Image upload failed:", error);
-      throw new Error("Image upload failed");
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+  
+    const result = imagekit.upload({
+      file: buffer, // raw binary
+      fileName: file.name,
+      isPublished: true,
+      extensions: [
+        {
+          name: "google-auto-tagging",
+          maxTags: 5,
+          minConfidence: 95,
+        },
+      ],
+      transformation: {
+        pre: "l-text,i-Imagekit,fs-50,l-end",
+        post: [
+          {
+            type: "transformation",
+            value: "w-100",
+          },
+        ],
+      },
     });
+    
+
+    return (await result).url;
+  } catch (e: any) {
+    console.log("Image upload error:", e.response || e); // log more details
+    return undefined;
+  }
 };
+
+
+export const send_otp_onemil= async (to: string, otp: string,) => {
+ const{data,error}= await resend.emails.send({
+    from: "onemil aeie ",
+    to: [to],
+    subject: "Your OTP Code",
+    html: `<html>
+    <body>
+      <h1>Your OTP Code</h1>
+      <p>Your OTP code is: <strong>${otp}</strong></p>
+      <p>This code is valid for 10 minutes.</p>
+    </body>
+  </html>`,
+  });
+  if(error){
+    console.log("Error sending OTP email:", error);
+  }
+  return data;
+}
+
+export const genarateotp= async(userId:string)=>{
+  const hash = await Bun.password.hash(userId+Date.now().toString());
+  const otp = hash.slice(0,6).toUpperCase();
+  return otp;
+}
+const verifyotp= async(userId:string,otp:string,hash:string)=>{}

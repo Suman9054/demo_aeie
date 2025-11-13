@@ -5,7 +5,7 @@ export default function Department(): JSX.Element {
   return (
     <div className="max-h-screen max-w-screen text justify-center items-center mx-auto">
       <motion.h2
-        className="text-2xl font-bold mb-4 text-center"
+        className="text-2xl font-bold mb-4 text-center text-amber-300"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -14,7 +14,7 @@ export default function Department(): JSX.Element {
       </motion.h2>
 
       <motion.p
-        className="leading-relaxed text-gray-700"
+        className="leading-relaxed text-gray-300 px-4 md:px-20 text-justify mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 1 }}
@@ -31,7 +31,7 @@ export default function Department(): JSX.Element {
       <br />
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-200 rounded-lg"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 p-2"
         initial="hidden"
         animate="visible"
         variants={{
@@ -73,7 +73,7 @@ export default function Department(): JSX.Element {
         ].map((item, idx) => (
           <motion.div
             key={idx}
-            className="bg-blue-500 text-white p-6 rounded-xl shadow-lg text-center"
+            className="bg-blue-400/20 text-white p-6 rounded-xl shadow-lg text-center"
             variants={{
               hidden: { opacity: 0, scale: 0.8, y: 50 },
               visible: {

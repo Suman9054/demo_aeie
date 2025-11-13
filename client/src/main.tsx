@@ -23,6 +23,8 @@ import RegistrationForm from "./pages/Auth/Register/Register";
 import { authverify } from "./utils/authverify/Authverify";
 import UserPage from "./pages/userpage/user";
 import AdminDashboard from "./pages/Admin/admin";
+import Event_ from "./pages/event_/event_le";
+import study from "./pages/study/study";
 
 const queryClient = new QueryClient();
 
@@ -78,6 +80,18 @@ const Event_pagerout = createRoute({
   component: Event_page,
 });
 
+const event_routes = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/events/$id",
+  component: Event_,
+});
+
+const study_routes = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/study",
+  component: study,
+});
+
 const AuthRootrout = createRoute({
   getParentRoute: () => rootRoute,
   path: "/auth",
@@ -121,18 +135,20 @@ const routeTree = rootRoute.addChildren([
   AuthRootrout.addChildren([LoginRoute, RegistrationRoute]),
   userroute,
   adminRoute,
+  event_routes,
+  study_routes,
 ]);
 
 const router = createRouter({ routeTree });
 
-{
-  /*declare module "@tanstack/react-router" {
+
+  declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
 }
- */
-}
+ 
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
