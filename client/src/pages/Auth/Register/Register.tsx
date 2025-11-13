@@ -80,14 +80,12 @@ export default function RegistrationForm() {
     if (validateForm()) {
       const respons = await api_client.post(
         "/api/v1/auth/register",
-        {},
-        {
-          params: {
+         {
             username: formData.username,
             password: formData.password,
             email: formData.email,
           },
-        },
+        
       );
       if (!respons) {
         handleReset();

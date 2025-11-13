@@ -11,6 +11,10 @@ const userSchema: Schema = new Schema<UserReturnSchema>(
       type: String,
       required: true,
     },
+    varified:{
+       type: Boolean,
+       default:false
+    },
     email: {
       type: String,
       unique: true,
@@ -48,9 +52,6 @@ const eventSchema: Schema = new Schema(
       required: true,
     },
     poster_url: {
-      type: String,
-    },
-    vedio_url: {
       type: String,
     },
     event_type: {

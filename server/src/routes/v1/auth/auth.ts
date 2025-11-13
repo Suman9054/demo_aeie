@@ -10,8 +10,10 @@ import {
   update_sesion,
 } from "../../../db/db";
 import {
+  genarateotp,
   hash_password,
   make_new_sesion_token,
+  send_otp_onemil,
   verify_hash,
 } from "../../../helper/helper";
 import { setCookie } from "hono/cookie";
@@ -20,7 +22,7 @@ import { sign } from "hono/jwt";
 const authRouter = new Hono();
 
 authRouter.post("/login", async (c) => {
-  const { email, password } = c.req.query() as unknown as user_login_schema;
+  const { email, password } =  await c.req.json() as unknown as user_login_schema;
 
   if (!email || !password) {
     return c.text("Email and password are required", 400);
@@ -36,7 +38,9 @@ authRouter.post("/login", async (c) => {
   const token = make_new_sesion_token();
   update_sesion(user._id.toString(), token);
   const jwt_token = await sign(
-    {},
+    {
+      userId: user._id.toString(),
+    },
 
     process.env.JWT_SECRET as string,
   );
@@ -52,12 +56,12 @@ authRouter.post("/login", async (c) => {
     sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
-  return c.json({ message: "Login successful" }, 200);
+  return c.json({ message: "Login successful" ,user:user}, 200);
 });
 
 authRouter.post("/register", async (c) => {
-  const { username, password, email } =
-    c.req.query() as unknown as user_registration_schema;
+  const { username, password, email } = await
+    c.req.json() as unknown as user_registration_schema;
   if (!username || !password || !email) {
     return c.text("Username, password, and email are required", 400);
   }
@@ -65,6 +69,10 @@ authRouter.post("/register", async (c) => {
   if (existingUser) {
     return c.text("User already exists", 409);
   }
+
+  //const data = await send_otp_onemil(email,"123456789");
+  //console.log("Email send data:", data);
+  
   const hashed_password = await hash_password(password);
   const user = await create_user({
     username: username,
@@ -74,13 +82,17 @@ authRouter.post("/register", async (c) => {
   if (!user) {
     return c.text("Failed to create user", 500);
   }
-  const jwt_token = await sign({}, process.env.JWT_SECRET as string);
+  const jwt_token = await sign({
+    userId: user._id.toString()
+  }, process.env.JWT_SECRET as string);
   setCookie(c, "jwt_token", jwt_token, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
+  //const otp = await genarateotp(user._id.toString());
+  //console.log("Generated OTP:", otp);
   const token = make_new_sesion_token();
   await asine_sesion_to_user(user._id, token);
 
@@ -90,7 +102,9 @@ authRouter.post("/register", async (c) => {
     sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
-  return c.json({ message: "User Registration successful" }, 201);
+  return c.json({ message: "User Registration successful",user:user}, 201);
 });
+
+
 
 export default authRouter;

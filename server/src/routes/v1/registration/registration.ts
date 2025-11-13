@@ -48,18 +48,18 @@ registrationRouter.post("/new/event", async (c) => {
   return c.json({ message: "Registration successful" }, 200);
 });
 
-registrationRouter.get("/all/registration", async (c) => {
-  const user_sesiontoken = getCookie(c, "session_token");
-  if (!user_sesiontoken) {
-    return c.json({ message: "Unauthorized" }, 401);
-  }
-
-  const registrations = await find_all_registration();
-  if (!registrations) {
-    return c.json({ message: "No registrations found" }, 404);
-  }
-  return c.json(registrations, 200);
-});
+registrationRouter.get(
+  "/all/registration",
+  admin_verify_middleware,
+  async (c) => {
+    
+    const registrations = await find_all_registration();
+    if (!registrations) {
+      return c.json({ message: "No registrations found" }, 404);
+    }
+    return c.json(registrations, 200);
+  },
+);
 
 registrationRouter.delete(
   "/delet/registration",

@@ -99,7 +99,7 @@ export const Homepage: React.FC = () => {
 
   return (
     <main className="scroll-smooth">
-      <div className="min-h-screen w-full relative flex flex-col justify-between py-10 overflow-x-scroll ">
+      <div className="min-h-screen w-full relative flex flex-col justify-between py-10  ">
         <div className="flex flex-col items-center justify-center max-w-[50%] text-center z-10 gap-2 mx-auto px-4 pt-30 flex-grow">
           <motion.h3
             className="text-3xl md:text-5xl font-sans text-gray-300 mb-1"

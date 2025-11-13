@@ -75,13 +75,11 @@ export default function LoginForm(): React.JSX.Element {
     try {
       const respons = await api_client.post(
         "/api/v1/auth/login",
-        {},
-        {
-          params: {
+         {
             email: formData.email,
             password: formData.password,
           },
-        },
+        
       );
       if (!respons) {
         setErrors({ general: "Login failed. Please try again." });
@@ -90,7 +88,6 @@ export default function LoginForm(): React.JSX.Element {
           password: "",
         });
       }
-      console.log(respons.status, respons.data);
     } catch (error: unknown) {
       setErrors({ general: "Login failed. Please try again." });
       console.log(error);
