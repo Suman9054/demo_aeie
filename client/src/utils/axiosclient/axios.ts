@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api_client = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://aeie-club-server-rxj0.onrender.com",
   withCredentials: true,
 });
