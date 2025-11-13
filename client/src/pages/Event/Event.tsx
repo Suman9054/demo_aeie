@@ -164,9 +164,7 @@ const EventsPage: React.FC = () => {
 
                         <p className="flex items-center">
                           <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
-                          <strong className="text-white mr-2">
-                            Tanggal pelaksanaan:
-                          </strong>
+                          
                           {new Date(event.date).toLocaleDateString()}
                         </p>
                       </div>
