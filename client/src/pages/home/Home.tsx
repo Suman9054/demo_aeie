@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mcard } from "../../components/motioncard/motioncard";
 import HodMsg from "../../components/Hod/HodMsg";
+import { useNavigate } from "@tanstack/react-router";
 
 type XY = "x" | "y";
 
@@ -26,6 +27,7 @@ export const Homepage: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [index, setIndex] = useState(0);
 
+  const navigate = useNavigate();
   useEffect(() => {
     const typingSpeed = 100;
 
@@ -133,6 +135,7 @@ export const Homepage: React.FC = () => {
               className="bg-orange-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-orange-600 transition text-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate({ to: "/about-us" })}
             >
               Learn More
             </motion.button>

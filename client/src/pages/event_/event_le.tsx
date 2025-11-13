@@ -44,7 +44,7 @@ const allEventsQuery = useQuery({
         </div>
       </div>
       { event?.event_type !== "event" && (
-      <div className="max-w-3xl mx-auto mt-6 p-4 bg-white rounded-lg shadow-md">
+      <div className="max-w-3xl mx-auto mt-6 p-4  rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-center text-amber-200">Register for {event?.event_type}</h2>
         <form className="space-y-4">
           <div>
@@ -88,6 +88,7 @@ const allEventsQuery = useQuery({
         </form>
       </div>
       )
+      
 
       }
     </div>
