@@ -39,13 +39,7 @@ export function Homelayout(): React.JSX.Element {
             About
             {location.pathname === "/about-us" ? <Underline w="w-11" /> : null}
           </Link>
-          <Link
-            to="/"
-            className="font-mono [&.active]:text-teal-500 transition-transform duration-200 hover:scale-110"
-          >
-            Contact us
-            {location.pathname === "/contactUs" ? <Underline w="w-22" /> : null}
-          </Link>
+          
           <Link
             to="/user"
             className=" transition-transform duration-200 hover:scale-110 object-fit-contain"
