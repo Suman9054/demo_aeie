@@ -14,7 +14,7 @@ db_connect();
 app.use(
   "/*",
   cors({
-    origin: "http://localhost:5000",
+    origin: "https://aeiehit.onrender.com",
     credentials: true,
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   }),
