@@ -86,9 +86,6 @@ authRouter.post("/register", async (c) => {
     userId: user._id.toString()
   }, process.env.JWT_SECRET as string);
   setCookie(c, "jwt_token", jwt_token, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
   //const otp = await genarateotp(user._id.toString());
@@ -97,9 +94,6 @@ authRouter.post("/register", async (c) => {
   await asine_sesion_to_user(user._id, token);
 
   setCookie(c, "session_token", token, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
   return c.json({ message: "User Registration successful",user:user}, 201);
