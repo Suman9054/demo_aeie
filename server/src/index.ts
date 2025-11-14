@@ -5,7 +5,7 @@ import authRouter from "./routes/v1/auth/auth";
 import { jwt } from "hono/jwt";
 import { cors } from "hono/cors";
 import registrationRouter from "./routes/v1/registration/registration";
-import { getCookie } from "hono/cookie";
+
 
 const app = new Hono();
 
@@ -29,6 +29,7 @@ app.get("/api/health", (c) => {
   return c.text("Welcome to the AEIE", 200);
 });
 app.get("/api/jwt/verify", (c) => {
+  
   return c.json({ valid: true, message: "Token is valid" });
 });
 // Routes
