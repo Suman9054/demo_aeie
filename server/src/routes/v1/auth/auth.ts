@@ -10,10 +10,9 @@ import {
   update_sesion,
 } from "../../../db/db";
 import {
-  genarateotp,
+  
   hash_password,
   make_new_sesion_token,
-  send_otp_onemil,
   verify_hash,
 } from "../../../helper/helper";
 import { setCookie } from "hono/cookie";
@@ -47,13 +46,15 @@ authRouter.post("/login", async (c) => {
   setCookie(c, "jwt_token", jwt_token, {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite: "none",
+    path: "/",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
   setCookie(c, "session_token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite: "none",
+    path: "/",
     maxAge: 60 * 60 * 24 * 7, // 1 week
   });
   return c.json({ message: "Login successful" ,user:user}, 200);
@@ -70,8 +71,7 @@ authRouter.post("/register", async (c) => {
     return c.text("User already exists", 409);
   }
 
-  //const data = await send_otp_onemil(email,"123456789");
-  //console.log("Email send data:", data);
+  
   
   const hashed_password = await hash_password(password);
   const user = await create_user({
@@ -86,7 +86,11 @@ authRouter.post("/register", async (c) => {
     userId: user._id.toString()
   }, process.env.JWT_SECRET as string);
   setCookie(c, "jwt_token", jwt_token, {
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,// 1 week
   });
   //const otp = await genarateotp(user._id.toString());
   //console.log("Generated OTP:", otp);
@@ -94,7 +98,11 @@ authRouter.post("/register", async (c) => {
   await asine_sesion_to_user(user._id, token);
 
   setCookie(c, "session_token", token, {
-    maxAge: 60 * 60 * 24 * 7, // 1 week
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,// 1 week
   });
   return c.json({ message: "User Registration successful",user:user}, 201);
 });
