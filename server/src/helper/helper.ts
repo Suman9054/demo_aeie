@@ -91,12 +91,12 @@ export const send_otp_onemil= async (to: string, otp: string,) => {
 
 export const genarateotp= async(userId:string)=>{
   const hash = await Bun.password.hash(userId+Date.now().toString()+crypto.randomUUID());
-  const otp = hash.slice(0,10).toUpperCase();
+  const otp = hash.slice(0,20);
   const url = "https://aeie-club-server-rxj0.onrender.com/verify/email/"+otp;
 return {otp,url};
 }
 export const verifyotp= async(token:string)=>{
- const respons = await verificationmodel.findOne({value:token,$expr: { $gt: [ "$expiresAt", new Date() ] }}).populate("user");
+ const respons = await verificationmodel.findOne({value:token, expireAt:{$gt: new Date()}}).populate("user");
  return respons;
 
 }

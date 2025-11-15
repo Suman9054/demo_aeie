@@ -47,7 +47,7 @@ app.get("/verify/email/:token", async (c) => {
   const { token } = c.req.param();
   const res = await verifyotp(token);
   if (!res) {
-    return c.text("Invalid or expired token", 400);
+    return c.json({message:"Invalid or expired token",err:res}, 400);
   }
   await usermodel.findByIdAndUpdate(res.user, { varified: true });
   return c.redirect("https://aeiehit.onrender.com/user");
