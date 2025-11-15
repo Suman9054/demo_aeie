@@ -71,7 +71,7 @@ export const image_upload = async (file: File) => {
 
 export const send_otp_onemil= async (to: string, otp: string,) => {
  const{data,error}= await resend.emails.send({
-    from: " aeie-hit <no-reply@aeie-hit.com>",
+    from: " aeie-hit <sh575386@gmail.com>",
     to: [to],
     subject: "Your OTP Code",
     html: `<html>
