@@ -7,6 +7,10 @@ export const authverify = async () => {
     return {};
   } catch (err) {
     console.error("JWT invalid:", err);
-    throw redirect({ to: "/auth/login" });
+    throw redirect({ to: "/auth/login",
+      search:{
+        redirect:location.href.split(location.origin)[1],
+      }
+     });
   }
 };

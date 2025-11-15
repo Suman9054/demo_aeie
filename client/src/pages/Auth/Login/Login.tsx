@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { api_client } from "../../../utils/axiosclient/axios";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 
 interface FormData {
   email: string;
@@ -22,6 +22,11 @@ export default function LoginForm(): React.JSX.Element {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+  const search = useSearch({
+    from: "/auth/login",
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -81,6 +86,12 @@ export default function LoginForm(): React.JSX.Element {
           },
         
       );
+      if (respons && respons.status === 200) {
+      navigate({
+        to: search.redirect||"/",
+        replace:true,
+      })
+      }
       if (!respons) {
         setErrors({ general: "Login failed. Please try again." });
         setFormData({

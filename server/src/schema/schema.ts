@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import type { UserReturnSchema } from "../types/type";
 
+
 const userSchema: Schema = new Schema<UserReturnSchema>(
   {
     username: {
@@ -117,7 +118,28 @@ const sesionSchema: Schema = new Schema({
   },
 });
 
+const verificationschema:Schema = new Schema({
+
+  user:{
+    type:Schema.Types.ObjectId,
+    required:true,
+  },
+  value:{
+    type:String,
+    required: true
+  },
+  createdAt:{
+    type:Date,
+    default:Date.now,
+  },
+  expireAt:{
+    type:Date,
+    default: () => new Date(Date.now() + 60 * 60 * 1000), // 1 hour from now
+  }
+})
+
 export const usermodel = model<UserReturnSchema>("User", userSchema);
 export const eventmodel = model("Event", eventSchema);
 export const registrationmodel = model("Registration_data", registrationSchema);
 export const sessionmodel = model("Session", sesionSchema);
+export const verificationmodel = model("Email_verification",verificationschema);
