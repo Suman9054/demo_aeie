@@ -2,6 +2,7 @@ import type z from "zod";
 import { auth_user_by_sesion } from "../db/db";
 import { Resend } from "resend";
 import ImageKit from "imagekit";
+import { verificationmodel } from "../schema/schema";
 
 const imagekit = new ImageKit({
   publicKey: "public_qW9ugAdhoqs9mwvVOHR5xo6oGJk=",
@@ -70,26 +71,32 @@ export const image_upload = async (file: File) => {
 
 export const send_otp_onemil= async (to: string, otp: string,) => {
  const{data,error}= await resend.emails.send({
-    from: "onemil aeie ",
+    from: "onemil aeie-hit ",
     to: [to],
     subject: "Your OTP Code",
     html: `<html>
     <body>
-      <h1>Your OTP Code</h1>
-      <p>Your OTP code is: <strong>${otp}</strong></p>
-      <p>This code is valid for 10 minutes.</p>
+      <h1>hi well come to aeie-hit</h1>
+      <p>verify link: <strong>${otp}</strong></p>
+      <p>This code is valid for 60 minutes.</p>
     </body>
   </html>`,
   });
   if(error){
     console.log("Error sending OTP email:", error);
+    return error;
   }
   return data;
 }
 
 export const genarateotp= async(userId:string)=>{
-  const hash = await Bun.password.hash(userId+Date.now().toString());
-  const otp = hash.slice(0,6).toUpperCase();
-  return otp;
+  const hash = await Bun.password.hash(userId+Date.now().toString()+crypto.randomUUID());
+  const otp = hash.slice(0,10).toUpperCase();
+  const url = "https://aeie-club-server-rxj0.onrender.com/verify/email?token="+otp;
+ return url;
 }
-const verifyotp= async(userId:string,otp:string,hash:string)=>{}
+export const verifyotp= async(token:string)=>{
+ const respons = await verificationmodel.findOne({value:token});
+ return respons;
+
+}

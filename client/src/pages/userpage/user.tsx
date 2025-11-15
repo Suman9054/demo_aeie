@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Calendar, LogOut, AlertCircle, CheckCircle, X } from "lucide-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api_client } from "../../utils/axiosclient/axios";
+import { useNavigate } from "@tanstack/react-router";
 
 export interface Event {
   _id: string;
@@ -39,19 +40,16 @@ export default function UserPage(): React.JSX.Element {
     }, 4000);
   };
 
-  const clearAllCookies = () => {
-    window.document.cookie.split(";").forEach((cookie) => {
-      const name = cookie.split("=")[0].trim();
-      console.log("coocky", name);
-      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
-    });
-  };
-  const handleLogout = () => {
-    clearAllCookies();
-    addNotification("Logged out successfully!", "info");
-    setTimeout(() => {
-      alert("Redirecting to login page...");
-    }, 1000);
+ const naqvigation = useNavigate();
+
+  const handleLogout = async () => {
+   const ok= await api_client.delete("/api/logout");
+   if(ok.status===200){
+    addNotification("Logged out successfully", "success");
+    naqvigation({ to: "/" });
+   }else{
+    addNotification("Logout failed", "error");
+   }
   };
 
   const getuserevents = async (): Promise<Event[]> => {

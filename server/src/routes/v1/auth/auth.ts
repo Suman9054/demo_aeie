@@ -11,8 +11,10 @@ import {
 } from "../../../db/db";
 import {
   
+  genarateotp,
   hash_password,
   make_new_sesion_token,
+  send_otp_onemil,
   verify_hash,
 } from "../../../helper/helper";
 import { setCookie } from "hono/cookie";
@@ -61,7 +63,7 @@ authRouter.post("/login", async (c) => {
 });
 
 authRouter.post("/register", async (c) => {
-  const { username, password, email } = await
+  try {const { username, password, email } = await
     c.req.json() as unknown as user_registration_schema;
   if (!username || !password || !email) {
     return c.text("Username, password, and email are required", 400);
@@ -82,6 +84,11 @@ authRouter.post("/register", async (c) => {
   if (!user) {
     return c.text("Failed to create user", 500);
   }
+  const otp = await genarateotp(user._id.toString());
+  
+  await send_otp_onemil(email, otp);
+  
+
   const jwt_token = await sign({
     userId: user._id.toString()
   }, process.env.JWT_SECRET as string);
@@ -92,8 +99,7 @@ authRouter.post("/register", async (c) => {
     path: "/",
     maxAge: 60 * 60 * 24 * 7,// 1 week
   });
-  //const otp = await genarateotp(user._id.toString());
-  //console.log("Generated OTP:", otp);
+  
   const token = make_new_sesion_token();
   await asine_sesion_to_user(user._id, token);
 
@@ -105,6 +111,9 @@ authRouter.post("/register", async (c) => {
     maxAge: 60 * 60 * 24 * 7,// 1 week
   });
   return c.json({ message: "User Registration successful",user:user}, 201);
+} catch (e) {
+  return c.json({ message: "Internal Server Error" }, 500);
+}
 });
 
 

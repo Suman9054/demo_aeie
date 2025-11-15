@@ -14,21 +14,28 @@ export default function Footer_layout(): React.JSX.Element {
       <div className="bg-slate-600 h-1 w-full rounded-lg "></div>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         {/* Section 1: Logos */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-1 ">
           <img
-            src="/logo1.png"
+            src="/logotrans1.png"
             alt="Logo 1"
             className="w-14 h-14 object-contain"
           />
           <img
-            src="/logo2.png"
+            src="/hrizan.png"
             alt="Logo 2"
             className="w-14 h-14 object-contain"
           />
+
+           <img
+            src="isa.png"
+            alt="Logo 3"
+            className="w-14 h-14 object-contain"
+          />
+
         </div>
 
         {/* Section 2: Description */}
-        <div className="text-center md:text-left max-w-md text-sm font-light leading-relaxed">
+        <div className="text-center md:text-left max-w-md text-sm font-light leading-relaxed p-1">
           <p>
             The Department of Applied Electronics & Instrumentation Engineering
             is dedicated to nurturing innovation and excellence in embedded

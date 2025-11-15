@@ -102,6 +102,7 @@ const LoginRoute = createRoute({
   getParentRoute: () => AuthRootrout,
   path: "/login",
   component: LoginForm,
+  validateSearch:(s:{redirect?:string})=>s,
 });
 
 const RegistrationRoute = createRoute({
