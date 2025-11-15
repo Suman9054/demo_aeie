@@ -19,6 +19,7 @@ import {
 } from "../../../helper/helper";
 import { setCookie } from "hono/cookie";
 import { sign } from "hono/jwt";
+import { verificationmodel } from "../../../schema/schema";
 
 const authRouter = new Hono();
 
@@ -86,7 +87,11 @@ authRouter.post("/register", async (c) => {
   }
   const otp = await genarateotp(user._id.toString());
   
-  await send_otp_onemil(email, otp);
+  await send_otp_onemil(email, otp.url);
+  await verificationmodel.create({
+    user:user._id,
+    value:otp.otp,
+  });
   
 
   const jwt_token = await sign({

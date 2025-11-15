@@ -71,7 +71,7 @@ export const image_upload = async (file: File) => {
 
 export const send_otp_onemil= async (to: string, otp: string,) => {
  const{data,error}= await resend.emails.send({
-    from: "onemil aeie-hit ",
+    from: " aeie-hit <no-reply@aeie-hit.com>",
     to: [to],
     subject: "Your OTP Code",
     html: `<html>
@@ -93,10 +93,10 @@ export const genarateotp= async(userId:string)=>{
   const hash = await Bun.password.hash(userId+Date.now().toString()+crypto.randomUUID());
   const otp = hash.slice(0,10).toUpperCase();
   const url = "https://aeie-club-server-rxj0.onrender.com/verify/email?token="+otp;
- return url;
+return {otp,url};
 }
 export const verifyotp= async(token:string)=>{
- const respons = await verificationmodel.findOne({value:token});
+ const respons = await verificationmodel.findOne({value:token,$expr: { $gt: [ "$expiresAt", new Date() ] }}).populate("user");
  return respons;
 
 }

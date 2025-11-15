@@ -7,6 +7,7 @@ import { cors } from "hono/cors";
 import registrationRouter from "./routes/v1/registration/registration";
 import { deleteCookie } from "hono/cookie";
 import { verifyotp } from "./helper/helper";
+import { usermodel } from "./schema/schema";
 
 
 const app = new Hono();
@@ -42,12 +43,17 @@ app.delete("/api/logout", (c) => {
 });
 
 app.get("/verify/email/:token", async (c) => {
+  try {
   const { token } = c.req.param();
   const res = await verifyotp(token);
   if (!res) {
     return c.text("Invalid or expired token", 400);
   }
-  return c.redirect("https://aeiehit.onrender.com/login");
+  await usermodel.findByIdAndUpdate(res.user, { varified: true });
+  return c.redirect("https://aeiehit.onrender.com/user");
+  } catch (error) {
+    return c.text("Server error",500);
+  }
 });
 // Routes
 app.route("/api/v1/event", event_route);
