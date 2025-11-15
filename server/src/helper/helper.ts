@@ -91,7 +91,7 @@ export const send_otp_onemil= async (to: string, otp: string,) => {
 
 export const genarateotp= async(userId:string)=>{
   const hash = await Bun.password.hash(userId+Date.now().toString()+crypto.randomUUID());
-  const otp = hash.slice(0,20).toUpperCase();
+  const otp = hash.slice(0,20);
   const url = "https://aeie-club-server-rxj0.onrender.com/verify/email/"+otp;
 return {otp,url};
 }
