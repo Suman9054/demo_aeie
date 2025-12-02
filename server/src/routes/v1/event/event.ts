@@ -66,7 +66,7 @@ event_route.post("/create/new/event", admin_verify_middleware, async (c) => {
 
     // Extract files
     const poster_ = form.get("poster_");
-    const vedio_ = form.get("vedio_");
+    const scaner_ = form.get("scaner_");
 
     
     const parsed = neweventschema.safeParse({
@@ -76,7 +76,7 @@ event_route.post("/create/new/event", admin_verify_middleware, async (c) => {
       lastdate,
       event_type,
       poster_,
-      vedio_,
+      scaner_,
     });
 
     if (!parsed.success) {
@@ -93,7 +93,7 @@ event_route.post("/create/new/event", admin_verify_middleware, async (c) => {
       lastdate: pLastdate,
       event_type: pEventType,
       poster_: pPoster,
-      vedio_: pVedio,
+      scaner_: pVedio,
     } = parsed.data;
 
    
@@ -115,7 +115,7 @@ event_route.post("/create/new/event", admin_verify_middleware, async (c) => {
       lastdate: pLastdate,
       event_type: pEventType,
       poster_url: img_url,
-      vedio_url: video_url,
+      scaner_url: video_url,
     });
 
     if (!new_event) {
@@ -179,7 +179,7 @@ event_route.put("/update/event", admin_verify_middleware, async (c) => {
       lastdate: pLastdate,
       event_type: pEventType,
       poster_: pPoster,
-      vedio_: pVedio,
+      scaner_: pVedio,
     } = prased.data;
   let poster_url: string | undefined;
   let vedio_url: string | undefined;

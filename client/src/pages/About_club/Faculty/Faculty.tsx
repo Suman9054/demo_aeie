@@ -62,14 +62,14 @@ const cardVariants: Variants = {
 const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
   return (
     <motion.div
-      className="relative group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 overflow-hidden border border-gray-200 hover:border-blue-300 cursor-pointer"
+      className="relative group bg-emerald-300/2000 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 overflow-hidden border border-gray-400 hover:border-blue-300 cursor-pointer"
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-300/200 to-purple-400/1000 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
 
       {/* Card Content */}
       <div className="relative p-6 z-10">
@@ -111,8 +111,8 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
 
 export default function ProfessorsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-12">
+    <div className="min-h-screen  py-16 px-6">
+      <h1 className="text-3xl font-bold text-center  mb-12">
         Meet Our Professors
       </h1>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

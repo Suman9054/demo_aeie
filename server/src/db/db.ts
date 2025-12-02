@@ -128,6 +128,8 @@ export const Creat_new_event = async (
       lastdate: event_data.lastdate,
       poster_url: event_data.poster_url,
       event_type: event_data.event_type,
+      fees: event_data.fees,
+      scaner_url: event_data.scaner_url,
     });
     return event;
   } catch (e) {
