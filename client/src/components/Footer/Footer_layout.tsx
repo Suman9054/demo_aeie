@@ -27,7 +27,7 @@ export default function Footer_layout(): React.JSX.Element {
           />
 
            <img
-            src="isa.png"
+            src="/isa.png"
             alt="Logo 3"
             className="w-14 h-14 object-contain"
           />

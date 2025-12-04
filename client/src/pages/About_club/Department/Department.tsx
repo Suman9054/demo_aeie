@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Department(): JSX.Element {
   return (
-    <div className="max-h-screen max-w-screen text justify-center items-center mx-auto">
+    <div className="max-h-screen max-w-screen text justify-center items-center mx-auto overflow-scroll p-20">
       <motion.h2
         className="text-2xl font-bold mb-4 text-center text-amber-300"
         initial={{ opacity: 0, y: -50 }}
@@ -31,7 +31,7 @@ export default function Department(): JSX.Element {
       <br />
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 p-2"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 p-2 overflow-scroll"
         initial="hidden"
         animate="visible"
         variants={{
