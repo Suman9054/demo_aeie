@@ -54,7 +54,7 @@ const professorsData: Professor[] = [
       "Embedded Systems",
       "Microprocessor & Microcontroller",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/soumya_20sir.jpg?updatedAt=1755281955074",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/soumya_20roy.jpg?updatedAt=1755282391825",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -68,7 +68,7 @@ const professorsData: Professor[] = [
       "Linear Control Theory",
       "Nonlinear Control System"
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/anirban_20sir.jpg?updatedAt=1755281954863",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/asim_20sir.jpg?updatedAt=1755282354543",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -82,7 +82,7 @@ const professorsData: Professor[] = [
       "Machine Learning",
       "Embedded Systems"
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/asim_20sir.jpg?updatedAt=1755281955001",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/madhumita_20mam.jpg?updatedAt=1755282390675",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -96,7 +96,7 @@ const professorsData: Professor[] = [
       "Digital Signal Processing and Medical Image Processing"
      
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/madhumita_20madam.jpg?updatedAt=1755281954935",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/maumita_20mam.gif?updatedAt=1755282308537",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -110,7 +110,7 @@ const professorsData: Professor[] = [
       "Power Electronics",
       
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanka_20madam.jpg?updatedAt=1755281954907",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/rohan_20sir.jpg?updatedAt=1755282287946",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -123,7 +123,7 @@ const professorsData: Professor[] = [
       "Networking",
       "Image Processing",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/rituparna_20madam.jpg?updatedAt=1755281954851",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanko_20sir.jpg?updatedAt=1755282263659",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -136,7 +136,7 @@ const professorsData: Professor[] = [
       "Power Plant Instrumentation",
       "Advanced Process Control",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/rohan_20sir.jpg?updatedAt=1755281955044",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/somak_20sir.jpg?updatedAt=1755282240620",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -149,7 +149,7 @@ const professorsData: Professor[] = [
       "Digital Electronics",
       "Microprocessor & Microcontroller",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/moumita_20madam.jpg?updatedAt=1755281954970",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/saurabh_20sir.png?updatedAt=1755282220710",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -162,7 +162,7 @@ const professorsData: Professor[] = [
       "Renewable Energy",
       
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/uday_20sir.jpg?updatedAt=1755281955101",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/sweta_20mam.png?updatedAt=1755282200052",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -174,7 +174,7 @@ const professorsData: Professor[] = [
       "Basic Electronics",
       " Industrial Instrumentation",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/debadatta_20sir.jpg?updatedAt=1755281954817",
+    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanka_20mam.jpg?updatedAt=1755282178094",
     department: "Applied Electronics and Instrumentation Engineering",
   }
 
