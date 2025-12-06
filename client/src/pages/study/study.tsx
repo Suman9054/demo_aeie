@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import {
   BookOpen,
   FileText,
-  Download,
   ChevronRight,
-  Database,
   Layout,
   Magnet,
   Server,
-  Globe,
   Cpu,
   Book,
   ArrowRight,
