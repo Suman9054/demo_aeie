@@ -22,7 +22,7 @@ const colorThemes = {
     text: "#F1F5F9",
     textSecondary: "#94A3B8",
     hover: "#334155",
-    active: "#475569"
+    active: "#475569",
   },
   "blue-purple": {
     colors: ["#3B82F6", "#6366F1", "#8B5CF6", "#A855F7", "#D946EF"],
@@ -31,63 +31,68 @@ const colorThemes = {
     text: "#E2E8F0",
     textSecondary: "#A1A1AA",
     hover: "#2D2B4A",
-    active: "#3D3B5A"
+    active: "#3D3B5A",
   },
-  "electric": {
+  electric: {
     colors: ["#06B6D4", "#3B82F6", "#6366F1", "#8B5CF6", "#EC4899"],
     background: "#0A0A0A",
     sidebar: "#1C1C1E",
     text: "#FFFFFF",
     textSecondary: "#A1A1A6",
     hover: "#2C2C2E",
-    active: "#3A3A3C"
+    active: "#3A3A3C",
   },
-  "academic": {
+  academic: {
     colors: ["#1E40AF", "#3B82F6", "#6366F1", "#8B5CF6", "#A855F7"],
     background: "#0F1419",
     sidebar: "#1E2A47",
     text: "#E1E8F0",
     textSecondary: "#9CA3AF",
     hover: "#2C3E50",
-    active: "#34495E"
+    active: "#34495E",
   },
-  "neon": {
+  neon: {
     colors: ["#00F5FF", "#1E90FF", "#9932CC", "#FF1493", "#FF4500"],
     background: "#0D1117",
     sidebar: "#161B22",
     text: "#F0F6FC",
     textSecondary: "#8B949E",
     hover: "#21262D",
-    active: "#30363D"
-  }
+    active: "#30363D",
+  },
 };
 
-export default function Slidenaebar({ navItems, theme = "deep-tech" }: SlidenaebarProps) {
+export default function Slidenaebar({
+  navItems,
+  theme = "deep-tech",
+}: SlidenaebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { height } = useDimensions(containerRef);
   const currentTheme = colorThemes[theme];
 
   return (
-   
-      <motion.nav
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        custom={height}
-        ref={containerRef}
-        style={nav}
-      >
-        <motion.div
-          style={{
-            ...background,
-            background: `linear-gradient(145deg, ${currentTheme.sidebar} 0%, ${currentTheme.active} 100%)`
-          }}
-          variants={sidebarVariants}
-        />
-        <Navigation navItems={navItems} theme={currentTheme} />
-        <MenuToggle toggle={() => setIsOpen(!isOpen)} theme={currentTheme} />
-      </motion.nav>
-   
+    <motion.nav
+      initial={false}
+      animate={isOpen ? "open" : "closed"}
+      custom={height}
+      ref={containerRef}
+      style={{
+        ...nav,
+        pointerEvents: isOpen ? "auto" : "none",
+      }}
+    >
+      <motion.div
+        style={{
+          ...background,
+          display: isOpen ? "block" : "none",
+          backgroundColor: currentTheme.sidebar,
+        }}
+        variants={sidebarVariants}
+      />
+      <Navigation navItems={navItems} theme={currentTheme} />
+      <MenuToggle toggle={() => setIsOpen(!isOpen)} theme={currentTheme} />
+    </motion.nav>
   );
 }
 
@@ -100,22 +105,22 @@ const navVariants: Variants = {
   },
 };
 
-const Navigation = ({ 
-  navItems, 
-  theme 
-}: { 
-  navItems: NavItem[]; 
-  theme: typeof colorThemes["deep-tech"];
+const Navigation = ({
+  navItems,
+  theme,
+}: {
+  navItems: NavItem[];
+  theme: (typeof colorThemes)["deep-tech"];
 }) => (
   <motion.ul style={list} variants={navVariants}>
     {navItems.map((item, i) => (
-      <MenuItem 
-        i={i} 
-        to={item.to} 
-        label={item.label} 
+      <MenuItem
+        i={i}
+        to={item.to}
+        label={item.label}
         icon={item.icon}
         theme={theme}
-        key={i} 
+        key={i}
       />
     ))}
   </motion.ul>
@@ -143,13 +148,13 @@ const MenuItem = ({
   to,
   label,
   icon,
-  theme
+  theme,
 }: {
   i: number;
   to: string;
   label: string;
   icon?: React.ReactNode;
-  theme: typeof colorThemes["deep-tech"];
+  theme: (typeof colorThemes)["deep-tech"];
 }) => {
   const borderColor = theme.colors[i % theme.colors.length];
   const [isHovered, setIsHovered] = useState(false);
@@ -163,17 +168,20 @@ const MenuItem = ({
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Link to={to} className="flex items-center gap-4 w-full p-2 rounded-lg transition-all duration-300">
-        <motion.div 
+      <Link
+        to={to}
+        className="flex items-center gap-4 w-full p-2 rounded-lg transition-all duration-300"
+      >
+        <motion.div
           style={{
             ...iconPlaceholder,
             border: `2px solid ${borderColor}`,
-            backgroundColor: isHovered ? borderColor : 'transparent',
-            boxShadow: isHovered ? `0 0 20px ${borderColor}40` : 'none'
+            backgroundColor: isHovered ? borderColor : "transparent",
+            boxShadow: isHovered ? `0 0 20px ${borderColor}40` : "none",
           }}
           animate={{
             rotate: isHovered ? 360 : 0,
-            scale: isHovered ? 1.1 : 1
+            scale: isHovered ? 1.1 : 1,
           }}
           transition={{ duration: 0.3 }}
         >
@@ -183,15 +191,15 @@ const MenuItem = ({
             </div>
           )}
         </motion.div>
-        <motion.span 
+        <motion.span
           style={{
             ...textPlaceholder,
             color: theme.text,
-            fontSize: '16px',
-            fontWeight: isHovered ? '600' : '400'
+            fontSize: "16px",
+            fontWeight: isHovered ? "600" : "400",
           }}
           animate={{
-            color: isHovered ? borderColor : theme.text
+            color: isHovered ? borderColor : theme.text,
           }}
           transition={{ duration: 0.2 }}
         >
@@ -226,7 +234,7 @@ interface PathProps {
   d?: string;
   variants: Variants;
   transition?: { duration: number };
-  theme: typeof colorThemes["deep-tech"];
+  theme: (typeof colorThemes)["deep-tech"];
 }
 
 const Path = ({ theme, ...props }: PathProps) => (
@@ -239,22 +247,25 @@ const Path = ({ theme, ...props }: PathProps) => (
   />
 );
 
-const MenuToggle = ({ 
-  toggle, 
-  theme 
-}: { 
-  toggle: () => void; 
-  theme: typeof colorThemes["deep-tech"];
+const MenuToggle = ({
+  toggle,
+  theme,
+}: {
+  toggle: () => void;
+  theme: (typeof colorThemes)["deep-tech"];
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.button 
+    <motion.button
       style={{
         ...toggleContainer,
-        backgroundColor: isHovered ? theme.hover : 'transparent',
+        backgroundColor: isHovered ? theme.hover : "transparent",
         border: `2px solid ${theme.colors[0]}`,
-        boxShadow: isHovered ? `0 0 15px ${theme.colors[0]}30` : 'none'
+        boxShadow: isHovered ? `0 0 15px ${theme.colors[0]}30` : "none",
+        top: 75,
+        left: 15,
+        pointerEvents: "auto",
       }}
       onClick={toggle}
       onHoverStart={() => setIsHovered(true)}
@@ -310,7 +321,7 @@ const background: React.CSSProperties = {
   bottom: 0,
   width: 320,
   backdropFilter: "blur(10px)",
-  borderRight: "1px solid rgba(255, 255, 255, 0.1)"
+  borderRight: "1px solid rgba(255, 255, 255, 0.1)",
 };
 
 const toggleContainer: React.CSSProperties = {
@@ -319,15 +330,13 @@ const toggleContainer: React.CSSProperties = {
   MozUserSelect: "none",
   cursor: "pointer",
   position: "absolute",
-  top: 18,
-  left: 15,
   width: 50,
   height: 50,
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  transition: "all 0.3s ease"
+  transition: "all 0.3s ease",
 };
 
 const list: React.CSSProperties = {
@@ -359,13 +368,13 @@ const iconPlaceholder: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  transition: "all 0.3s ease"
+  transition: "all 0.3s ease",
 };
 
 const textPlaceholder: React.CSSProperties = {
   flex: 1,
   transition: "all 0.2s ease",
-  fontFamily: "'Inter', sans-serif"
+  fontFamily: "'Inter', sans-serif",
 };
 
 const useDimensions = (ref: React.RefObject<HTMLDivElement | null>) => {

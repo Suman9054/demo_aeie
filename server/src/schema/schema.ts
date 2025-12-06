@@ -55,6 +55,12 @@ const eventSchema: Schema = new Schema(
     poster_url: {
       type: String,
     },
+    fees:{
+      type: Number,
+    },
+    scaner_url: {
+      type: String,
+    },
     event_type: {
       type: String,
       enum: ["event", "competition", "workshop"],

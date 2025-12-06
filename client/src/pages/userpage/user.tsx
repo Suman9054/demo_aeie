@@ -40,16 +40,16 @@ export default function UserPage(): React.JSX.Element {
     }, 4000);
   };
 
- const naqvigation = useNavigate();
+  const naqvigation = useNavigate();
 
   const handleLogout = async () => {
-   const ok= await api_client.delete("/api/logout");
-   if(ok.status===200){
-    addNotification("Logged out successfully", "success");
-    naqvigation({ to: "/" });
-   }else{
-    addNotification("Logout failed", "error");
-   }
+    const ok = await api_client.delete("/api/logout");
+    if (ok.status === 200) {
+      addNotification("Logged out successfully", "success");
+      naqvigation({ to: "/" });
+    } else {
+      addNotification("Logout failed", "error");
+    }
   };
 
   const getuserevents = async (): Promise<Event[]> => {

@@ -29,9 +29,10 @@ interface event_schema {
   description: string;
   date: string;
   lastdate: string;
+  fease?: number;
   poster_?: File | null;
   event_type: string;
-  vedio_?: File | null;
+  scaner_?: File | null;
 }
 
 const AdminDashboard: React.FC = () => {
@@ -48,7 +49,7 @@ const AdminDashboard: React.FC = () => {
     lastdate: "",
     poster_: null,
     event_type: "",
-    vedio_: null,
+    scaner_: null,
   });
   const quaryclient = useQueryClient();
   const getallevents = async (): Promise<Event[]> => {
@@ -69,7 +70,8 @@ const AdminDashboard: React.FC = () => {
       lastdate: "",
       poster_: null,
       event_type: "",
-      vedio_: null,
+      scaner_: null,
+      fease: undefined,
     });
     setEditingEvent(null);
   };
@@ -86,9 +88,10 @@ const AdminDashboard: React.FC = () => {
         payload.append("date", formData.date);
         payload.append("lastdate", formData.lastdate);
         payload.append("event_type", formData.event_type);
+        payload.append("fees", String(formData.fease));
 
         if (formData.poster_) payload.append("poster_", formData.poster_);
-        if (formData.vedio_) payload.append("vedio_", formData.vedio_);
+        if (formData.scaner_) payload.append("scaner_", formData.scaner_);
 
         await api_client.put("/api/v1/event/update/event", payload, {
           params: { id: editingEvent },
@@ -106,7 +109,7 @@ const AdminDashboard: React.FC = () => {
         payload.append("event_type", formData.event_type);
 
         if (formData.poster_) payload.append("poster_", formData.poster_);
-        if (formData.vedio_) payload.append("vedio_", formData.vedio_);
+        if (formData.scaner_) payload.append("scaner_", formData.scaner_);
 
         await api_client.post("/api/v1/event/create/new/event", payload, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -138,7 +141,7 @@ const AdminDashboard: React.FC = () => {
       lastdate: new Date(event.lastdate).toISOString().split("T")[0],
       poster_: null,
       event_type: event.event_type,
-      vedio_: null,
+      scaner_: null,
     });
     setShowForm(true);
   };
@@ -146,10 +149,9 @@ const AdminDashboard: React.FC = () => {
   const registrationsData = useQuery<Registration[]>({
     queryKey: ["registrations"],
     queryFn: async () => {
-      const res = await api_client.get(
-        "/api/v1//all/registration",
-        { params: { id: showRegistrations } }
-      );
+      const res = await api_client.get("/api/v1//all/registration", {
+        params: { id: showRegistrations },
+      });
       return res.data;
     },
   });
@@ -285,6 +287,15 @@ const AdminDashboard: React.FC = () => {
                 }
                 required
               />
+              <Input
+                label="Fees"
+                type="number"
+                value={formData.fease}
+                onChange={(e) =>
+                  setFormData({ ...formData, event_type: e.target.value })
+                }
+                required
+              />
             </div>
             <div className="flex gap-4">
               {/* Poster upload */}
@@ -302,13 +313,13 @@ const AdminDashboard: React.FC = () => {
 
               {/* Video upload */}
               <Input
-                label="Video"
+                label="scaner"
                 type="file"
-                accept="video/*"
+                accept="image/*"
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    vedio_: e.target.files?.[0] || null,
+                    scaner_: e.target.files?.[0] || null,
                   })
                 }
               />
@@ -346,14 +357,12 @@ const AdminDashboard: React.FC = () => {
         </Modal>
       )}
 
-      
       {showRegistrations && (
         <Modal onClose={() => setShowRegistrations(null)}>
           <h3 className="text-lg font-medium mb-2">
             Registrations for {registrationsData.data?.[0]?.event.title}
           </h3>
-          { registrationsData.data?.length === 0 ?
-          (
+          {registrationsData.data?.length === 0 ? (
             <p className="text-gray-600">No registrations yet.</p>
           ) : (
             <div className="space-y-2">
@@ -364,20 +373,22 @@ const AdminDashboard: React.FC = () => {
                 >
                   <div>
                     <p className="font-medium">{reg.user.username}</p>
-                    
+
                     <p className="text-sm text-gray-600">{reg.user.email}</p>
                     <p className="text-sm text-gray-600">{reg.phonnumber}</p>
                     <p className="text-sm text-gray-600">{reg.roolnumber}</p>
                     <p className="text-sm text-gray-600">{reg.department}</p>
                     <p className="text-sm text-gray-600">{reg.year}</p>
                   </div>
-                  <p className="text-sm text-gray-500">{reg.registrationDate.toLocaleTimeString()}</p>
+                  <p className="text-sm text-gray-500">
+                    {reg.registrationDate.toLocaleTimeString()}
+                  </p>
                 </div>
               ))}
             </div>
           )}
         </Modal>
-      )} 
+      )}
     </div>
   );
 };

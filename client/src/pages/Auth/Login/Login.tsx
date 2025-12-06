@@ -78,19 +78,15 @@ export default function LoginForm(): React.JSX.Element {
     setErrors({});
 
     try {
-      const respons = await api_client.post(
-        "/api/v1/auth/login",
-         {
-            email: formData.email,
-            password: formData.password,
-          },
-        
-      );
+      const respons = await api_client.post("/api/v1/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      });
       if (respons && respons.status === 200) {
-      navigate({
-        to: search.redirect||"/",
-        replace:true,
-      })
+        navigate({
+          to: search.redirect || "/",
+          replace: true,
+        });
       }
       if (!respons) {
         setErrors({ general: "Login failed. Please try again." });

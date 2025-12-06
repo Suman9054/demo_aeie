@@ -16,6 +16,8 @@ export const event_schema = z.object({
   lastdate: z.date(),
   poster_url: z.string().optional(),
   event_type: z.enum(["event", "competition", "workshop"]),
+  fees: z.number().optional(),
+  scaner_url: z.string().optional(),
 });
 
 export const upadate_event_shema = z.object({
@@ -24,6 +26,8 @@ export const upadate_event_shema = z.object({
   date: z.coerce.date().optional(),
   lastdate: z.coerce.date().optional(),
   poster_: z.any().optional(),
+  scaner_: z.any().optional(),
+  fees: z.number().optional(),
   event_type: z.enum(["event", "competition", "workshop"]).optional(),
   id: z.string().optional(),
 });
@@ -75,6 +79,8 @@ export const neweventschema = z.object({
   lastdate: z.coerce.date(),
   event_type: z.enum(["event", "competition", "workshop"]),
   poster_: z.any().optional() || null,
+  fees: z.number().optional(),
+  scaner_: z.any().optional() || null,
 });
 
 export type UserReturnSchema = z.infer<typeof user_return_schema>;
