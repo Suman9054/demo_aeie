@@ -149,10 +149,9 @@ const AdminDashboard: React.FC = () => {
   const registrationsData = useQuery<Registration[]>({
     queryKey: ["registrations"],
     queryFn: async () => {
-      const res = await api_client.get(
-        "/api/v1//all/registration",
-        { params: { id: showRegistrations } }
-      );
+      const res = await api_client.get("/api/v1//all/registration", {
+        params: { id: showRegistrations },
+      });
       return res.data;
     },
   });
@@ -358,14 +357,12 @@ const AdminDashboard: React.FC = () => {
         </Modal>
       )}
 
-      
       {showRegistrations && (
         <Modal onClose={() => setShowRegistrations(null)}>
           <h3 className="text-lg font-medium mb-2">
             Registrations for {registrationsData.data?.[0]?.event.title}
           </h3>
-          { registrationsData.data?.length === 0 ?
-          (
+          {registrationsData.data?.length === 0 ? (
             <p className="text-gray-600">No registrations yet.</p>
           ) : (
             <div className="space-y-2">
@@ -376,20 +373,22 @@ const AdminDashboard: React.FC = () => {
                 >
                   <div>
                     <p className="font-medium">{reg.user.username}</p>
-                    
+
                     <p className="text-sm text-gray-600">{reg.user.email}</p>
                     <p className="text-sm text-gray-600">{reg.phonnumber}</p>
                     <p className="text-sm text-gray-600">{reg.roolnumber}</p>
                     <p className="text-sm text-gray-600">{reg.department}</p>
                     <p className="text-sm text-gray-600">{reg.year}</p>
                   </div>
-                  <p className="text-sm text-gray-500">{reg.registrationDate.toLocaleTimeString()}</p>
+                  <p className="text-sm text-gray-500">
+                    {reg.registrationDate.toLocaleTimeString()}
+                  </p>
                 </div>
               ))}
             </div>
           )}
         </Modal>
-      )} 
+      )}
     </div>
   );
 };

@@ -27,7 +27,6 @@ export default function Department(): JSX.Element {
         (OBE) structure...
       </motion.p>
 
-     
       <br />
 
       <motion.div

@@ -33,7 +33,7 @@ const EventsPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<
     "allevents" | "nearest" | "latest"
   >("allevents");
- 
+
   const getAllEvents = async (): Promise<Event[]> => {
     const res = await api_client.get<Event[]>("/api/v1/event/allevents");
     return res.data;
@@ -73,7 +73,7 @@ const EventsPage: React.FC = () => {
     isLoading = allEventsQuery.isLoading;
   } else if (activeFilter === "nearest") {
     data = nearestEventsQuery.data;
-   isLoading = nearestEventsQuery.isLoading;
+    isLoading = nearestEventsQuery.isLoading;
   } else if (activeFilter === "latest") {
     data = newestEventsQuery.data;
     isLoading = newestEventsQuery.isLoading;
@@ -83,13 +83,11 @@ const EventsPage: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black">
-     
       <div className="pt-8">
         <Slideshow images={slideevents} />
       </div>
 
       <div className="w-full flex flex-col py-12 items-center">
-       
         <div className="flex justify-center space-x-4 mb-12">
           <button
             onClick={() => setActiveFilter("allevents")}
@@ -125,7 +123,6 @@ const EventsPage: React.FC = () => {
           </button>
         </div>
 
-       
         <div className="max-w-6xl mx-auto space-y-8 px-4 w-full">
           {isLoading ? (
             <Loader />
@@ -139,7 +136,6 @@ const EventsPage: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative flex">
-                    
                     <div className="relative overflow-hidden">
                       <img
                         src={event.poster_url}
@@ -149,7 +145,6 @@ const EventsPage: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20"></div>
                     </div>
 
-                   
                     <div className="flex-1 p-8 flex flex-col justify-between relative z-10">
                       <div>
                         <span className="inline-block px-4 py-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 backdrop-blur-sm border border-teal-400/30 text-teal-300 rounded-full text-xs font-medium mb-4">
@@ -164,13 +159,12 @@ const EventsPage: React.FC = () => {
 
                         <p className="flex items-center">
                           <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
-                          
+
                           {new Date(event.date).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
 
-                   
                     <div className="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                       <button
                         onClick={() => {

@@ -102,7 +102,7 @@ const LoginRoute = createRoute({
   getParentRoute: () => AuthRootrout,
   path: "/login",
   component: LoginForm,
-  validateSearch:(s:{redirect?:string})=>s,
+  validateSearch: (s: { redirect?: string }) => s,
 });
 
 const RegistrationRoute = createRoute({
@@ -142,13 +142,11 @@ const routeTree = rootRoute.addChildren([
 
 const router = createRouter({ routeTree });
 
-
-  declare module "@tanstack/react-router" {
+declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
 }
- 
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

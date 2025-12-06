@@ -1,7 +1,13 @@
 import React from "react";
-import { motion,  } from "framer-motion";
-import { GraduationCap, Mail, Linkedin, BookOpen, Sparkles } from "lucide-react";
-import type{ Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import {
+  GraduationCap,
+  Mail,
+  Linkedin,
+  BookOpen,
+  Sparkles,
+} from "lucide-react";
+import type { Variants } from "framer-motion";
 
 // --- Types ---
 interface Professor {
@@ -27,7 +33,8 @@ const professorsData: Professor[] = [
       "Digital Signal Processing",
       "Biomedical Signals",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/hod%20sir.jpg?updatedAt=1754924385305",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -41,7 +48,8 @@ const professorsData: Professor[] = [
       "Power Electronics",
       "Signal Processing",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/dg_20sir.jpg?updatedAt=1755281954881",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/dg_20sir.jpg?updatedAt=1755281954881",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -54,7 +62,8 @@ const professorsData: Professor[] = [
       "Embedded Systems",
       "Microprocessor & Microcontroller",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/soumya_20roy.jpg?updatedAt=1755282391825",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/soumya_20roy.jpg?updatedAt=1755282391825",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -66,9 +75,10 @@ const professorsData: Professor[] = [
       "Analog Electronics",
       "Field Theory",
       "Linear Control Theory",
-      "Nonlinear Control System"
+      "Nonlinear Control System",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/asim_20sir.jpg?updatedAt=1755282354543",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/asim_20sir.jpg?updatedAt=1755282354543",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -80,9 +90,10 @@ const professorsData: Professor[] = [
       "Digital Signal Processing",
       "Image Processing",
       "Machine Learning",
-      "Embedded Systems"
+      "Embedded Systems",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/madhumita_20mam.jpg?updatedAt=1755282390675",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/madhumita_20mam.jpg?updatedAt=1755282390675",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -93,10 +104,10 @@ const professorsData: Professor[] = [
     fieldsOfResearch: [
       "Circuit Theory",
       "Measurement",
-      "Digital Signal Processing and Medical Image Processing"
-     
+      "Digital Signal Processing and Medical Image Processing",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/maumita_20mam.gif?updatedAt=1755282308537",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/maumita_20mam.gif?updatedAt=1755282308537",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -108,9 +119,9 @@ const professorsData: Professor[] = [
       "Biomedical signal Processing",
       "Sensors and Transducers",
       "Power Electronics",
-      
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/rohan_20sir.jpg?updatedAt=1755282287946",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/rohan_20sir.jpg?updatedAt=1755282287946",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -123,7 +134,8 @@ const professorsData: Professor[] = [
       "Networking",
       "Image Processing",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanko_20sir.jpg?updatedAt=1755282263659",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/priyanko_20sir.jpg?updatedAt=1755282263659",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -136,7 +148,8 @@ const professorsData: Professor[] = [
       "Power Plant Instrumentation",
       "Advanced Process Control",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/somak_20sir.jpg?updatedAt=1755282240620",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/somak_20sir.jpg?updatedAt=1755282240620",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -149,7 +162,8 @@ const professorsData: Professor[] = [
       "Digital Electronics",
       "Microprocessor & Microcontroller",
     ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/saurabh_20sir.png?updatedAt=1755282220710",
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/saurabh_20sir.png?updatedAt=1755282220710",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -157,12 +171,9 @@ const professorsData: Professor[] = [
     name: "Mrs. Sweta Bijali Maity",
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
-    fieldsOfResearch: [
-      "Basic Electronics",
-      "Renewable Energy",
-      
-    ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/sweta_20mam.png?updatedAt=1755282200052",
+    fieldsOfResearch: ["Basic Electronics", "Renewable Energy"],
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/sweta_20mam.png?updatedAt=1755282200052",
     department: "Applied Electronics and Instrumentation Engineering",
   },
   {
@@ -170,17 +181,11 @@ const professorsData: Professor[] = [
     name: "Mrs. Priyanka Rakshit Sarkar",
     qualification: "M.Tech, B.Tech",
     designation: "Assistant Professor",
-    fieldsOfResearch: [
-      "Basic Electronics",
-      " Industrial Instrumentation",
-    ],
-    image: "https://ik.imagekit.io/AEIE/aeie_media/priyanka_20mam.jpg?updatedAt=1755282178094",
+    fieldsOfResearch: ["Basic Electronics", " Industrial Instrumentation"],
+    image:
+      "https://ik.imagekit.io/AEIE/aeie_media/priyanka_20mam.jpg?updatedAt=1755282178094",
     department: "Applied Electronics and Instrumentation Engineering",
-  }
-
-
-
-
+  },
 ];
 
 // --- Animation Variants ---
@@ -221,7 +226,12 @@ const GridPattern = () => (
         <path d="M.5 40V.5H40" fill="none" />
       </pattern>
     </defs>
-    <rect width="100%" height="100%" strokeWidth={0} fill="url(#grid-pattern)" />
+    <rect
+      width="100%"
+      height="100%"
+      strokeWidth={0}
+      fill="url(#grid-pattern)"
+    />
   </svg>
 );
 
@@ -242,32 +252,33 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
     >
       {/* Card Container */}
       <div className="relative h-full overflow-hidden rounded-3xl border border-white/20 bg-white/70 backdrop-blur-xl dark:bg-slate-900/60 dark:border-white/10 shadow-xl transition-all duration-500 hover:shadow-indigo-500/20 hover:-translate-y-2">
-        
         {/* Top Decorative Banner */}
         <div className="h-24 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Image Container */}
         <div className="flex justify-center -mt-12 px-6">
-          <motion.div 
+          <motion.div
             className="relative rounded-full p-1.5 bg-white dark:bg-slate-900 shadow-lg"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-indigo-100 dark:border-indigo-900">
-               <img
+              <img
                 src={professor.image}
                 alt={professor.name}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
             </div>
             {/* Status Indicator */}
-            <div className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white dark:border-slate-900 rounded-full z-10" title="Active Faculty" />
+            <div
+              className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white dark:border-slate-900 rounded-full z-10"
+              title="Active Faculty"
+            />
           </motion.div>
         </div>
 
         {/* Content */}
         <div className="p-6 pt-4 text-center">
-          
           {/* Name & Role */}
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
             {professor.name}
@@ -275,7 +286,7 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
           <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-2">
             {professor.designation}
           </p>
-          
+
           {/* Qualifications */}
           <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 mb-6 bg-slate-100 dark:bg-slate-800/50 py-1.5 px-3 rounded-full mx-auto w-fit">
             <GraduationCap className="w-3.5 h-3.5" />
@@ -303,9 +314,9 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
 
           {/* Action Footer (Visual Only) */}
           <div className="flex justify-center gap-4 pt-2">
-             <SocialBtn icon={<Mail size={16} />} label="Email" />
-             <SocialBtn icon={<Linkedin size={16} />} label="LinkedIn" />
-             <SocialBtn icon={<BookOpen size={16} />} label="Publications" />
+            <SocialBtn icon={<Mail size={16} />} label="Email" />
+            <SocialBtn icon={<Linkedin size={16} />} label="LinkedIn" />
+            <SocialBtn icon={<BookOpen size={16} />} label="Publications" />
           </div>
         </div>
       </div>
@@ -313,8 +324,17 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
   );
 };
 
-const SocialBtn = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <button className="p-2 rounded-full text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 dark:hover:text-indigo-400 transition-all duration-200" title={label}>
+const SocialBtn = ({
+  icon,
+  label,
+}: {
+  icon: React.ReactNode;
+  label: string;
+}) => (
+  <button
+    className="p-2 rounded-full text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 dark:hover:text-indigo-400 transition-all duration-200"
+    title={label}
+  >
     {icon}
   </button>
 );
@@ -326,7 +346,6 @@ export default function ProfessorsPage() {
       <BackgroundOrbs />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -338,13 +357,18 @@ export default function ProfessorsPage() {
             <Sparkles size={14} />
             <span>World-Class Faculty</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Meet Our <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-pink-600">Professors</span>
+            Meet Our{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-pink-600">
+              Professors
+            </span>
           </h1>
-          
+
           <p className="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            Pioneering research and shaping the future of Electronics & Instrumentation Engineering through excellence in teaching and innovation.
+            Pioneering research and shaping the future of Electronics &
+            Instrumentation Engineering through excellence in teaching and
+            innovation.
           </p>
         </motion.div>
 
@@ -358,9 +382,9 @@ export default function ProfessorsPage() {
           {professorsData.map((professor) => (
             <ProfessorCard key={professor.id} professor={professor} />
           ))}
-          
+
           {/* Placeholder for layout demonstration (Optional) */}
-           {/* <div className="hidden lg:flex items-center justify-center w-full h-full min-h-[400px] border-2 border-dashed border-slate-300 dark:border-slate-800 rounded-3xl text-slate-400 text-sm font-medium">
+          {/* <div className="hidden lg:flex items-center justify-center w-full h-full min-h-[400px] border-2 border-dashed border-slate-300 dark:border-slate-800 rounded-3xl text-slate-400 text-sm font-medium">
              Join our Faculty
            </div> */}
         </motion.div>

@@ -39,7 +39,7 @@ export function Homelayout(): React.JSX.Element {
             About
             {location.pathname === "/about-us" ? <Underline w="w-11" /> : null}
           </Link>
-          
+
           <Link
             to="/user"
             className=" transition-transform duration-200 hover:scale-110 object-fit-contain"
