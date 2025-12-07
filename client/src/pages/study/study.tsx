@@ -42,8 +42,8 @@ const studyPathData: StudyNode[] = [
         title: "Feed back in Control.pdf",
         url: " /documents/ah/controlsystem/FeedbackinControl",
       },
-      { title: "Time.pdf", url: "/documents/ah/controlsystem/Z" },
-      { title: "Z.pdf", url: "/documents/ah/controlsystem/time" },
+      { title: "Time.pdf", url: "/documents/ah/controlsystem/time" },
+      { title: "Z.pdf", url: "/documents/ah/controlsystem/z" },
     ],
   },
   {
