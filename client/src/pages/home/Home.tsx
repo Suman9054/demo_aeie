@@ -59,11 +59,11 @@ export const Homepage: React.FC = () => {
       title: "placement",
       icon: "🎯",
       description:
-        "Excellent placement opportunities with top companies in electronics, automation, and instrumentation sectors. Our dedicated placement cell ensures comprehensive career guidance and industry connections.",
+        "Strong placement record in core and IT sectors, with AEIE students placed in leading companies through campus recruitment and training & placement support.",
       stats: [
-        { label: "Placement Rate", value: "92%" },
-        { label: "Average Package", value: "6.5 LPA" },
-        { label: "Top Companies", value: "50+" },
+        { label: "Placement Rate", value: "~92%" },
+        { label: "Median Package", value: "₹5 LPA" },
+        { label: "Average Package", value: "₹5–6 LPA" },
       ],
       bgColor: "bg-amber-500/20",
       textColor: "text-amber-400",

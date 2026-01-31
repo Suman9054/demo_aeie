@@ -40,7 +40,7 @@ const studyPathData: StudyNode[] = [
     resources: [
       {
         title: "Feed back in Control.pdf",
-        url: " /documents/ah/controlsystem/FeedbackinControl",
+        url: "/documents/ah/controlsystem/FeedbackinControl",
       },
       { title: "Time.pdf", url: "/documents/ah/controlsystem/time" },
       { title: "Z.pdf", url: "/documents/ah/controlsystem/z" },
@@ -109,7 +109,7 @@ const studyPathData: StudyNode[] = [
       },
       {
         title: "Feedback Amplifier.pdf",
-        url: " /documents/ddg/analogelectronis/FeedbackAmplifier",
+        url: "/documents/ddg/analogelectronis/FeedbackAmplifier",
       },
       {
         title: "Feedback Oscillator.pdf",
@@ -282,6 +282,176 @@ const studyPathData: StudyNode[] = [
       { title: "ujt triggering.pdf", url: "/documents/ddg/PowerElectronics/ujttriggering" },
     ],
   },
+  {
+    id: "7",
+    title: "NDT & Condition Monitoring",
+    shortDescription: "Dr. Madhumita Das",
+
+    icon: Book,
+    color: "text-rose-500",
+    bgGradient: "from-rose-50 to-rose-100",
+    resources: [
+      {
+        title: "Ultrasonic Testing.pdf",
+        url: "/documents/Madhumita Das/Lecture_Ultrasonic_Testing.pdf",
+      },
+      {
+        title: "Radiography.pdf",
+        url: "/documents/Madhumita Das/Lecture_radiography.pdf",
+      },
+      {
+        title: "Thermography.pdf",
+        url: "/documents/Madhumita Das/Lecture_thermography.pdf",
+      },
+    ],
+  },
+  {
+    id: "8",
+    title: "Microprocessor (8085 & 8255)",
+    shortDescription: "Dr. Debdatta Ghosh",
+
+    icon: Cpu,
+    color: "text-indigo-500",
+    bgGradient: "from-indigo-50 to-indigo-100",
+    resources: [
+      {
+        title: "Unit plan & outcomes.pdf",
+        url: "/documents/Microprocessor_Upload/0_Unit Plan-Lession outcome.pdf",
+      },
+      { title: "Introduction.pdf", url: "/documents/Microprocessor_Upload/1_Introduction.pdf" },
+      {
+        title: "Architecture of 8085.pdf",
+        url: "/documents/Microprocessor_Upload/2_Architecture of 8085.pdf",
+      },
+      {
+        title: "8085 instruction set.pdf",
+        url: "/documents/Microprocessor_Upload/3_8085instructionset.pdf",
+      },
+      {
+        title: "Microprocessor operations.pdf",
+        url: "/documents/Microprocessor_Upload/4_Microprocessor Operations.pdf",
+      },
+      {
+        title: "Memory & I/O interfacing.pdf",
+        url: "/documents/Microprocessor_Upload/5_Memory and IO interfacing.pdf",
+      },
+      {
+        title: "Timing diagram 8085.pdf",
+        url: "/documents/Microprocessor_Upload/6_Timingdiagram8085.pdf",
+      },
+      {
+        title: "Counters & time delay.pdf",
+        url: "/documents/Microprocessor_Upload/7_Counterstimedelay.pdf",
+      },
+      {
+        title: "Stack & subroutine.pdf",
+        url: "/documents/Microprocessor_Upload/8_Stack and Subroutine.pdf",
+      },
+      {
+        title: "Interrupt.pdf",
+        url: "/documents/Microprocessor_Upload/9_Interrupt.pdf",
+      },
+      {
+        title: "8255.pdf",
+        url: "/documents/Microprocessor_Upload/10_8255.pdf",
+      },
+    ],
+  },
+  {
+    id: "9",
+    title: "Signals & Systems",
+    shortDescription: "Prof. Moumita Sahoo",
+
+    icon: Magnet,
+    color: "text-cyan-600",
+    bgGradient: "from-cyan-50 to-cyan-100",
+    resources: [
+      {
+        title: "Materials on Signal and System.pdf",
+        url: "/documents/Moumita Sahoo/materials on signal and system.pdf",
+      },
+    ],
+  },
+  {
+    id: "10",
+    title: "Measurement & Instrumentation",
+    shortDescription: "Lab & instrumentation notes",
+
+    icon: Server,
+    color: "text-emerald-600",
+    bgGradient: "from-emerald-50 to-emerald-100",
+    resources: [
+      {
+        title: "Introduction to measurement (L1).pdf",
+        url: "/documents/Rohan Mandal/Introduction_L1_RM.pdf",
+      },
+      {
+        title: "Potentiometer (L2).pdf",
+        url: "/documents/Rohan Mandal/Potentiometer_L2_RM.pdf",
+      },
+      {
+        title: "Strain gauge (L3).pdf",
+        url: "/documents/Rohan Mandal/Strain gauge_L3_RM.pdf",
+      },
+      {
+        title: "Advanced microprocessor (8051).pdf",
+        url: "/documents/Soumya Roy/CO_Adv_Microprocessor.pdf",
+      },
+      {
+        title: "Loop, timer, serial, interrupt (8051).pdf",
+        url: "/documents/Soumya Roy/Loop+Timer+Serial+Interrupt-8051.pdf",
+      },
+      {
+        title: "Pressure measurement (Session 1).pdf",
+        url: "/documents/Soumya Roy/Session 1_ Introduction to Pressure Measurement.pdf",
+      },
+      {
+        title: "Coriolis mass flowmeter (Session 9).pdf",
+        url: "/documents/Soumya Roy/Session 9_Coriolis Mass Flowmeter.pdf",
+      },
+      {
+        title: "Compare Orifice, Venturi & Pitot.pdf",
+        url: "/documents/sourav_mondal/Compare of Orifice, Venturi & Pitot.pdf",
+      },
+      {
+        title: "Differential pressure level measurement.pdf",
+        url: "/documents/sourav_mondal/Differential Pressure Level Measurement.pdf",
+      },
+      {
+        title: "Digital tachometer.pdf",
+        url: "/documents/sourav_mondal/Digital Tachometer.pdf",
+      },
+      {
+        title: "Displacement transducer.pdf",
+        url: "/documents/sourav_mondal/Displacement Transducer.pdf",
+      },
+      {
+        title: "R-2R ladder DAC.pdf",
+        url: "/documents/sourav_mondal/R-2R Laddar DAC.pdf",
+      },
+      {
+        title: "Signal conversion.pdf",
+        url: "/documents/sourav_mondal/Signal Conversion.pdf",
+      },
+    ],
+  },
+  {
+    id: "11",
+    title: "Renewable Energy",
+    shortDescription: "Prof. Sweta Bijoli",
+
+    icon: BookOpen,
+    color: "text-lime-600",
+    bgGradient: "from-lime-50 to-lime-100",
+    resources: [
+      { title: "Introduction.pdf", url: "/documents/sweta_bijoli/Introduction.pdf" },
+      { title: "Biomass energy.pdf", url: "/documents/sweta_bijoli/Biomass Energy.pdf" },
+      { title: "Geothermal energy.pdf", url: "/documents/sweta_bijoli/Geothermal energy.pdf" },
+      { title: "Tidal energy.pdf", url: "/documents/sweta_bijoli/Tidal _energy.pdf" },
+      { title: "Wave energy.pdf", url: "/documents/sweta_bijoli/Wave energy.pdf" },
+      { title: "Wind energy.pdf", url: "/documents/sweta_bijoli/Wind energy.pdf" },
+    ],
+  },
 ];
 
 // --- Components ---
@@ -289,7 +459,7 @@ const studyPathData: StudyNode[] = [
 const PDFLink = ({ resource }: { resource: Resource }) => (
   <button
     className="group flex items-center justify-between w-full p-4 mb-3 bg-white border border-gray-200 rounded-xl hover:border-indigo-500 hover:shadow-md transition-all duration-200 text-left"
-    onClick={() => window.open(resource.url, "_blank") }
+    onClick={() => window.open(resource.url, "_blank")}
   >
     <div className="flex items-center space-x-3">
       <div className="p-2 bg-red-50 text-red-500 rounded-lg group-hover:bg-red-100 transition-colors">
@@ -312,7 +482,6 @@ const Card = ({
   onClick,
 }: {
   node: StudyNode;
-  index: number;
   onClick: (id: string) => void;
 }) => {
   return (
@@ -451,22 +620,18 @@ export default function Study() {
       {/* Main Timeline Container */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-20">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            Your Learning Journey
+          <h2 className="text-4xl font-extrabold text-emerald-600 mb-4">
+            Study Resources
           </h2>
-          <p className="text-gray-600">
+
+          <p className=" text-teal-400">
             Click on a module card to view details and download study materials.
           </p>
         </div>
 
         <div className="relative pl-4 sm:pl-0">
-          {studyPathData.map((node, index) => (
-            <Card
-              key={node.id}
-              node={node}
-              index={index}
-              onClick={setActiveId}
-            />
+          {studyPathData.map((node) => (
+            <Card key={node.id} node={node} onClick={setActiveId} />
           ))}
         </div>
 

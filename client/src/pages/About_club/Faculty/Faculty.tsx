@@ -251,18 +251,15 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
       className="group relative w-full h-full"
     >
       {/* Card Container */}
-      <div className="relative h-full overflow-hidden rounded-3xl border border-white/20 bg-white/70 backdrop-blur-xl dark:bg-slate-900/60 dark:border-white/10 shadow-xl transition-all duration-500 hover:shadow-indigo-500/20 hover:-translate-y-2">
-        {/* Top Decorative Banner */}
-        <div className="h-24 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
-
+      <div className="relative h-full overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/85 shadow-xl transition-all duration-500 hover:shadow-slate-900/70 hover:-translate-y-2">
         {/* Image Container */}
-        <div className="flex justify-center -mt-12 px-6">
+        <div className="flex justify-center pt-6 px-6">
           <motion.div
-            className="relative rounded-full p-1.5 bg-white dark:bg-slate-900 shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            className="relative rounded-2xl p-1.5 bg-slate-900 shadow-lg"
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
-            <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-indigo-100 dark:border-indigo-900">
+            <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-2xl overflow-hidden border border-slate-700 bg-slate-800">
               <img
                 src={professor.image}
                 alt={professor.name}
@@ -271,7 +268,7 @@ const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
             </div>
             {/* Status Indicator */}
             <div
-              className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white dark:border-slate-900 rounded-full z-10"
+              className="absolute bottom-2 right-2 w-4 h-4 bg-emerald-500 border-2 border-slate-900 rounded-full z-10"
               title="Active Faculty"
             />
           </motion.div>
@@ -340,6 +337,9 @@ const SocialBtn = ({
 );
 
 export default function ProfessorsPage() {
+  const head = professorsData[0];
+  const others = professorsData.slice(1);
+
   return (
     <div className="relative min-h-screen w-full bg-slate-50 dark:bg-slate-950 overflow-hidden">
       <GridPattern />
@@ -351,7 +351,7 @@ export default function ProfessorsPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 space-y-4"
+          className="text-center mb-10 space-y-4"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-2">
             <Sparkles size={14} />
@@ -366,27 +366,67 @@ export default function ProfessorsPage() {
           </h1>
 
           <p className="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            Pioneering research and shaping the future of Electronics &
-            Instrumentation Engineering through excellence in teaching and
-            innovation.
+            Faculty of AEIE at Haldia Institute of Technology lead teaching, research
+            and innovation across electronics, instrumentation and control.
           </p>
         </motion.div>
 
-        {/* Grid Container */}
+        {/* Summary stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="mb-12 flex flex-wrap justify-center gap-3 text-xs md:text-sm text-slate-600 dark:text-slate-300"
+        >
+          <div className="rounded-full bg-white/70 dark:bg-slate-900/70 px-4 py-1.5 border border-slate-200 dark:border-slate-700">
+            Total faculty: <span className="font-semibold">{professorsData.length}</span>
+          </div>
+          <div className="rounded-full bg-white/70 dark:bg-slate-900/70 px-4 py-1.5 border border-slate-200 dark:border-slate-700">
+            Professors & Associate: <span className="font-semibold">{professorsData.filter(p => p.designation.toLowerCase().includes("professor")).length}</span>
+          </div>
+          <div className="rounded-full bg-white/70 dark:bg-slate-900/70 px-4 py-1.5 border border-slate-200 dark:border-slate-700">
+            Areas: control, DSP, biomedical, instrumentation, power electronics & more
+          </div>
+        </motion.div>
+
+        {/* Highlighted HoD */}
+        {head && (
+          <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="mb-12 grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-8 items-center"
+          >
+            <ProfessorCard professor={head} />
+            <div className="space-y-3 text-sm md:text-base text-slate-700 dark:text-slate-300">
+              <h2 className="text-lg md:text-xl font-semibold text-slate-900 dark:text-white">
+                From the Head of Department
+              </h2>
+              <p>
+                Under the leadership of <span className="font-medium">{head.name}</span>,
+                the department emphasizes strong fundamentals in circuit theory, signal
+                processing, control and embedded systems, combined with hands-on lab
+                experience.
+              </p>
+              <p>
+                Faculty members actively guide student projects, research internships and
+                industry collaborations, ensuring that graduates are prepared for both
+                higher studies and core engineering roles.
+              </p>
+            </div>
+          </motion.section>
+        )}
+
+        {/* Grid of remaining faculty */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-start"
         >
-          {professorsData.map((professor) => (
+          {others.map((professor) => (
             <ProfessorCard key={professor.id} professor={professor} />
           ))}
-
-          {/* Placeholder for layout demonstration (Optional) */}
-          {/* <div className="hidden lg:flex items-center justify-center w-full h-full min-h-[400px] border-2 border-dashed border-slate-300 dark:border-slate-800 rounded-3xl text-slate-400 text-sm font-medium">
-             Join our Faculty
-           </div> */}
         </motion.div>
       </div>
     </div>
